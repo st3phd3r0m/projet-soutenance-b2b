@@ -17,6 +17,7 @@
 /.env
 /public/bundles/
 /public/media/
+/public/images/
 /migrations/
 ###> liip/imagine-bundle ###
 /public/media/cache/
