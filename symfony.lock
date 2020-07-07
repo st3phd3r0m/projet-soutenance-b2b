@@ -113,6 +113,7 @@
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.2.0"
+    },
     "fzaninotto/faker": {
         "version": "v1.9.1"
     },
