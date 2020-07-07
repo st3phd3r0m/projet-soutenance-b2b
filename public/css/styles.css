@@ -1,0 +1,21 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    background-color: #ebf2e3; 
+}
+
+.pinkButton{
+    background-color: #fb3199;
+}
+
+.violetButton{
+    background-color: #6b40a1;
+}
+
+.darkGreyButton{
+    background-color: #6f7176;
+}
+
+.lightGreyButton{
+    background-color: #d8d9da;
+}
