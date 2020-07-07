@@ -8,17 +8,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-/**
- * @Route("/", name="home")
- */
 class HomeController extends AbstractController
 {
+
+
+
     /**
-     * @Route("/home", name="home")
+     * @Route("/", name="home")
      */
     public function index(AnnouncementsRepository $announcementsRepository, PaginatorInterface $paginator, Request $request)
     {
-
 
         $announcements = $paginator->paginate(
             $announcementsRepository->findBy([], ['created_at' => 'DESC']),

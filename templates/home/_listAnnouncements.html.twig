@@ -1,0 +1,16 @@
+<div class="card col-{{ col }} p-0 mb-1 card_prod">
+    {% if announcement.image is not empty %}
+    {# {{ path('home_show', { slug: announcement.slug }) }} #}
+        <a class="card-img-top" href="" title="Voir le produit {{ announcement.title }}"><img class="d-block w-100 p-3" src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures') }}" alt="{{ announcement.title }}"></a>
+    {% endif %}
+    <div class="card-body mx-0 p-2">
+        <p class="card-title">{{ announcement.title }}</p>
+        <p class="card-text">
+
+
+            {{ announcement.description }}
+        </p>
+
+
+    </div>
+</div>
