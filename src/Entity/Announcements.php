@@ -6,9 +6,14 @@ use App\Repository\AnnouncementsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass=AnnouncementsRepository::class)
+ * @Vich\Uploadable
  */
 class Announcements
 {
@@ -33,6 +38,12 @@ class Announcements
      * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @var File|null
+     * @Vich\UploadableField(mapping="announcements_images", fileNameProperty="image")
+     */
+    private $imageFile;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -102,6 +113,12 @@ class Announcements
      */
     private $profession;
 
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
+
     public function __construct()
     {
         $this->categoriesPropertiesValues = new ArrayCollection();
@@ -147,6 +164,21 @@ class Announcements
 
         return $this;
     }
+
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(?File $imageFile = null): void
+    {
+        $this->imageFile = $imageFile;
+
+        if (null !== $imageFile) {
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
 
     public function getNotes(): ?string
     {
@@ -319,6 +351,18 @@ class Announcements
     public function setProfession(?Professions $profession): self
     {
         $this->profession = $profession;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

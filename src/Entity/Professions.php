@@ -6,6 +6,7 @@ use App\Repository\ProfessionsRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ProfessionsRepository::class)
@@ -34,6 +35,12 @@ class Professions
      * @ORM\OneToMany(targetEntity=Announcements::class, mappedBy="profession")
      */
     private $announcements;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -96,6 +103,18 @@ class Professions
                 $announcement->setProfession(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
