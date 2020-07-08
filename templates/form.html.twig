@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+{% block title %}Dépot d'une annonce{% endblock %}
+
+{% block body %}
+<main>
+{# Debut partie du haut #}
+   <div class="partie_haut">
+        <div class="photo">
+
+        </div>
+
+        <div>
+            <div>
+                <select name="categoryFilter" id="categoryFilter">
+                    <option value="">Catégorie</option>
+                </select>
+            </div>
+            <div>
+                <input type="text" placeholder="Choisir un titre">
+            </div>
+            <div>
+                <input type="textarea" placeholder="Description de votre annonce">
+            </div>
+            <div>
+                <select name="keyWordFilter" id="keyWordFilter">
+                    <option value="">Mots clés</option>
+                </select>
+            </div>
+            
+        </div>
+        
+   </div>{# fin partie haut #}
+   
+   {# Partie_note #}
+   <div class="partie_note">
+   
+        <div class="select_note">{# Select_note #}
+            <div>
+                <input type="text" placeholder="Contact">
+            </div>
+            <div>
+                <input type="text" placeholder="Adresse">
+            </div>
+            <div>
+                <input type="textarea" placeholder="Notes">
+            </div>
+        </div>{# Fin Select_note #}
+
+        {# selection urgence #}
+        <div class="select_urgence">
+            <select name="urgencyFilter" id="urgencyFilter">
+                <option value="">Urgence</option>
+                <option value="rouge">Très urgent</option>
+                <option value="orange">Urgent</option>
+                <option value="bleu">Pas urgent</option>
+            </select>
+        </div>{# Finselection urgence #} 
+
+        {# contrepartie #}
+         <div class="select_contrepartie">
+            <select name="paymentFilter" id="paymentFilter">
+                <option value="">Contrepartie</option>
+                <option value="euros">euros</option>
+                <option value="bonAchat">Bon d'achat</option>
+                <option value="bonCadeau">Bon cadeau</option>
+            </select>
+
+        </div>{# Fin contrepartie #}
+
+   </div>{# fin partie_note #}
+        
+    {# selection  #}
+   <div class="partie_bas">
+
+        <div class="selection">
+            <div>
+                <select name="locationFilter" id="locationFilter"> 
+                    <option value="">Localisation</option>
+                </select>
+            </div>
+            <div>
+                <input type="date" placeholder="Date">
+            </div>
+             <div>
+               <input type="number">
+            </div>
+        </div>
+   </div>{# Fin election  #}
+
+</main>
+
+{% endblock %}
