@@ -33,7 +33,11 @@ class EmailVerifier
 
         $context = $email->getContext();
         $context['signedUrl'] = $signatureComponents->getSignedUrl();
+
+        // Temps en seconde
         $context['expiresAt'] = $signatureComponents->getExpiresAt();
+
+       
 
         $email->context($context);
 
