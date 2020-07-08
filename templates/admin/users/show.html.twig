@@ -8,20 +8,12 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
                 <th>Roles</th>
                 <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
             </tr>
             <tr>
                 <th>Firstname</th>
@@ -38,9 +30,29 @@
         </tbody>
     </table>
 
-    <a href="{{ path('users_index') }}">back to list</a>
+    <!-- faire une section pour voir les annonces posté par l'utilisateur -->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Categorie</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for announcement in announcements %}
+            <tr>
+                <td>{{ announcement.title }}</td>
+                <td>{{ announcement.category.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-    <a href="{{ path('users_edit', {'id': user.id}) }}">edit</a>
+    <a href="{{ path('admin_users_index') }}">back to list</a>
 
-    {{ include('users/_delete_form.html.twig') }}
+    {{ include('admin/users/_delete_form.html.twig') }}
 {% endblock %}

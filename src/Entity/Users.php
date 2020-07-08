@@ -67,6 +67,8 @@ class Users implements UserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
      * @Gedmo\Slug(fields={"firstname","lastname"})
      * @ORM\Column(length=255, unique=true)
      */
@@ -262,6 +264,8 @@ class Users implements UserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+    }
+
     public function getSlug(): ?string
     {
         return $this->slug;

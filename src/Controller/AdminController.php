@@ -13,6 +13,7 @@ use App\Form\ActivitySectorType;
 use App\Repository\ActivitySectorRepository;
 use App\Entity\Professions;
 use App\Form\ProfessionsType;
+use App\Repository\AnnouncementsRepository;
 use App\Repository\ProfessionsRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,17 +64,18 @@ class AdminController extends AbstractController
     }
 
     /**
-     * @Route("/users/{id}", name="admin_users_show", methods={"GET"})
+     * @Route("/users/{slug}", name="admin_users_show", methods={"GET"})
      */
-    public function showUsers(Users $user): Response
+    public function showUsers(Users $user, AnnouncementsRepository $announcementsRepository): Response
     {
         return $this->render('admin/users/show.html.twig', [
             'user' => $user,
+            'announcements' => $announcementsRepository->findBy(['user' => $user])
         ]);
     }
 
     /**
-     * @Route("/users/{id}/edit", name="admin_users_edit", methods={"GET","POST"})
+     * @Route("/users/{slug}/edit", name="admin_users_edit", methods={"GET","POST"})
      */
     public function editUsers(Request $request, Users $user): Response
     {
