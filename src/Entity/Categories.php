@@ -35,11 +35,6 @@ class Categories
     private $announcements;
 
     /**
-     * @ORM\ManyToMany(targetEntity=CategoriesProperties::class, inversedBy="categories")
-     */
-    private $category_prop;
-
-    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255, unique=true)
      */
@@ -48,7 +43,6 @@ class Categories
     public function __construct()
     {
         $this->announcements = new ArrayCollection();
-        $this->category_prop = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,31 +105,6 @@ class Categories
         return $this;
     }
 
-    /**
-     * @return Collection|CategoriesProperties[]
-     */
-    public function getCategoryProp(): Collection
-    {
-        return $this->category_prop;
-    }
-
-    public function addCategoryProp(CategoriesProperties $categoryProp): self
-    {
-        if (!$this->category_prop->contains($categoryProp)) {
-            $this->category_prop[] = $categoryProp;
-        }
-
-        return $this;
-    }
-
-    public function removeCategoryProp(CategoriesProperties $categoryProp): self
-    {
-        if ($this->category_prop->contains($categoryProp)) {
-            $this->category_prop->removeElement($categoryProp);
-        }
-
-        return $this;
-    }
 
     public function getSlug(): ?string
     {

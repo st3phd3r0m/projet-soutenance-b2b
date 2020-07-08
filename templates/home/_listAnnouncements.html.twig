@@ -5,7 +5,6 @@
             <img src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
             {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
             <a href="{{ path('home_show', {slug: announcement.slug }) }}">Voir l'annonce</a>
-
         </div>
 
         <div>
