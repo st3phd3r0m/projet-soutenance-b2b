@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>{% block title %} Yeah!{% endblock %}</title>
+        <title>{% block title %}  Yeah!{% endblock %}</title>
         <!-- CSS only -->
         <link rel="stylesheet" href="{{ asset('Css/normalize.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
@@ -15,37 +15,52 @@
     <body>
         {# DEBUT HEADER #}
         <header>
-                <div>
-                    <a href="{{ path('home') }}" title="Accueil du site"><img src="#" alt="Logo Yeah!"></a>
-                </div>
-                <button>Créer une publication</button>
-                <h1>Le réseau social des professionnels</h1>
-
-                <nav>
-                    <a href="" title="">
-                        <i class="las la-heart"></i>
-                        <span>favoris</span>
-                    </a>
-                    <a href="" title="">
-                        <i class="las la-search"></i>
-                        <span>recherche</span>
-                    </a>
-                    <a href="" title="">
-                        <i class="las la-envelope"></i>
-                        <span>message</span>
-                    </a>
-                    <a href="" title="">
-                        <i class="las la-user"></i>
-                        <span>se connecter</span>
-                    </a>
-                </nav>        
+            <div class="logo">
+                <a href="{{ path('home') }}" title="Accueil du site"><img src="{{ asset('images/logo_Yeah.png') }}" alt="Logo Yeah!"></a>
+            </div>
+            <button class="btn pinkBackground">Créer une publication</button>
+            <h1>Le réseau social des professionnels</h1>
+            
+            <!--Menu Navigation-->
+            <nav>
+                <button><i class="las la-bars"></i></button>
+                <ul class="menu">
+                    <li>
+                        <a href="" title="">
+                            <i class="las la-heart"></i>
+                            <span>favoris</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" title="">
+                            <i class="las la-search"></i>
+                            <span>recherche</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" title="">
+                            <i class="las la-envelope"></i>
+                            <span>message</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" title="">
+                            <i class="las la-user"></i>
+                            <span>se connecter</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- Fin Menu Navigation-->
         </header>
         {# FIN HEADER #}
 
         {% block body %}{% endblock %}
 
         {# DEBUT FOOTER #}
-
+        <footer>
+            <p>Paul, Stéphane, Wiame, Youness, Lauralee</p>
+        </footer>
         {# FIN FOOTER #}
 
         <!-- JS, Popper.js, and jQuery -->

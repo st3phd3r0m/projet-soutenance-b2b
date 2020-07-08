@@ -1,21 +1,173 @@
+/* Propriétés globales */
 body{
     font-family: 'Roboto', sans-serif;
     font-size: 14px;
-    background-color: #ebf2e3; 
 }
 
-.pinkButton{
+.btn {
+    color: white;
+    padding: 2px 25px;
+}
+
+/* Fin Propriétés globales */
+
+/*Backgrounds*/
+.pinkBackground{
+    color: white;
     background-color: #fb3199;
 }
 
-.violetButton{
+.violetBackground{
+    color: white;
     background-color: #6b40a1;
 }
 
-.darkGreyButton{
+.darkGreyBackground{
+    color: white;
     background-color: #6f7176;
 }
 
-.lightGreyButton{
+.lightGreyBackground{
+    color: white;
     background-color: #d8d9da;
 }
+/*Fin Backgrounds*/
+
+/*Vue mobile*/
+
+/* Header */
+header {
+    width: 100%;
+    display: grid;
+}
+
+header .logo {
+    grid-column: 1/2;
+}
+
+header .logo img {
+    height: 65px;
+    margin: 10px;
+}
+
+header .pinkBackground {
+    display: none;
+}
+
+header h1 {
+    color: #fb3199;
+    font-size: 22px;
+    font-weight: 300;
+    grid-column: 1/3;
+    grid-row: 2;
+    text-align: center;
+}
+
+header nav {
+    grid-column: 2/3;
+    text-align: right;
+    margin-top: 5px;
+}
+
+header nav button {
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: transparent;
+    margin: 20px 10px;
+}
+
+header nav .la-bars{
+    font-size: 30px;
+    color: black;
+}
+
+header nav ul {
+    display : none;
+}
+
+/* Fin Header */
+
+/* Page Index */
+
+main{
+    background-color: #ebf2e3; 
+    padding : 25px;
+}
+
+main section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+main section h1{
+    color: #6b40a1;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+main section p{
+    color: #6b40a1;
+}
+
+.pinkText{
+    color: #fb3199;
+    font-weight: bold;
+}
+
+main section button {
+    width: 80%;
+    margin: auto;
+}
+
+.sortByButton{
+    display: block;
+    width: 50%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+}
+
+.search_bar{
+    display: flex;
+    flex-direction: column;
+}
+
+.search_bar div{
+    width: 80%;
+    margin: auto;
+    margin-bottom: 5px;
+}
+
+.search_bar input, .search_bar select{
+    width: 100%;
+    padding: 5px;
+}
+
+.search_bar button{
+    width: 100%;
+    margin: 20px 0px;
+}
+
+/*Carte annonce*/
+.buttonList{
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonList button {
+    margin-bottom: 5px;
+}
+/*Fin Carte annonce*/
+
+/* Fin Page Index */
+
+
+/*Footer*/
+    footer p{
+        text-align: center;
+    }
+/*Fin Footer*/
+
+/*Fin Vue mobile*/
