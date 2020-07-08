@@ -66,6 +66,11 @@ class Announcements
     private $city;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
      * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $postal_code;
@@ -102,10 +107,7 @@ class Announcements
      */
     private $urgency;
 
-    /**
-     * @ORM\OneToMany(targetEntity=CategoriesPropertiesValues::class, mappedBy="announcement")
-     */
-    private $categoriesPropertiesValues;
+
 
     /**
      * @ORM\ManyToOne(targetEntity=Professions::class, inversedBy="announcements")
@@ -118,11 +120,6 @@ class Announcements
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
-
-    public function __construct()
-    {
-        $this->categoriesPropertiesValues = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -228,6 +225,18 @@ class Announcements
         return $this;
     }
 
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
     public function getPostalCode(): ?string
     {
         return $this->postal_code;
@@ -308,37 +317,6 @@ class Announcements
     public function setUrgency(?int $urgency): self
     {
         $this->urgency = $urgency;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|CategoriesPropertiesValues[]
-     */
-    public function getCategoriesPropertiesValues(): Collection
-    {
-        return $this->categoriesPropertiesValues;
-    }
-
-    public function addCategoriesPropertiesValue(CategoriesPropertiesValues $categoriesPropertiesValue): self
-    {
-        if (!$this->categoriesPropertiesValues->contains($categoriesPropertiesValue)) {
-            $this->categoriesPropertiesValues[] = $categoriesPropertiesValue;
-            $categoriesPropertiesValue->setAnnouncement($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategoriesPropertiesValue(CategoriesPropertiesValues $categoriesPropertiesValue): self
-    {
-        if ($this->categoriesPropertiesValues->contains($categoriesPropertiesValue)) {
-            $this->categoriesPropertiesValues->removeElement($categoriesPropertiesValue);
-            // set the owning side to null (unless already changed)
-            if ($categoriesPropertiesValue->getAnnouncement() === $this) {
-                $categoriesPropertiesValue->setAnnouncement(null);
-            }
-        }
 
         return $this;
     }

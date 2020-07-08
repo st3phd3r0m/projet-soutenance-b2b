@@ -47,7 +47,11 @@
                 </div>
             <!--Fin Barre de recherche-->
     
-            <!--Bloc Carte entreprise-->
+
+
+
+
+            {# <!--Bloc Carte entreprise-->
                 <div class="card">
                     <div>
                         <img src="" alt="">
@@ -80,15 +84,44 @@
                     </div>
                 </div>
             </section>
+
+
+
             <!--Fin Liste entreprises-->
         </div>
-        <!--Fin Bloc Carte entreprise-->    
-    
-        <!--Carte-->
+        <!--Fin Bloc Carte entreprise-->     #}
+
+
+
+
+
+
+            
+            <div class="py-5">
+            {{ knp_pagination_render(announcements) }}
+            </div>
+            
+            <!--Bloc Carte entreprise-->
+            {% for announcement in announcements %} 
+                {{ include('home/_listAnnouncements.html.twig') }}
+            {% endfor %}
+            <!--Fin Bloc Carte entreprise--> 
+
+
+            <div class="py-5">
+            {{ knp_pagination_render(announcements) }}
+            </div>
+            
+
+
+        </section>
+        <!--Fin Liste entreprises-->
+
+        <!--Carte géo-->
         <div>
-            <!--Intégration Carte-->
+            <!--Intégration Carte géo-->
         </div>
-        <!--Fin carte-->
+        <!--Fin carte géo-->
       
     </main>
 

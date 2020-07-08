@@ -1,16 +1,40 @@
-<div class="card col-{{ col }} p-0 mb-1 card_prod">
-    {% if announcement.image is not empty %}
-    {# {{ path('home_show', { slug: announcement.slug }) }} #}
-        <a class="card-img-top" href="" title="Voir le produit {{ announcement.title }}"><img class="d-block w-100 p-3" src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures') }}" alt="{{ announcement.title }}"></a>
-    {% endif %}
-    <div class="card-body mx-0 p-2">
-        <p class="card-title">{{ announcement.title }}</p>
-        <p class="card-text">
 
+<!--Bloc Carte entreprise-->
+    <div class="card">
+        <div>
+            <img src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
+            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+            <a href="{{ path('home_show', {slug: announcement.slug }) }}">Voir l'annonce</a>
+        </div>
 
-            {{ announcement.description }}
-        </p>
+        <div>
+            <div>{{ announcement.category.name }}</div>
+            <div class="card_title">{{ announcement.title }}</div>
+            <div class="card_text">{{ announcement.description }}</div>
+            <div class="card_text">Annonce {{ announcement.ref }}</div>
+            <div> Mots-clès :           
+                {% for keyWords in announcement.keyWords %} 
+                    #{{ keyWords }}, 
+                {% endfor %}
+            </div>
+        </div>
 
+        <div>
+            <div>
+                <div>Localisation : {{ announcement.postalCode }}</div>
+                <div>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
+                <div>Telephone : {{ announcement.user.phone }} </div>
+                <div>Mail : {{ announcement.user.email }}</div>
+                <div>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
+            </div>
 
+            <div class="buttonList">
+                <button type="button" class=" btn darkGreyBackground">Partager</button>
+                <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
+                <button type="button" class=" btn darkGreyBackground">Recommander</button>
+                <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
+                <button type="button" class=" btn violetBackground">Répondre</button>
+            </div>
+        </div>
     </div>
-</div>
+<!--Fin Bloc Carte entreprise-->  

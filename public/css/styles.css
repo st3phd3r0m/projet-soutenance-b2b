@@ -163,6 +163,32 @@ main section button {
 
 /* Fin Page Index */
 
+/* Page dépot d'annonce */
+
+.partie_haut{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+.partie_note{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+.partie_note > div:first-child > div:last-child input{
+ width: 100%;
+ height: 150px;
+}
+.partie_bas{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+}
+
+/* Fin page dépot d'annonce */
+
+
 
 /*Footer*/
     footer p{
