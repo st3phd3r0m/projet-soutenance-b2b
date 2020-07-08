@@ -56,7 +56,7 @@ class Announcements
     private $ref;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $key_words = [];
 
@@ -81,7 +81,7 @@ class Announcements
     private $created_at;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
+     * @ORM\Column(type="json", nullable=true)
      */
     private $price_range = [];
 

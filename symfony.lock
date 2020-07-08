@@ -99,6 +99,9 @@
     "egulias/email-validator": {
         "version": "2.1.18"
     },
+    "fzaninotto/faker": {
+        "version": "v1.9.1"
+    },
     "gedmo/doctrine-extensions": {
         "version": "v2.4.41"
     },
@@ -113,9 +116,6 @@
     },
     "knplabs/knp-paginator-bundle": {
         "version": "v5.2.0"
-    },
-    "fzaninotto/faker": {
-        "version": "v1.9.1"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
@@ -138,6 +138,9 @@
             "./config/packages/liip_imagine.yaml",
             "./config/routes/liip_imagine.yaml"
         ]
+    },
+    "mmo/faker-images": {
+        "version": "v0.2.0"
     },
     "monolog/monolog": {
         "version": "1.25.4"
