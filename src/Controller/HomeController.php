@@ -24,11 +24,27 @@ class HomeController extends AbstractController
             //Le numero de la page, si aucun numero, on force la page 1
             $request->query->getInt('page', 1),
             //Nombre d'élément par page
-            10
+            5
         );
 
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements,
+        ]);
+    }
+
+    
+    /**
+     * @Route("/show/{slug}", name="home_show")
+     * @param string $slug
+     * @param Request $request
+     * @return Response
+     */
+    public function show(AnnouncementsRepository $announcementsRepository, Request $request, string $slug)
+    {
+        $announcement = $announcementsRepository->findOneBy(['slug' => $slug]);
+
+        return $this->render('home/show.html.twig', [
+            'announcement' => $announcement,
         ]);
     }
 }
