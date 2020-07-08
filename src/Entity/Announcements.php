@@ -66,6 +66,11 @@ class Announcements
     private $city;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $address;
+
+    /**
      * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $postal_code;
@@ -224,6 +229,18 @@ class Announcements
     public function setCity(?string $city): self
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    public function getAddress(): ?string
+    {
+        return $this->address;
+    }
+
+    public function setAddress(?string $address): self
+    {
+        $this->address = $address;
 
         return $this;
     }
