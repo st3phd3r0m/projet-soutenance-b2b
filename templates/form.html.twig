@@ -11,7 +11,7 @@
 
         <div>
             <div>
-                <select name="categoryFilter" id="categoryFilter">
+                <select name="categoryFilter" id="categoryFilter" class="pinkBackground">
                     <option value="">Catégorie</option>
                 </select>
             </div>
@@ -75,17 +75,38 @@
         <div class="selection">
             <div>
                 <select name="locationFilter" id="locationFilter"> 
-                    <option value="">Localisation</option>
+                    <option value=""><i class="las la-map-marker"></i>Localisation</option>
                 </select>
             </div>
             <div>
-                <input type="date" placeholder="Date">
+                <i class="las la-calendar"></i>
+                <input type="date">
             </div>
              <div>
-               <input type="number">
+                <i class="las la-phone"></i>
+                <input type="tel">
             </div>
+             <div>
+                <i class="las la-envelope"></i>
+                <input type="email">
+            </div>
+            <div>
+                <i class="las la-euro-sign"></i>
+                <input type="text" placeholder="fourchette de prix">
+            </div>
+        </div>{# Fin selection #}
+
+        <div class="buttonList">
+            <button type="button" class=" btn darkGreyBackground">Partager</button>
+            <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
+            <button type="button" class=" btn darkGreyBackground">Recommander</button>
+            <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
+            <button type="button" class=" btn violetBackground">Répondre</button>
         </div>
-   </div>{# Fin election  #}
+
+
+    
+   </div>{# Fin partie du bas  #}
 
 </main>
 
