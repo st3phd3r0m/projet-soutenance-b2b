@@ -6,7 +6,7 @@ use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
+use Gedmo\Mapping\Annotation as Gedmo;
 /**
  * @ORM\Entity(repositoryClass=CategoriesRepository::class)
  */
@@ -38,6 +38,12 @@ class Categories
      * @ORM\ManyToMany(targetEntity=CategoriesProperties::class, inversedBy="categories")
      */
     private $category_prop;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -127,6 +133,18 @@ class Categories
         if ($this->category_prop->contains($categoryProp)) {
             $this->category_prop->removeElement($categoryProp);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

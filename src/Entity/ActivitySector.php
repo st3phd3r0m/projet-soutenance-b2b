@@ -6,6 +6,7 @@ use App\Repository\ActivitySectorRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ActivitySectorRepository::class)
@@ -28,6 +29,12 @@ class ActivitySector
      * @ORM\OneToMany(targetEntity=Professions::class, mappedBy="activitySector")
      */
     private $professions;
+
+    /**
+     * @Gedmo\Slug(fields={"name"})
+     * @ORM\Column(length=255, unique=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -78,6 +85,18 @@ class ActivitySector
                 $profession->setActivitySector(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
