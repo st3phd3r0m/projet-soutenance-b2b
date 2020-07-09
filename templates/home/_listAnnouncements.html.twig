@@ -4,36 +4,36 @@
         <div>
             <img src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
             {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
-            <a href="{{ path('home_show', {slug: announcement.slug }) }}">Voir l'annonce</a>
+            {#<a href="{{ path('home_show', {slug: announcement.slug }) }}">Voir l'annonce</a>#}
         </div>
 
         <div>
-            <div>{{ announcement.category.name }}</div>
+            <div class="card_category pinkBackground">{{ announcement.category.name }}</div>
             <div class="card_title">{{ announcement.title }}</div>
             <div class="card_text">{{ announcement.description }}</div>
-            <div class="card_text">Annonce {{ announcement.ref }}</div>
-            <div> Mots-clès :           
+            <div class="card_announcement">Annonce : {{ announcement.ref }}</div>
+            <div class="keyWords"> Mots-clés :           
                 {% for keyWords in announcement.keyWords %} 
-                    #{{ keyWords }}, 
+                    #{{ keyWords }}  
                 {% endfor %}
             </div>
         </div>
 
         <div>
-            <div>
-                <div>Localisation : {{ announcement.postalCode }}</div>
-                <div>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
-                <div>Telephone : {{ announcement.user.phone }} </div>
-                <div>Mail : {{ announcement.user.email }}</div>
-                <div>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
+            <div class="informations">
+                <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation : {{ announcement.postalCode }}</div>
+                <div class="card_alternative_text"><i class="las la-clock"></i>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
+                <div class="card_alternative_text"><i class="las la-phone"></i>Telephone : {{ announcement.user.phone }} </div>
+                <div class="card_alternative_text"><i class="las la-envelope"></i>Email : {{ announcement.user.email }}</div>
+                <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
             </div>
 
             <div class="buttonList">
-                <button type="button" class=" btn darkGreyBackground">Partager</button>
-                <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
-                <button type="button" class=" btn darkGreyBackground">Recommander</button>
-                <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
-                <button type="button" class=" btn violetBackground">Répondre</button>
+                <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
+                <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
+                <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
+                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
+                <a href="#" type="button" class=" button violetBackground">Répondre</a>
             </div>
         </div>
     </div>
