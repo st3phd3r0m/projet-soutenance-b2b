@@ -61,25 +61,31 @@ header h1 {
 }
 
 header nav {
-    grid-column: 2/3;
-    text-align: right;
-    margin-top: 5px;
+    grid-column: 1/3;
+    text-align: center;
 }
 
-header nav button {
-    border: 1px solid black;
-    border-radius: 5px;
-    background-color: transparent;
-    margin: 20px 10px;
+header .navbar-toggler{
+    text-align: right;
+    font-size: 30px;
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0; 
+}
+
+header nav li{
+    margin-bottom: 5px;
+}
+
+header nav a{
+    color: black;
 }
 
 header nav .la-bars{
     font-size: 30px;
     color: black;
-}
-
-header nav ul {
-    display : none;
 }
 
 /* Fin Header */
@@ -160,8 +166,8 @@ main section p{
 /*Carte annonce*/
 
 .card {
-    padding: 10px;
-    margin-bottom: 5px;
+    padding: 15px 15px 10px 15px;
+    margin-bottom: 10px;
 }
 
 .card img{
@@ -213,7 +219,6 @@ main section p{
 }
 
 .buttonList .button {
-    font-weight: 700;
     margin-bottom: 5px;
     padding: 5px 10px;
     border-radius: 5px;
@@ -221,9 +226,36 @@ main section p{
 /*Fin Carte annonce*/
 
 .pagination {
+    margin-top: 25px;
     display: flex;
-    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pagination span {
+    display: flex;
     justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    height: 32px;
+    width: 32px;
+    padding: 15px;
+}
+
+.pagination a {
+    color: black;
+}
+
+.pagination .current {
+    color: white;
+    background-color: black;
+    border-radius: 50%;
+}
+
+.pagination .first, .pagination .previous, .pagination .next, .pagination .last {
+    color: black;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
 /* Fin Page Index */
