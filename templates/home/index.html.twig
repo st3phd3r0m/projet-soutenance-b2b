@@ -51,27 +51,27 @@
 
 
 
-            {# <!--Bloc Carte entreprise-->
+             <!--Bloc Carte entreprise-->
                 <div class="card">
                     <div>
                         <img src="" alt="">
                     </div>
     
                     <div>
-                        <div>Recherche prestataire</div>
+                        <div class="card_category">Recherche prestataire</div>
                         <div class="card_title">Création de charte graphique</div>
-                        <div class="card_text">Une entreprise recherche un graphiste afi n defi naliser sa charte graphique, typographie et sonlogo</div>
+                        <div class="card_text">Une entreprise recherche un graphiste afin definaliser sa charte graphique, typographie et son logo</div>
                         <div class="card_text">Annonce 000-000</div>
-                        <div>#graphisme #motsclés</div>
+                        <div class="keyWords">#graphisme #motsclés</div>
                     </div>
     
                     <div>
                         <div>
-                            <div>Localisation</div>
-                            <div>Date</div>
-                            <div>Telephone</div>
-                            <div>Mail</div>
-                            <div>Tarif</div>
+                            <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation</div>
+                            <div class="card_alternative_text"><i class="las la-calendar"></i>Date</div>
+                            <div class="card_alternative_text"><i class="las la-phone"></i>Telephone</div>
+                            <div class="card_alternative_text"><i class="las la-envelope"></i>Email</div>
+                            <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif</div>
                         </div>
     
                         <div class="buttonList">
@@ -83,24 +83,13 @@
                         </div>
                     </div>
                 </div>
+                <!--Fin Bloc Carte entreprise-->     
             </section>
-
-
-
             <!--Fin Liste entreprises-->
         </div>
-        <!--Fin Bloc Carte entreprise-->     #}
 
 
 
-
-
-
-            
-            <div class="py-5">
-            {{ knp_pagination_render(announcements) }}
-            </div>
-            
             <!--Bloc Carte entreprise-->
             {% for announcement in announcements %} 
                 {{ include('home/_listAnnouncements.html.twig') }}
