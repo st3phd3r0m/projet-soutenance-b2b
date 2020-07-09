@@ -243,6 +243,23 @@ main section p{
 */
 /* Fin page dépot d'annonce */
 
+/* Page register and login */
+.policeForm {
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.030em;
+  }
+
+  .fond{
+      background-color: #ebf2e3;
+  }
+  .fond > .formulaire > button{
+      color: #ebf2e3;
+  }
+  
+/* Fin Page register and login */
+
 
 
 /*Footer*/

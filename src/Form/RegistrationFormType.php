@@ -25,6 +25,12 @@ class RegistrationFormType extends AbstractType
             ->add('firstname', TextType::class, [
                 'required' => true,
                 'label' => 'Prénom',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le prénom est obligatoire'
@@ -34,6 +40,12 @@ class RegistrationFormType extends AbstractType
             ->add('lastname', TextType::class, [
                 'required' => true,
                 'label' => 'Nom',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le nom est obligatoire'
@@ -43,6 +55,12 @@ class RegistrationFormType extends AbstractType
             ->add('email', EmailType::class, [
                 'required' => true,
                 'label' => 'Adresse e-mail',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'L\adresse e-mail est obligatoire'
@@ -55,6 +73,12 @@ class RegistrationFormType extends AbstractType
             ->add('phone', TelType::class, [
                 'required' => true,
                 'label' => 'Télephone',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3',
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Le télephone est obligatoire'
@@ -67,18 +91,24 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes ne sont pas identiques !',
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le Mot de passe'],
-
-
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'mapped' => false,
+                'options' => [
+                    'attr' =>[
+                         'class' => 'form-control form-control-lg form-control-a mb-3'
+                    ],
+                    'label_attr' => [
+                    'class' => 'policeForm'
+                ],
+                ],
+                
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Entrez votre mot de passe',
                     ]),
                     new Length([
-                        'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
+                        'min' => 10,
+                        'minMessage' => 'Votre mot de passe doit contenir minimum {{ limit }} caractères',
                         'max' => 4096,
                     ]),
                     
@@ -86,14 +116,17 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'J\'acceptes les CGU',
+                'label' => 'J\'acceptes les CGU ',
+                'label_attr' => [
+                    'class' => 'policeForm mr-2'
+                ],
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez accepter les termes.',
                     ]),
                 ],
             ])
-            ->add('valider', SubmitType::class)
+            // ->add('valider', SubmitType::class)
         ;
     }
 
