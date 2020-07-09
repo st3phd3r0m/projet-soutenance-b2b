@@ -3,7 +3,15 @@
 namespace App\Form;
 
 use App\Entity\Announcements;
+use App\Entity\Categories;
+use App\Entity\Professions;
+use App\Repository\ProfessionsRepository;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
@@ -52,53 +60,66 @@ class AnnouncementsType extends AbstractType
                 ] 
             ])  
             ->add('notes', TextareaType::class, [
-                'required'=>true,
-                'label'=>'Vous pouvez optionnellement ajouter une note pour votre annonce',
+                // 'required'=>true,
+                'label'=>'Ajouter accessoirement une note pour votre annonce',
             ]) 
 
             //plus tard
-            ->add('ref')
             ->add('key_words')
+            ->add('postal_code')
+            ->add('gps_location')
 
 
+            ->add('price_range', RangeType::class, [])
+
+
+
+            ->add('category', EntityType::class, [
+                'label'=>'Quel est le type de l\'annonce ?',
+                'class'=> Categories::class,
+                'choice_label'=> 'name'
+            ])
+
+            ->add('profession', EntityType::class, [
+                'label'=>'Quel est le type de l\'annonce ?',
+                'class'=> Professions::class,
+                // 'query_builder' => function (ProfessionsRepository $er) {
+                //     return $er->createQueryBuilder('p')
+                //         ->
+                //         ->orderBy('p.name', 'ASC');
+                // },
+                'choice_label'=> 'name'
+            ])
 
             ->add('city', TextType::class, [
-                'required' => true,
+                // 'required' => true,
                 'label'=>'Ville d\'intervention',
                 'attr'=>[
                     'class'=>'form-control'
                 ]
             ])
-            
-            ->add('postal_code')
 
 
-
-
-            ->add('gps_location')
-            ->add('created_at')
-            ->add('price_range')
-            ->add('urgency')
-            ->add('slug')
-            ->add('category')
-            ->add('user')
-            ->add('profession')
+            ->add('urgency', ChoiceType::class, [
+				'label' => 'Urgence de l\'annonce',
+				'expanded' => true,
+				'multiple' => false,
+				'choices' => [
+					'Très urgent' => '3',
+                    'Urgent' => '2',
+                    'Normal' => '1'
+				]
+            ])
             ->add('imageFile', VichImageType::class,[
-                'required' => true,
-                'label'=>'Image d\'illustration de l\'article de vente',
+                'label'=>'Image d\'illustration de votre annonce',
                 'download_link'=>false,
                 'imagine_pattern'=>'miniatures',
                 'constraints'=>[
-                    new NotBlank([
-                        'message'=> 'Veuillez choisir une image de présentation.',
-                        'groups'=> ['new']
-                    ]),
                     new Image([
                         'maxSize'=>'2M',
                         'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
                         'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
-                        'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG',
-                        'groups'=> ['new', 'update']
+                        'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
                     ])
                 ]
             ])

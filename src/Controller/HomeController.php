@@ -2,14 +2,18 @@
 
 namespace App\Controller;
 
+use App\Entity\Announcements;
+use App\Form\AnnouncementsType;
 use App\Repository\AnnouncementsRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+
 
 
 
@@ -45,6 +49,39 @@ class HomeController extends AbstractController
 
         return $this->render('home/show.html.twig', [
             'announcement' => $announcement,
+        ]);
+    }
+
+    /**
+     * @Route("/new", name="home_new", methods={"GET","POST"})
+     * 
+     * 
+     */
+    public function new(Request $request, AnnouncementsRepository $announcementsRepository): Response
+    {
+        
+        $maxRef = $announcementsRepository->findMaxRef();
+        $maxRef = sprintf('%06d', $maxRef[0][1]+1 );
+
+        $announcement = new Announcements;
+        $form = $this->createForm(AnnouncementsType::class, $announcement);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $announcement->setUser($this->getUser());
+            $announcement->setRef($maxRef);
+            $announcement->setCreatedAt(new \DateTime('now'));
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($announcement);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('comments_index');
+        }
+
+        return $this->render('home/new.html.twig', [
+            'form' => $form->createView(),
         ]);
     }
 }
