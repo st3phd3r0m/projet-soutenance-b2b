@@ -1,12 +1,7 @@
 /* Propriétés globales */
 body{
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-}
-
-.btn {
-    color: white;
-    padding: 2px 25px;
 }
 
 /* Fin Propriétés globales */
@@ -56,12 +51,13 @@ header .pinkBackground {
 
 header h1 {
     color: #fb3199;
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 300;
     grid-column: 1/3;
     grid-row: 2;
     text-align: center;
     margin-bottom:20px;
+    padding: 0 25px;
 }
 
 header nav {
@@ -98,7 +94,7 @@ main{
 main section {
     display: flex;
     flex-direction: column;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 main section h1{
@@ -117,18 +113,16 @@ main section p{
     color: #fb3199;
     font-weight: bold;
 }
-
-main button {
-    width: 60%;
-    margin: auto;
+.blackText{
+    color: black;
 }
 
-.sortByButton{
-    display: block;
-    width: 50%;
-    margin-bottom: 20px;
-    border-radius: 5px;
-    border: none;
+.button {
+    padding: 10px;
+    text-align: center;
+    border-radius: 10px;
+    width: 60%;
+    margin: 0 auto;
 }
 
 .search_bar{
@@ -142,32 +136,101 @@ main button {
     margin-bottom: 5px;
 }
 
+.search_bar .button {
+    margin-top: 15px;
+}
+
 .search_bar input, .search_bar select{
     width: 100%;
     padding: 5px;
 }
 
-.search_bar button{
-    width: 100%;
-    margin: 20px 0px;
+ .sortByButton{
+     background-color: white;
+     margin: 25px 0 10px;
+     padding: 5px;
+     border-radius: 5px;
+     border: none;
+}
+
+.sortByButton i {
+    margin: 0 3px;
 }
 
 /*Carte annonce*/
+
+.card {
+    padding: 10px;
+    margin-bottom: 5px;
+}
+
+.card img{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card_category{
+    display: inline;
+    padding: 3px 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.card_title{
+    font-size: 16px;
+    font-weight: 700;
+    margin: 15px 0;
+}
+
+.card_announcement{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.keyWords{
+    color: #7f858b;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.informations{
+    margin-top: 10px;
+    margin-bottom: 25px;
+}
+
+.informations i{
+    margin: 0 3px;
+}
+
+.card_alternative_text{
+    color: #7f858b;
+    margin: 5px 0;
+}
+
 .buttonList{
     display: flex;
     flex-direction: column;
 }
 
-.buttonList button {
+.buttonList .button {
+    font-weight: 700;
     margin-bottom: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
 }
 /*Fin Carte annonce*/
+
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 /* Fin Page Index */
 
 /* Page dépot d'annonce */
 
-.partie_haut{
+/*.partie_haut{
     width: 100%;
     justify-content: center;
     display: flex;
@@ -188,8 +251,30 @@ main button {
     justify-content: center;
     display: flex;
 }
-
+*/
 /* Fin page dépot d'annonce */
+
+/* Page register and login */
+.policeForm {
+    color: black;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.030em;
+  }
+
+  .fond{
+      background-color: #ebf2e3;
+  }
+  .fond > .formulaire > button{
+      color: #ebf2e3;
+  }
+  .titre{
+      font-size: 2rem;
+      color: #6b40a1;
+      font-weight: bold;
+  }
+  
+/* Fin Page register and login */
 
 
 
