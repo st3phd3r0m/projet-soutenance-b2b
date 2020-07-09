@@ -32,7 +32,7 @@
         </tbody>
     </table>
 
-    {# Pour le Dashboard 4 onglet : Entreprise(s), Annonces postées, Abonnements en cours et Historique des Abonnements #}
+    {# Pour le Dashboard 4 onglet, surement à isolés dans des twig distincts : Entreprise(s), Annonces postées, Abonnements en cours, Historique des Abonnements et la liste des utilisateurs qui est dans admin/users/index.html.twig #}
 
     <!-- onglet "Entrepirses" -->
     <h3>Entrepirses</h3>
@@ -106,6 +106,7 @@
                 <th>Abonnement</th>
                 <th>montant</th>
                 <th>Date de paiement</th>
+                <th>Entreprise</th>
             </tr>
         </thead>
         <tbody>
@@ -114,6 +115,7 @@
                 <td>{{ sub.subscription.name }}</td>
                 <td>{{ sub.amount }}</td>
                 <td>{{ sub.orderedAt }}</td>
+                <td>{{ sub.compagny.name }}</td>
             </tr>
         {% else %}
             <tr>

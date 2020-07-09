@@ -91,7 +91,7 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes ne sont pas identiques !',
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmez le mot de passe'],
+                'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'mapped' => false,
                 'options' => [
                     'attr' =>[

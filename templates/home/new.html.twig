@@ -2,8 +2,35 @@
 
 {% block title %} Yeah! - Accueil{% endblock %}
 
+
 {% block body %}
 
-    {{ form(form) }}
+    {# {{ form(form) }} #}
+
+    {{ form_start(form) }}
+
+    {{ form_row(form.title)}}
+    {{ form_row(form.description)}}
+
+
+    {# <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="false" class="collapsed">
+        <p class="title">Budget</p>
+    </a> #}
+    <div>
+        <p>Budget :</p>
+        <div id="slider"></div>
+        {{ form_row(form.price_min)}}
+        {{ form_row(form.price_max)}}    
+    </div>
+
+
+
+
+    {{ form_end(form) }}
+
+{% endblock %}
+{% block javascripts %}
+    {# js pour affichage des curseurs (gamme de budget) #}
+    <script src="{{ asset('js/sliderBudget.js') }}"></script>
 
 {% endblock %}

@@ -11,8 +11,8 @@ use App\Repository\SubscriptionRepository;
 use App\Entity\ActivitySector;
 use App\Form\ActivitySectorType;
 use App\Repository\ActivitySectorRepository;
-use App\Entity\Professions;
-use App\Form\ProfessionsType;
+// use App\Entity\Professions;
+// use App\Form\ProfessionsType;
 use App\Repository\AnnouncementsRepository;
 use App\Repository\CompagniesRepository;
 use App\Repository\ProfessionsRepository;
@@ -216,28 +216,28 @@ class AdminController extends AbstractController
     // -----------------  Administration des Secteurs / Professions -----------------
     // -------------------------------------------------------------------------------
 
-    /**
-     * @Route("/sectors_professions/", name="admin_sectors_professions_index", methods={"GET"})
-     */
-    public function index(ActivitySectorRepository $activitySectorRepository, ProfessionsRepository $professionsRepository): Response
-    {
-        return $this->render('admin/sectors_professions/index.html.twig', [
-            'sectors' => $activitySectorRepository->findAll(),
-        ]);
-    }
+    // /**
+    //  * @Route("/sectors_professions/", name="admin_sectors_professions_index", methods={"GET"})
+    //  */
+    // public function index(ActivitySectorRepository $activitySectorRepository, ProfessionsRepository $professionsRepository): Response
+    // {
+    //     return $this->render('admin/sectors_professions/index.html.twig', [
+    //         'sectors' => $activitySectorRepository->findAll(),
+    //     ]);
+    // }
 
-    /**
-     * @Route("/sectors_professions/{id}", name="admin_sector_delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, ActivitySector $activitySector): Response
-    {
-        if ($this->isCsrfTokenValid('delete'.$activitySector->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($activitySector);
-            $entityManager->flush();
-        }
+    // /**
+    //  * @Route("/sectors_professions/{id}", name="admin_sector_delete", methods={"DELETE"})
+    //  */
+    // public function delete(Request $request, ActivitySector $activitySector): Response
+    // {
+    //     if ($this->isCsrfTokenValid('delete'.$activitySector->getId(), $request->request->get('_token'))) {
+    //         $entityManager = $this->getDoctrine()->getManager();
+    //         $entityManager->remove($activitySector);
+    //         $entityManager->flush();
+    //     }
 
-        return $this->redirectToRoute('admin_sectors_professions_index');
-    }
+    //     return $this->redirectToRoute('admin_sectors_professions_index');
+    // }
 
 }
