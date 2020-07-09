@@ -19,6 +19,14 @@ class AnnouncementsRepository extends ServiceEntityRepository
         parent::__construct($registry, Announcements::class);
     }
 
+    public function findMaxRef()
+    {
+        return $this->createQueryBuilder('a')
+            ->select('MAX(a.ref)')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Announcements[] Returns an array of Announcements objects
     //  */
