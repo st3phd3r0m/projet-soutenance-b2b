@@ -81,7 +81,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Le télephone est obligatoire'
+                        'message' => 'Le numéro de télephone est obligatoire'
                     ])
                 ]
             ])
@@ -91,7 +91,7 @@ class RegistrationFormType extends AbstractType
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passes ne sont pas identiques !',
                 'first_options' => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
+                'second_options' => ['label' => 'Confirmez le mot de passe'],
                 'mapped' => false,
                 'options' => [
                     'attr' =>[
@@ -116,7 +116,7 @@ class RegistrationFormType extends AbstractType
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
-                'label' => 'J\'acceptes les CGU ',
+                'label' => 'J\'accepte les CGU ',
                 'label_attr' => [
                     'class' => 'policeForm mr-2'
                 ],
