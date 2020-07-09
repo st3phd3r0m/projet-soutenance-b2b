@@ -271,6 +271,7 @@ main section p{
   .titre{
       font-size: 2rem;
       color: #6b40a1;
+      font-weight: bold;
   }
   
 /* Fin Page register and login */

@@ -19,7 +19,7 @@
             <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
         {% endif %}
 
-        <h1 class=" titre mb-4 pt-4 font-weight-normal text-center">Connexion</h1>
+        <h1 class=" titre mb-4 pt-4 text-center"> Yeah-Connexion</h1>
 
         <label for="inputEmail" class="policeForm">Adresse e-mail</label>
         <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control mb-3" required autofocus>
@@ -27,16 +27,16 @@
         <input type="password" name="password" id="inputPassword" class="form-control" required>
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
+        <div class="mt-2">
+            <a href="#" class="blackText ">Mot de passe oublié ?</a>
+        </div>
         <div class="checkbox mt-3">
             <label>
                 <input type="checkbox" name="_remember_me" class=" mr-2"> Se souvenir de moi
             </label>
             
         </div>
-        <div >
-            <a href="#" class="blackText">Mot de passe oublié ?</a>
-        </div>
+        
         <div class="col text-center">
             <button class="btn pinkBackground mt-4" type="submit">  Se connecter</button>
         </div>
