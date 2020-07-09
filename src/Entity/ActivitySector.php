@@ -26,19 +26,20 @@ class ActivitySector
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity=Professions::class, mappedBy="activitySector")
-     */
-    private $professions;
-
-    /**
      * @Gedmo\Slug(fields={"name"})
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Announcements::class, mappedBy="activity_sector")
+     */
+    private $announcements;
+
     public function __construct()
     {
         $this->professions = new ArrayCollection();
+        $this->announcements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -66,29 +67,6 @@ class ActivitySector
         return $this->professions;
     }
 
-    public function addProfession(Professions $profession): self
-    {
-        if (!$this->professions->contains($profession)) {
-            $this->professions[] = $profession;
-            $profession->setActivitySector($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProfession(Professions $profession): self
-    {
-        if ($this->professions->contains($profession)) {
-            $this->professions->removeElement($profession);
-            // set the owning side to null (unless already changed)
-            if ($profession->getActivitySector() === $this) {
-                $profession->setActivitySector(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -97,6 +75,37 @@ class ActivitySector
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Announcements[]
+     */
+    public function getAnnouncements(): Collection
+    {
+        return $this->announcements;
+    }
+
+    public function addAnnouncement(Announcements $announcement): self
+    {
+        if (!$this->announcements->contains($announcement)) {
+            $this->announcements[] = $announcement;
+            $announcement->setActivitySector($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnouncement(Announcements $announcement): self
+    {
+        if ($this->announcements->contains($announcement)) {
+            $this->announcements->removeElement($announcement);
+            // set the owning side to null (unless already changed)
+            if ($announcement->getActivitySector() === $this) {
+                $announcement->setActivitySector(null);
+            }
+        }
 
         return $this;
     }
