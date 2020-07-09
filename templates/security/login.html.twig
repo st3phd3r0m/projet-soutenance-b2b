@@ -28,7 +28,7 @@
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
         <div class="mt-2">
-            <a href="#" class="blackText ">Mot de passe oublié ?</a>
+            <a href="{{ path('app_forgot_password_request') }}" class="blackText ">Mot de passe oublié ?</a>
         </div>
         <div class="checkbox mt-3">
             <label>
