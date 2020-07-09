@@ -9,6 +9,8 @@ use App\Repository\ProfessionsRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -70,7 +72,24 @@ class AnnouncementsType extends AbstractType
             ->add('gps_location')
 
 
-            ->add('price_range', RangeType::class, [])
+            // ->add('price_range', RangeType::class, [
+
+            //     'attr' => [
+            //         'min' => 100,
+            //         'max' => 200000
+            //     ]
+
+            // ])
+
+
+            ->add('price_range', CollectionType::class, [
+                // each entry in the array will be a "number" field
+                'entry_type' => NumberType::class,
+                // these options are passed to each "number" type
+                'entry_options' => [
+                    'attr' => ['class' => 'number-box'],
+                ],
+            ])
 
 
 
