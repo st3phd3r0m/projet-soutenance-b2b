@@ -5,6 +5,8 @@
 {% block body %}
     <h1>Users</h1>
 
+    <a href="{{ path('admin_users_index') }}">back to list</a>
+
     <table class="table">
         <tbody>
             <tr>
@@ -30,29 +32,94 @@
         </tbody>
     </table>
 
-    <!-- faire une section pour voir les annonces posté par l'utilisateur -->
+    {# Pour le Dashboard 4 onglet : Entreprise(s), Annonces postées, Abonnements en cours et Historique des Abonnements #}
+
+    <!-- onglet "Entrepirses" -->
+    <h3>Entrepirses</h3>
     <table class="table">
         <thead>
             <tr>
-                <th>Titre</th>
-                <th>Categorie</th>
+                <th>Nom</th>
+                <th>N° Siret</th>
             </tr>
         </thead>
         <tbody>
-        {% for announcement in announcements %}
+        {% for compagny in user.compagnies %}
             <tr>
-                <td>{{ announcement.title }}</td>
-                <td>{{ announcement.category.name }}</td>
+                <td>{{ compagny.name }}</td>
+                <td>{{ compagny.siret }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="8">no records found</td>
+                <td colspan="8">Aucun ancien payement</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_users_index') }}">back to list</a>
+    <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
+    <h3>Annonces postées</h3>
 
-    {{ include('admin/users/_delete_form.html.twig') }}
+    {% for announcement in announcements %}
+        {{ include('home/_listAnnouncements.html.twig') }}
+    {% else %}
+            <p>Cet utilisateur n'a pas encore posté d'annonce</p>
+    {% endfor %}
+
+    <!-- onglet "Abonnements en cours" pour voir les abonnements en cour -->
+    <h3>Abonnements en cours</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Achat</th>
+                <th>montant</th>
+                <th>Date de paiement</th>
+                <th>Entreprise</th>
+                <th>Actif jusqu'au</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for activeSub in activeSubs %}
+            <tr>
+                <td>{{ activeSub.subscription.name }}</td>
+                <td>{{ activeSub.amount }}</td>
+                <td>{{ activeSub.orderedAt }}</td>
+                <td>{{ activeSub.compagny.name }}</td>
+                <td>brouette</td><!-- pas encore fais la formule mdr  -->
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun ancien payement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+    <!-- onglet "Historique des Abonnements" pour voir l'historique des abonnement -->
+    <h3>Historique des Abonnements</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Abonnement</th>
+                <th>montant</th>
+                <th>Date de paiement</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sub in subs %}
+            <tr>
+                <td>{{ sub.subscription.name }}</td>
+                <td>{{ sub.amount }}</td>
+                <td>{{ sub.orderedAt }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun ancien payement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

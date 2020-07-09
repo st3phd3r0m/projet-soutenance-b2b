@@ -14,11 +14,14 @@ use App\Repository\ActivitySectorRepository;
 use App\Entity\Professions;
 use App\Form\ProfessionsType;
 use App\Repository\AnnouncementsRepository;
+use App\Repository\CompagniesRepository;
 use App\Repository\ProfessionsRepository;
+use App\Repository\SubscriptionPurchasesRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\IsNull;
 
 /**
  * @Route("/admin")
@@ -66,9 +69,25 @@ class AdminController extends AbstractController
     /**
      * @Route("/users/{slug}", name="admin_users_show", methods={"GET"})
      */
-    public function showUsers(Users $user, AnnouncementsRepository $announcementsRepository): Response
+    public function showUsers(Users $user, CompagniesRepository $compagniesRepository, AnnouncementsRepository $announcementsRepository, SubscriptionPurchasesRepository $subscriptionPurchasesRepository): Response
     {
+        $activeSub = $subscriptionPurchasesRepository->findBy([
+            'compagny' => $compagniesRepository->findBy([
+                'user' => $user,
+                ]),
+            'active' => true
+            ]);
+
+        $subHistory = $subscriptionPurchasesRepository->findBy([
+            'compagny' => $compagniesRepository->findBy([
+                'user' => $user,
+                ]),
+            'active' => false
+            ]);
+
         return $this->render('admin/users/show.html.twig', [
+            'activeSubs' => $activeSub,
+            'subs' => $subHistory,
             'user' => $user,
             'announcements' => $announcementsRepository->findBy(['user' => $user])
         ]);
