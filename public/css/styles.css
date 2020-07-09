@@ -113,6 +113,9 @@ main section p{
     color: #fb3199;
     font-weight: bold;
 }
+.blackText{
+    color: black;
+}
 
 .button {
     padding: 10px;
@@ -264,6 +267,10 @@ main section p{
   }
   .fond > .formulaire > button{
       color: #ebf2e3;
+  }
+  .titre{
+      font-size: 2rem;
+      color: #6b40a1;
   }
   
 /* Fin Page register and login */
