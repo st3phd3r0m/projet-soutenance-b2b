@@ -105,10 +105,13 @@ class AnnouncementsType extends AbstractType
 
 
             ->add('city', TextType::class, [
-                // 'required' => true,
+                'required' => true,
                 'label'=>'Ville d\'intervention',
+                'mapped' => false,
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control',
+                    'list'=>'selectPannel',
+                    'autocomplete'=>'off'
                 ]
             ])
 

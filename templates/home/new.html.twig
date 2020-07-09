@@ -5,29 +5,38 @@
 
 {% block body %}
 
-    {# {{ form(form) }} #}
-
-    {{ form_start(form) }}
-
-    {{ form_row(form.title)}}
-    {{ form_row(form.description)}}
 
 
-    {# <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="false" class="collapsed">
-        <p class="title">Budget</p>
-    </a> #}
-    <div>
-        <p>Budget :</p>
-        <div id="slider"></div>
-        {{ form_row(form.price_min)}}
-        {{ form_row(form.price_max)}}    
+   <div class="w-100 mx-auto fond">
+        <div class="w-50 mx-auto formulaire">
+            <h1 class="text-center titre mb-4 pt-4">Nouvelle annonce</h1>  
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.title)}}
+                {{ form_row(form.description)}}
+
+                <div>
+                    <p>Budget :</p>
+                    <div id="slider"></div>
+                    {{ form_row(form.price_min)}}
+                    {{ form_row(form.price_max)}}    
+                </div>
+
+                <div>
+                    {{ form_row(form.city)}}
+                    <datalist id="selectPannel" autocomplete="off">
+                    </datalist>
+                </div>
+                
+
+
+
+
+                {{ form_end(form) }}
+
+        </div>
     </div>
-
-
-    {{ form_end(form) }}
-
-
-
 
 {% endblock %}
 {% block javascripts %}
