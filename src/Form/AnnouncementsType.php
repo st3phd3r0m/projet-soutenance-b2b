@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\ActivitySector;
 use App\Entity\Announcements;
 use App\Entity\Categories;
 use App\Entity\Professions;
@@ -95,49 +96,45 @@ class AnnouncementsType extends AbstractType
                 'choice_label'=> 'name'
             ])
 
-            // ->add('profession', EntityType::class, [
-            //     'label'=>'Quel est le type de l\'annonce ?',
-            //     'class'=> Professions::class,
-            //     // 'query_builder' => function (ProfessionsRepository $er) {
-            //     //     return $er->createQueryBuilder('p')
-            //     //         ->
-            //     //         ->orderBy('p.name', 'ASC');
-            //     // },
-            //     'choice_label'=> 'name'
-            // ])
-
-            // ->add('city', TextType::class, [
-            //     // 'required' => true,
-            //     'label'=>'Ville d\'intervention',
-            //     'attr'=>[
-            //         'class'=>'form-control'
-            //     ]
-            // ])
+            ->add('activity_sector', EntityType::class, [
+                'label'=>'Secteur d\'activité',
+                'class'=> ActivitySector::class,
+                'choice_label'=> 'name',
+                'attr'=>['class'=>'actSect']
+            ])
 
 
-            // ->add('urgency', ChoiceType::class, [
-			// 	'label' => 'Urgence de l\'annonce',
-			// 	'expanded' => true,
-			// 	'multiple' => false,
-			// 	'choices' => [
-			// 		'Très urgent' => '3',
-            //         'Urgent' => '2',
-            //         'Normal' => '1'
-			// 	]
-            // ])
-            // ->add('imageFile', VichImageType::class,[
-            //     'label'=>'Image d\'illustration de votre annonce',
-            //     'download_link'=>false,
-            //     'imagine_pattern'=>'miniatures',
-            //     'constraints'=>[
-            //         new Image([
-            //             'maxSize'=>'2M',
-            //             'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
-            //             'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
-            //             'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
-            //         ])
-            //     ]
-            // ])
+            ->add('city', TextType::class, [
+                // 'required' => true,
+                'label'=>'Ville d\'intervention',
+                'attr'=>[
+                    'class'=>'form-control'
+                ]
+            ])
+
+            ->add('urgency', ChoiceType::class, [
+				'label' => 'Urgence de l\'annonce',
+				'expanded' => true,
+				'multiple' => false,
+				'choices' => [
+					'Très urgent' => '3',
+                    'Urgent' => '2',
+                    'Normal' => '1'
+				]
+            ])
+            ->add('imageFile', VichImageType::class,[
+                'label'=>'Image d\'illustration de votre annonce',
+                'download_link'=>false,
+                'imagine_pattern'=>'miniatures',
+                'constraints'=>[
+                    new Image([
+                        'maxSize'=>'2M',
+                        'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
+                        'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
+                        'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
+                    ])
+                ]
+            ])
             ->add('Valider', SubmitType::class)
 
         ;
