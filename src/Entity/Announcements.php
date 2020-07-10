@@ -125,7 +125,7 @@ class Announcements
     private $unlock_count;
 
     /**
-     * @ORM\OneToMany(targetEntity=UnlockedAnnouncements::class, mappedBy="announcements")
+     * @ORM\OneToMany(targetEntity=UnlockedAnnouncements::class, mappedBy="announcements", cascade={"persist"})
      */
     private $unlockedAnnouncements;
 
