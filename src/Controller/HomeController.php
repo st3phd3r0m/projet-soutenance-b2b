@@ -14,9 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomeController extends AbstractController
 {
 
-
-
-
     /**
      * @Route("/", name="home")
      */
@@ -96,7 +93,11 @@ class HomeController extends AbstractController
             $entityManager->persist($announcement);
             $entityManager->flush();
 
-            return $this->redirectToRoute('comments_index');
+            //Envoi d'un message de succès
+            $this->addFlash('success', 'Votre annonce a bien été enregistrée.');
+
+            return $this->redirectToRoute('home');
+
         }
 
         return $this->render('home/new.html.twig', [
