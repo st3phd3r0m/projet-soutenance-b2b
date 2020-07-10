@@ -124,6 +124,16 @@ class Announcements
      */
     private $unlock_count;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UnlockedAnnouncements::class, mappedBy="announcements")
+     */
+    private $unlockedAnnouncements;
+
+    public function __construct()
+    {
+        $this->unlockedAnnouncements = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -356,6 +366,37 @@ class Announcements
     public function setUnlockCount(int $unlock_count): self
     {
         $this->unlock_count = $unlock_count;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UnlockedAnnouncements[]
+     */
+    public function getUnlockedAnnouncements(): Collection
+    {
+        return $this->unlockedAnnouncements;
+    }
+
+    public function addUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if (!$this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements[] = $unlockedAnnouncement;
+            $unlockedAnnouncement->setAnnouncements($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if ($this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements->removeElement($unlockedAnnouncement);
+            // set the owning side to null (unless already changed)
+            if ($unlockedAnnouncement->getAnnouncements() === $this) {
+                $unlockedAnnouncement->setAnnouncements(null);
+            }
+        }
 
         return $this;
     }

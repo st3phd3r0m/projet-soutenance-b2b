@@ -79,11 +79,17 @@ class Users implements UserInterface
      */
     private $subscriptionPurchases;
 
+    /**
+     * @ORM\OneToMany(targetEntity=UnlockedAnnouncements::class, mappedBy="user")
+     */
+    private $unlockedAnnouncements;
+
     public function __construct()
     {
         $this->compagnies = new ArrayCollection();
         $this->announcements = new ArrayCollection();
         $this->subscriptionPurchases = new ArrayCollection();
+        $this->unlockedAnnouncements = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -309,6 +315,37 @@ class Users implements UserInterface
             // set the owning side to null (unless already changed)
             if ($subscriptionPurchase->getUser() === $this) {
                 $subscriptionPurchase->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UnlockedAnnouncements[]
+     */
+    public function getUnlockedAnnouncements(): Collection
+    {
+        return $this->unlockedAnnouncements;
+    }
+
+    public function addUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if (!$this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements[] = $unlockedAnnouncement;
+            $unlockedAnnouncement->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if ($this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements->removeElement($unlockedAnnouncement);
+            // set the owning side to null (unless already changed)
+            if ($unlockedAnnouncement->getUser() === $this) {
+                $unlockedAnnouncement->setUser(null);
             }
         }
 
