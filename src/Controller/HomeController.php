@@ -95,4 +95,17 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+     /**
+      * @Route("/search", name="search")
+      */
+    public function search(PaginatorInterface $paginator, Request $request){
+      $announcements = $paginator->paginate(
+         $this->getDoctrine()->getRepository(Announcements::class)->search($request->query->get('search')),
+         $request->query->getInt('page, 1'),
+         10
+      );
+      return $this->render('home/index.html.twig', [
+          'announcements' => $announcements
+      ]);
+    }
 }
