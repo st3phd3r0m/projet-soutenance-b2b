@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Announcements;
 use App\Form\AnnouncementsType;
 use App\Repository\AnnouncementsRepository;
+use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,7 +18,7 @@ class HomeController extends AbstractController
     /**
      * @Route("/", name="home")
      */
-    public function index(AnnouncementsRepository $announcementsRepository, PaginatorInterface $paginator, Request $request)
+    public function index(AnnouncementsRepository $announcementsRepository, CategoriesRepository $categoriesRepository, PaginatorInterface $paginator, Request $request)
     {
 
         $announcements = $paginator->paginate(
@@ -28,8 +29,11 @@ class HomeController extends AbstractController
             5
         );
 
+        $categories = $categoriesRepository->findAll();
+
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements,
+            'categories' => $categories
         ]);
     }
 
