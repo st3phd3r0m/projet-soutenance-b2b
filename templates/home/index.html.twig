@@ -4,6 +4,7 @@
 
 {% block body %}
 
+
     <main>
         <div>
             <!--Présentation entreprise-->
@@ -19,11 +20,12 @@
             <!--Liste entreprises-->
             <section>
             <!--Barre de recherche-->
-                        <div class="w-50 max-auto">
+            <div class="w-50 max-auto">
             <form action="{{ path('search') }}" maethod="get" class="form-inline mb-5">
                  <input type="text" name="search" placeholder="Rechercher" class="form-control mr-2">
                  <button class="btn btn-primary">Rechercher</button>
-            </form>    
+            </form>     
+                
                         <div>
                             <select name="categoryFilter" id="categoryFilter">
                                 <option value="">Catégorie</option>
