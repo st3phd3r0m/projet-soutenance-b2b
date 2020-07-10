@@ -47,7 +47,7 @@ class SubscriptionPurchases
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="subscriptionPurchases")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $User;
+    private $user;
 
     public function getId(): ?int
     {
@@ -116,12 +116,12 @@ class SubscriptionPurchases
 
     public function getUser(): ?Users
     {
-        return $this->User;
+        return $this->user;
     }
 
     public function setUser(?Users $User): self
     {
-        $this->User = $User;
+        $this->user = $User;
 
         return $this;
     }
