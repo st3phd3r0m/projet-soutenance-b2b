@@ -70,6 +70,14 @@ class HomeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
+            $location = json_decode($form->get("coordinates")->getData());
+            $announcement->setCity($location->name);
+            $announcement->setPostalCode($location->cp);
+            $gps=[$location->long,
+                  $location->lat];
+            $announcement->setGpsLocation($gps);
+
+            //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
             $key_words = $form->get("key_words")->getData();
             $key_words = explode ( ";", $key_words);
             $key_words = array_filter($key_words);
