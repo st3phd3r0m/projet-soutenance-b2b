@@ -21,8 +21,8 @@
                 <td>{{ subscription.name }}</td>
                 <td>{{ subscription.price }}</td>
                 <td>
-                    <a href="{{ path('subscription_show', {'id': subscription.id}) }}">show</a>
-                    <a href="{{ path('subscription_edit', {'id': subscription.id}) }}">edit</a>
+                    <a href="{{ path('admin_subscription_show', {'id': subscription.id}) }}">show</a>
+                    <a href="{{ path('admin_subscription_edit', {'id': subscription.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('subscription_new') }}">Create new</a>
+    <a href="{{ path('admin_subscription_new') }}">Create new</a>
 {% endblock %}

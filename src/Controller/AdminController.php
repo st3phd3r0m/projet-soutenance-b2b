@@ -69,25 +69,9 @@ class AdminController extends AbstractController
     /**
      * @Route("/users/{slug}", name="admin_users_show", methods={"GET"})
      */
-    public function showUsers(Users $user, CompagniesRepository $compagniesRepository, AnnouncementsRepository $announcementsRepository, SubscriptionPurchasesRepository $subscriptionPurchasesRepository): Response
+    public function showUsers(Users $user, AnnouncementsRepository $announcementsRepository): Response
     {
-        $activeSub = $subscriptionPurchasesRepository->findBy([
-            'compagny' => $compagniesRepository->findBy([
-                'user' => $user,
-                ]),
-            'active' => true
-            ]);
-
-        $subHistory = $subscriptionPurchasesRepository->findBy([
-            'compagny' => $compagniesRepository->findBy([
-                'user' => $user,
-                ]),
-            'active' => false
-            ]);
-
         return $this->render('admin/users/show.html.twig', [
-            'activeSubs' => $activeSub,
-            'subs' => $subHistory,
             'user' => $user,
             'announcements' => $announcementsRepository->findBy(['user' => $user])
         ]);
@@ -216,28 +200,51 @@ class AdminController extends AbstractController
     // -----------------  Administration des Secteurs / Professions -----------------
     // -------------------------------------------------------------------------------
 
-    // /**
-    //  * @Route("/sectors_professions/", name="admin_sectors_professions_index", methods={"GET"})
-    //  */
-    // public function index(ActivitySectorRepository $activitySectorRepository, ProfessionsRepository $professionsRepository): Response
-    // {
-    //     return $this->render('admin/sectors_professions/index.html.twig', [
-    //         'sectors' => $activitySectorRepository->findAll(),
-    //     ]);
-    // }
+    /**
+     * @Route("/activity_sector/", name="admin_activity_sector_index", methods={"GET"})
+     */
+    public function index(ActivitySectorRepository $activitySectorRepository): Response
+    {
+        return $this->render('admin/activity_sector/index.html.twig', [
+            'sectors' => $activitySectorRepository->findAll(),
+        ]);
+    }
 
-    // /**
-    //  * @Route("/sectors_professions/{id}", name="admin_sector_delete", methods={"DELETE"})
-    //  */
-    // public function delete(Request $request, ActivitySector $activitySector): Response
-    // {
-    //     if ($this->isCsrfTokenValid('delete'.$activitySector->getId(), $request->request->get('_token'))) {
-    //         $entityManager = $this->getDoctrine()->getManager();
-    //         $entityManager->remove($activitySector);
-    //         $entityManager->flush();
-    //     }
+    /**
+     * @Route("/activity_sector/{id}", name="admin_activity_sector_delete", methods={"DELETE"})
+     */
+    public function delete(Request $request, ActivitySector $activitySector): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$activitySector->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($activitySector);
+            $entityManager->flush();
+        }
 
-    //     return $this->redirectToRoute('admin_sectors_professions_index');
-    // }
+        return $this->redirectToRoute('admin_activity_sector_index');
+    }
+
+    /**
+     * @Route("/activity_sector/new", name="admin_activity_sector_new", methods={"GET","POST"})
+     */
+    public function newActivitySector(Request $request): Response
+    {
+        $activitySector = new ActivitySector();
+        $form = $this->createForm(ActivitySectorType::class, $activitySector);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($activitySector);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('admin_activity_sector_index');
+        }
+
+        return $this->render('admin/activity_sector/new.html.twig', [
+            'activitySector' => $activitySector,
+            'form' => $form->createView(),
+        ]);
+    }
 
 }
