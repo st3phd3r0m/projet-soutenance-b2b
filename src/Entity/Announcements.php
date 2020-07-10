@@ -119,6 +119,11 @@ class Announcements
      */
     private $activity_sector;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $unlock_count;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -339,6 +344,18 @@ class Announcements
     public function setActivitySector(?ActivitySector $activity_sector): self
     {
         $this->activity_sector = $activity_sector;
+
+        return $this;
+    }
+
+    public function getUnlockCount(): ?int
+    {
+        return $this->unlock_count;
+    }
+
+    public function setUnlockCount(int $unlock_count): self
+    {
+        $this->unlock_count = $unlock_count;
 
         return $this;
     }

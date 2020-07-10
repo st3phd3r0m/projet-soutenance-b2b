@@ -74,10 +74,16 @@ class Users implements UserInterface
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SubscriptionPurchases::class, mappedBy="User")
+     */
+    private $subscriptionPurchases;
+
     public function __construct()
     {
         $this->compagnies = new ArrayCollection();
         $this->announcements = new ArrayCollection();
+        $this->subscriptionPurchases = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -274,6 +280,37 @@ class Users implements UserInterface
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SubscriptionPurchases[]
+     */
+    public function getSubscriptionPurchases(): Collection
+    {
+        return $this->subscriptionPurchases;
+    }
+
+    public function addSubscriptionPurchase(SubscriptionPurchases $subscriptionPurchase): self
+    {
+        if (!$this->subscriptionPurchases->contains($subscriptionPurchase)) {
+            $this->subscriptionPurchases[] = $subscriptionPurchase;
+            $subscriptionPurchase->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscriptionPurchase(SubscriptionPurchases $subscriptionPurchase): self
+    {
+        if ($this->subscriptionPurchases->contains($subscriptionPurchase)) {
+            $this->subscriptionPurchases->removeElement($subscriptionPurchase);
+            // set the owning side to null (unless already changed)
+            if ($subscriptionPurchase->getUser() === $this) {
+                $subscriptionPurchase->setUser(null);
+            }
+        }
 
         return $this;
     }

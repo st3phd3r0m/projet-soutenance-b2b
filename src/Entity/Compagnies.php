@@ -35,16 +35,6 @@ class Compagnies
      */
     private $user;
 
-    /**
-     * @ORM\OneToMany(targetEntity=SubscriptionPurchases::class, mappedBy="compagny")
-     */
-    private $subscriptionPurchases;
-
-    public function __construct()
-    {
-        $this->subscriptionPurchases = new ArrayCollection();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
@@ -86,34 +76,4 @@ class Compagnies
         return $this;
     }
 
-    /**
-     * @return Collection|SubscriptionPurchases[]
-     */
-    public function getSubscriptionPurchases(): Collection
-    {
-        return $this->subscriptionPurchases;
-    }
-
-    public function addSubscriptionPurchase(SubscriptionPurchases $subscriptionPurchase): self
-    {
-        if (!$this->subscriptionPurchases->contains($subscriptionPurchase)) {
-            $this->subscriptionPurchases[] = $subscriptionPurchase;
-            $subscriptionPurchase->setCompagny($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSubscriptionPurchase(SubscriptionPurchases $subscriptionPurchase): self
-    {
-        if ($this->subscriptionPurchases->contains($subscriptionPurchase)) {
-            $this->subscriptionPurchases->removeElement($subscriptionPurchase);
-            // set the owning side to null (unless already changed)
-            if ($subscriptionPurchase->getCompagny() === $this) {
-                $subscriptionPurchase->setCompagny(null);
-            }
-        }
-
-        return $this;
-    }
 }

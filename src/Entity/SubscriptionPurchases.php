@@ -44,10 +44,10 @@ class SubscriptionPurchases
     private $active;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Compagnies::class, inversedBy="subscriptionPurchases")
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="subscriptionPurchases")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $compagny;
+    private $User;
 
     public function getId(): ?int
     {
@@ -114,14 +114,14 @@ class SubscriptionPurchases
         return $this;
     }
 
-    public function getCompagny(): ?Compagnies
+    public function getUser(): ?Users
     {
-        return $this->compagny;
+        return $this->User;
     }
 
-    public function setCompagny(?Compagnies $compagny): self
+    public function setUser(?Users $User): self
     {
-        $this->compagny = $compagny;
+        $this->User = $User;
 
         return $this;
     }
