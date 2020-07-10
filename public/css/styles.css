@@ -1,5 +1,5 @@
 /* Propriétés globales */
-body{
+body {
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
 }
@@ -7,22 +7,22 @@ body{
 /* Fin Propriétés globales */
 
 /*Backgrounds*/
-.pinkBackground{
+.pinkBackground {
     color: white;
     background-color: #fb3199;
 }
 
-.violetBackground{
+.violetBackground {
     color: white;
     background-color: #6b40a1;
 }
 
-.darkGreyBackground{
+.darkGreyBackground {
     color: white;
     background-color: #6f7176;
 }
 
-.lightGreyBackground{
+.lightGreyBackground {
     color: white;
     background-color: #d8d9da;
 }
@@ -65,7 +65,7 @@ header nav {
     text-align: center;
 }
 
-header .navbar-toggler{
+header .navbar-toggler {
     text-align: right;
     font-size: 30px;
 }
@@ -75,15 +75,15 @@ header nav ul {
     padding: 0; 
 }
 
-header nav li{
+header nav li {
     margin-bottom: 5px;
 }
 
-header nav a{
+header nav a {
     color: black;
 }
 
-header nav .la-bars{
+header nav .la-bars {
     font-size: 30px;
     color: black;
 }
@@ -92,7 +92,7 @@ header nav .la-bars{
 
 /* Page Index */
 
-main{
+main {
     background-color: #ebf2e3; 
     padding : 25px;
 }
@@ -103,7 +103,7 @@ main section {
     margin-bottom: 25px;
 }
 
-main section h1{
+main section h1 {
     color: #6b40a1;
     font-size: 30px;
     font-weight: bold;
@@ -111,15 +111,15 @@ main section h1{
     text-align: center;
 }
 
-main section p{
+main section p {
     color: #6b40a1;
 }
 
-.pinkText{
+.pinkText {
     color: #fb3199;
     font-weight: bold;
 }
-.blackText{
+.blackText {
     color: black;
 }
 
@@ -131,12 +131,12 @@ main section p{
     margin: 0 auto;
 }
 
-.search_bar{
+.search_bar {
     display: flex;
     flex-direction: column;
 }
 
-.search_bar div{
+.search_bar div {
     width: 80%;
     margin: auto;
     margin-bottom: 5px;
@@ -146,12 +146,12 @@ main section p{
     margin-top: 15px;
 }
 
-.search_bar input, .search_bar select{
+.search_bar input, .search_bar select {
     width: 100%;
     padding: 5px;
 }
 
- .sortByButton{
+.sortByButton {
      background-color: white;
      margin: 25px 0 10px;
      padding: 5px;
@@ -170,50 +170,50 @@ main section p{
     margin-bottom: 10px;
 }
 
-.card img{
+.card img {
     width: 100%;
     margin-bottom: 20px;
 }
 
-.card_category{
+.card_category {
     display: inline;
     padding: 3px 10px;
     text-align: center;
     border-radius: 5px;
 }
 
-.card_title{
+.card_title {
     font-size: 16px;
     font-weight: 700;
     margin: 15px 0;
 }
 
-.card_announcement{
+.card_announcement {
     margin-top: 30px;
     margin-bottom: 10px;
 }
 
-.keyWords{
+.keyWords {
     color: #7f858b;
     font-weight: 700;
     margin-bottom: 10px;
 }
 
-.informations{
+.informations {
     margin-top: 10px;
     margin-bottom: 25px;
 }
 
-.informations i{
+.informations i {
     margin: 0 3px;
 }
 
-.card_alternative_text{
+.card_alternative_text {
     color: #7f858b;
     margin: 5px 0;
 }
 
-.buttonList{
+.buttonList {
     display: flex;
     flex-direction: column;
 }
@@ -294,13 +294,14 @@ main section p{
     letter-spacing: 0.030em;
   }
 
-  .fond{
+  .fond {
       background-color: #ebf2e3;
   }
+
   .fond > .formulaire > button{
       color: #ebf2e3;
   }
-  .titre{
+  .titre {
       font-size: 2rem;
       color: #6b40a1;
       font-weight: bold;
@@ -308,14 +309,96 @@ main section p{
   
 /* Fin Page register and login */
 
-
-
 /*Footer*/
 
-    footer p{
+    footer p {
         margin-top: 16px;
         text-align: center;
     }
 /*Fin Footer*/
 
 /*Fin Vue mobile*/
+
+/* Vue tablette */
+@media screen and (min-width: 768px) {
+
+    header h1 {
+        font-size: 30px;
+        margin: 10px 0 35px;
+    }
+
+    main {
+    padding: 40px;
+    }
+
+    main p{
+        margin-bottom: 20px;
+    }
+
+    main .button {
+        margin: 30px auto;
+    }
+
+    .search_bar div {
+        width: 100%; 
+        margin-bottom: 10px;
+    }
+   
+    .search_bar .button {
+        margin: 30px auto; 
+    }
+
+    .card {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 15px;
+        padding: 15px;
+    }
+
+    .card img {
+        height: 100%;
+        object-fit: cover;
+        margin-bottom: 0;
+    }
+
+    .card_bloc_2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .card_text{
+        flex: 1;
+    }
+
+    .card_category{
+        align-self: start;
+    }
+
+    .card_bloc_3 {
+        border-left: 1px dotted #6f7176;
+        padding-left: 15px;
+    }
+
+    .card .informations {
+        margin-top: 0;
+    }
+
+    .card_alternative_text:first-child {
+        margin-top: 0;
+    }
+
+    .buttonList .button {
+        margin: 5px 0;
+    }
+
+    .buttonList .button:last-child{
+        margin-bottom: 0;
+    }
+
+    .pagination{
+        width: 80%;
+        margin: 25px auto 0;
+    }
+}
+/*Fin Vue tablette */
+

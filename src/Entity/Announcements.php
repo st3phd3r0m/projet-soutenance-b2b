@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=AnnouncementsRepository::class)
+ * @ORM\Table(indexes={@ORM\Index(name="search", columns={"title", "description"}, flags={"fulltext"})})
  * @Vich\Uploadable
  */
 class Announcements
