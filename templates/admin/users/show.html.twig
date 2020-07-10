@@ -1,41 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'base_admin.html.twig' %}
 
 {% block title %}Users{% endblock %}
 
 {% block body %}
-    <h1>Users</h1>
+    <h1 class=" titre mb-4 pt-4 text-center">Users</h1>
 
     <a href="{{ path('admin_users_index') }}">back to list</a>
 
     <table class="table">
         <tbody>
+
+            <tr>
+                <th>Lastname</th>
+                <td>{{ user.lastname }}</td>
+            </tr>
+             <tr>
+                <th>Firstname</th>
+                <td>{{ user.firstname }}</td>
+            </tr>
             <tr>
                 <th>Email</th>
                 <td>{{ user.email }}</td>
             </tr>
             <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
                 <th>Phone</th>
                 <td>{{ user.phone }}</td>
             </tr>
+            <tr>
+                <th>Roles</th>
+                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+            </tr>
+           
         </tbody>
     </table>
 
     {# Pour le Dashboard 4 onglet, surement à isolés dans des twig distincts : Entreprise(s), Annonces postées, Abonnements en cours, Historique des Abonnements et la liste des utilisateurs qui est dans admin/users/index.html.twig #}
 
     <!-- onglet "Entrepirses" -->
-    <h3>Entrepirses</h3>
+    <h3>Entreprises</h3>
     <table class="table">
         <thead>
             <tr>

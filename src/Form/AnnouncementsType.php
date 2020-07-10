@@ -11,6 +11,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -67,43 +68,31 @@ class AnnouncementsType extends AbstractType
                 // 'required'=>true,
                 'label'=>'Ajouter accessoirement une note pour votre annonce',
             ]) 
-
             ->add('key_words', TextType::class,[
                 'label'=>'Ajouter des mots-clés, délimités par des points-virgules (";"), afin de référencer votre annonce : ',
                 'mapped' => false,
             ])
-
-            //plus tard
-            // ->add('postal_code')
-            // ->add('gps_location')
-
-
             ->add('price_min', MoneyType::class, [
                 'label'=>'entre : ',
                 'mapped' => false,
                 'attr'=>['value'=>'1000']
             ])
-
             ->add('price_max', MoneyType::class, [
                 'label'=>'et : ',
                 'mapped' => false,
                 'attr'=>['value'=>'100000']
             ])
-
             ->add('category', EntityType::class, [
                 'label'=>'Quel est le type de l\'annonce ?',
                 'class'=> Categories::class,
                 'choice_label'=> 'name'
             ])
-
             ->add('activity_sector', EntityType::class, [
                 'label'=>'Secteur d\'activité',
                 'class'=> ActivitySector::class,
                 'choice_label'=> 'name',
                 'attr'=>['class'=>'actSect']
             ])
-
-
             ->add('city', TextType::class, [
                 'required' => true,
                 'label'=>'Ville d\'intervention',
@@ -114,7 +103,10 @@ class AnnouncementsType extends AbstractType
                     'autocomplete'=>'off'
                 ]
             ])
-
+            ->add('coordinates', HiddenType::class, [
+                'required' => true,
+                'mapped' => false,
+            ])
             ->add('urgency', ChoiceType::class, [
 				'label' => 'Urgence de l\'annonce',
 				'expanded' => true,
