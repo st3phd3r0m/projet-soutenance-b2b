@@ -3,6 +3,12 @@
 {% block title %} Yeah! - Accueil{% endblock %}
 
 {% block body %}
+
+      <div class="w-50 max-auto">
+            <form action="{{ path('search') }}" maethod="get" class="form-inline mb-5">
+                 <input type="text" name="search" placeholder="Rechercher" class="form-control mr-2">
+                 <button class="btn btn-primary">Rechercher</button>
+            </form>
     <main>
         <div>
             <!--Présentation entreprise-->
@@ -18,11 +24,11 @@
             <!--Liste entreprises-->
             <section>
             <!--Barre de recherche-->
-                <div class="search_filter"> 
-                    <div class="search_bar">
-                        <div>
-                            <input type="text" placeholder="Que recherchez-vous ?">
-                        </div> 
+                        <div class="w-50 max-auto">
+            <form action="{{ path('search') }}" maethod="get" class="form-inline mb-5">
+                 <input type="text" name="search" placeholder="Rechercher" class="form-control mr-2">
+                 <button class="btn btn-primary">Rechercher</button>
+            </form>    
                         <div>
                             <select name="categoryFilter" id="categoryFilter">
                                 <option value="">Catégorie</option>
