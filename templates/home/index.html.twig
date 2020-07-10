@@ -4,11 +4,6 @@
 
 {% block body %}
 
-      <div class="w-50 max-auto">
-            <form action="{{ path('search') }}" maethod="get" class="form-inline mb-5">
-                 <input type="text" name="search" placeholder="Rechercher" class="form-control mr-2">
-                 <button class="btn btn-primary">Rechercher</button>
-            </form>
     <main>
         <div>
             <!--Présentation entreprise-->
@@ -16,7 +11,8 @@
                 <h1>Plateforme d’affaires et d’opportunités commerciales</h1>
                 <p>yeah.io simplifie la mise en relation entre l’offre et la demande. Vous pouvez inscrire votre entreprise, répondre à des devis, trouver des nouveaux prospects, développer votre chiffre d’affaire, faire connaitre votre savoir-faire ou encore rechercher un prestataire, déposer une offre de stage ou d’emploi...</p>
                 <p class="pinkText">Devenez apporteur d’affaire en postant une opportunité commerciale précise et recevez en contrepartie des €, des bons cadeaux ou des bons de réductions.</p>
-                <a href="{{ path('home_new') }}" type="button" class="button pinkBackground">Créer une publication</a>
+                <button type="button" class="btn pinkBackground">Créer une publication</button>
+                <a href="{{ path('home_new') }}" type="button" class="btn pinkBackground">Créer une publication</a>
             </section>
             <!-- Fin Présentation entreprise-->
     
@@ -30,7 +26,7 @@
             </form>    
                         <div>
                             <select name="categoryFilter" id="categoryFilter">
-                                <option value="">Secteur d'activité</option>
+                                <option value="">Catégorie</option>
                             </select>
                         </div>
                         <div>
@@ -43,68 +39,81 @@
                                 <option value="">Type d'annonces ?</option>
                             </select>
                         </div>
-                        <a href="#"  type="button" class=" button violetBackground">C'est parti</a>
+                        <div>
+                            <button type="button" class=" btn violetBackground">C'est parti</button>        
+                        </div>
+                    </div>
+                    <div>
+                        <button class="sortByButton">Trier par<i class="las la-sort-amount-down"></i></button>
                     </div>
                 </div>
             <!--Fin Barre de recherche-->
+    
 
-                 <div class="sortByFilter">
-                    <button class="sortByButton">Trier par<i class="las la-sort-amount-down"></i></button>
-                </div>
 
-            <!--Bloc Carte entreprise-->
-                {#<div class="card">
+
+
+             <!--Bloc Carte entreprise-->
+                <div class="card">
                     <div>
                         <img src="" alt="">
                     </div>
     
                     <div>
-                        <div class="card_category pinkBackground">Recherche prestataire</div>
+                        <div class="card_category">Recherche prestataire</div>
                         <div class="card_title">Création de charte graphique</div>
-                        <div class="card_text">Une entreprise recherche un graphiste afin de finaliser sa charte graphique, typographie et son logo.</div>
-                        <div class="card_announcement">Annonce 000-000</div>
+                        <div class="card_text">Une entreprise recherche un graphiste afin definaliser sa charte graphique, typographie et son logo</div>
+                        <div class="card_text">Annonce 000-000</div>
                         <div class="keyWords">#graphisme #motsclés</div>
                     </div>
     
                     <div>
-                        <div class="informations">
+                        <div>
                             <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation</div>
-                            <div class="card_alternative_text"><i class="las la-clock"></i>Date</div>
+                            <div class="card_alternative_text"><i class="las la-calendar"></i>Date</div>
                             <div class="card_alternative_text"><i class="las la-phone"></i>Telephone</div>
                             <div class="card_alternative_text"><i class="las la-envelope"></i>Email</div>
                             <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif</div>
                         </div>
     
                         <div class="buttonList">
-                            <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
-                            <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
-                            <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
-                            <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
-                            <a href="#" type="button" class=" button violetBackground">Répondre</a>
+                            <button type="button" class=" btn darkGreyBackground">Partager</button>
+                            <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
+                            <button type="button" class=" btn darkGreyBackground">Recommander</button>
+                            <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
+                            <button type="button" class=" btn violetBackground">Répondre</button>
                         </div>
                     </div>
-                </div> #} 
-            <!--Fin Bloc Carte entreprise--> 
-
-                <!--Bloc Carte entreprise-->
-                {% for announcement in announcements %} 
-                    {{ include('home/_listAnnouncements.html.twig') }}
-                {% endfor %}
-
-                <div>
-                {{ knp_pagination_render(announcements) }}
                 </div>
-                <!--Fin Bloc Carte entreprise-->
+                <!--Fin Bloc Carte entreprise-->     
             </section>
             <!--Fin Liste entreprises-->
         </div>
+
+
+
+            <!--Bloc Carte entreprise-->
+            {% for announcement in announcements %} 
+                {{ include('home/_listAnnouncements.html.twig') }}
+            {% endfor %}
+            <!--Fin Bloc Carte entreprise--> 
+
+
+            <div class="py-5">
+            {{ knp_pagination_render(announcements) }}
+            </div>
+            
+
+
+        </section>
+        <!--Fin Liste entreprises-->
 
         <!--Carte géo-->
         <div>
             <!--Intégration Carte géo-->
         </div>
         <!--Fin carte géo-->
-
+      
     </main>
 
 {% endblock %}
