@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\ActivitySector;
 use App\Entity\Announcements;
 use App\Entity\Categories;
 use App\Entity\Professions;
@@ -10,8 +11,9 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -66,32 +68,27 @@ class AnnouncementsType extends AbstractType
                 'label'=>'Ajouter accessoirement une note pour votre annonce',
             ]) 
 
-            //plus tard
-            ->add('key_words')
-            ->add('postal_code')
-            ->add('gps_location')
-
-
-            // ->add('price_range', RangeType::class, [
-
-            //     'attr' => [
-            //         'min' => 100,
-            //         'max' => 200000
-            //     ]
-
-            // ])
-
-
-            ->add('price_range', CollectionType::class, [
-                // each entry in the array will be a "number" field
-                'entry_type' => NumberType::class,
-                // these options are passed to each "number" type
-                'entry_options' => [
-                    'attr' => ['class' => 'number-box'],
-                ],
+            ->add('key_words', TextType::class,[
+                'label'=>'Ajouter des mots-clés, délimités par des points-virgules (";"), afin de référencer votre annonce : ',
+                'mapped' => false,
             ])
 
+            //plus tard
+            // ->add('postal_code')
+            // ->add('gps_location')
 
+
+            ->add('price_min', MoneyType::class, [
+                'label'=>'entre : ',
+                'mapped' => false,
+                'attr'=>['value'=>'1000']
+            ])
+
+            ->add('price_max', MoneyType::class, [
+                'label'=>'et : ',
+                'mapped' => false,
+                'attr'=>['value'=>'100000']
+            ])
 
             ->add('category', EntityType::class, [
                 'label'=>'Quel est le type de l\'annonce ?',
@@ -99,25 +96,24 @@ class AnnouncementsType extends AbstractType
                 'choice_label'=> 'name'
             ])
 
-            ->add('profession', EntityType::class, [
-                'label'=>'Quel est le type de l\'annonce ?',
-                'class'=> Professions::class,
-                // 'query_builder' => function (ProfessionsRepository $er) {
-                //     return $er->createQueryBuilder('p')
-                //         ->
-                //         ->orderBy('p.name', 'ASC');
-                // },
-                'choice_label'=> 'name'
+            ->add('activity_sector', EntityType::class, [
+                'label'=>'Secteur d\'activité',
+                'class'=> ActivitySector::class,
+                'choice_label'=> 'name',
+                'attr'=>['class'=>'actSect']
             ])
+
 
             ->add('city', TextType::class, [
-                // 'required' => true,
+                'required' => true,
                 'label'=>'Ville d\'intervention',
+                'mapped' => false,
                 'attr'=>[
-                    'class'=>'form-control'
+                    'class'=>'form-control',
+                    'list'=>'selectPannel',
+                    'autocomplete'=>'off'
                 ]
             ])
-
 
             ->add('urgency', ChoiceType::class, [
 				'label' => 'Urgence de l\'annonce',
@@ -142,6 +138,8 @@ class AnnouncementsType extends AbstractType
                     ])
                 ]
             ])
+            ->add('Valider', SubmitType::class)
+
         ;
     }
 

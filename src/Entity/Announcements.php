@@ -108,19 +108,16 @@ class Announcements
      */
     private $urgency;
 
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Professions::class, inversedBy="announcements")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $profession;
-
     /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=255, unique=true)
      */
     private $slug;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=ActivitySector::class, inversedBy="announcements")
+     */
+    private $activity_sector;
 
     public function getId(): ?int
     {
@@ -322,18 +319,6 @@ class Announcements
         return $this;
     }
 
-    public function getProfession(): ?Professions
-    {
-        return $this->profession;
-    }
-
-    public function setProfession(?Professions $profession): self
-    {
-        $this->profession = $profession;
-
-        return $this;
-    }
-
     public function getSlug(): ?string
     {
         return $this->slug;
@@ -342,6 +327,18 @@ class Announcements
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getActivitySector(): ?ActivitySector
+    {
+        return $this->activity_sector;
+    }
+
+    public function setActivitySector(?ActivitySector $activity_sector): self
+    {
+        $this->activity_sector = $activity_sector;
 
         return $this;
     }

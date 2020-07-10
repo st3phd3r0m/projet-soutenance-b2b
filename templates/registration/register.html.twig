@@ -3,8 +3,22 @@
 {% block title %}Register{% endblock %}
 
 {% block body %}
-   <div class="w-50 mx-auto">
-    <h1 class="mb-3 font-weight-normal text-center">Inscription</h1>  
-        {{ form(registrationForm) }}            
+
+   <div class="w-100 mx-auto fond">
+        <div class="w-50 mx-auto formulaire">
+            <h1 class="text-center titre mb-4 pt-4">Yeah-Inscription</h1>  
+            {{ form_start(registrationForm) }}
+            {{ form_row(registrationForm.firstname) }}
+            {{ form_row(registrationForm.lastname) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.phone) }}
+            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.agreeTerms) }}
+            {# {{ form_row(registrationForm.valider) }} #}
+            <div class="text-center">
+            <button class="btn pinkBackground mb-4 mt-4" type="submit">S'inscrire </button>
+            {{ form_end(registrationForm) }}
+            </div>
+        </div>
     </div>
 {% endblock %}

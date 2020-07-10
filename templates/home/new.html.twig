@@ -2,8 +2,46 @@
 
 {% block title %} Yeah! - Accueil{% endblock %}
 
+
 {% block body %}
 
-    {{ form(form) }}
+
+
+   <div class="w-100 mx-auto fond">
+        <div class="w-50 mx-auto formulaire">
+            <h1 class="text-center titre mb-4 pt-4">Nouvelle annonce</h1>  
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.title)}}
+                {{ form_row(form.description)}}
+
+                <div>
+                    <p>Budget :</p>
+                    <div id="slider"></div>
+                    {{ form_row(form.price_min)}}
+                    {{ form_row(form.price_max)}}    
+                </div>
+
+                <div>
+                    {{ form_row(form.city)}}
+                    <datalist id="selectPannel" autocomplete="off">
+                    </datalist>
+                </div>
+                
+
+
+
+
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {# js pour affichage des curseurs (gamme de budget) #}
+    <script src="{{ asset('js/sliderBudget.js') }}"></script>
+    <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
 
 {% endblock %}

@@ -69,6 +69,17 @@ class HomeController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
+            //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
+            $key_words = $form->get("key_words")->getData();
+            $key_words = explode ( ";", $key_words);
+            $key_words = array_filter($key_words);
+            $announcement->setKeyWords($key_words);
+
+            //Récupération de la délimitation du budget
+            $price_range[0] = $form->get("price_min")->getData();
+            $price_range[1] = $form->get("price_max")->getData();
+            $announcement->setPriceRange($price_range);
+            
             $announcement->setUser($this->getUser());
             $announcement->setRef($maxRef);
             $announcement->setCreatedAt(new \DateTime('now'));
