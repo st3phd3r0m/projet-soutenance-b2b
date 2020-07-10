@@ -3,7 +3,7 @@ let numbOfSuggestion = 5;
 $(document).ready(function() {
     $('.actSect').select2();
     $('#announcements_city').on('keyup', getCityList);
-
+    $('#announcements_city').on('change', sendGPS);
 });
 
 
@@ -20,14 +20,29 @@ function getCityList() {
                 //Ici on a une reponse
                 let villes = JSON.parse(xmlhttp.responseText);
 
-                let selectPannel = document.querySelector("#selectPannel");
+                cities=[];
+                let compt = 0;
+                for (let ville of villes) {
+                    for (let cp of ville.codesPostaux){
+                        cities[compt]={
+                            'name':ville.nom,
+                            'dept':ville.departement.nom,
+                            'cp':cp,
+                            'long': ville.centre.coordinates[0],
+                            'lat': ville.centre.coordinates[1]
+                        }
+                        compt++;
+                    }
+                }
 
+                let selectPannel = document.querySelector("#selectPannel");
                 selectPannel.innerHTML="";
                 
-                for (let ville of villes) {
-                    let option = document.createElement("option");
+                for (let ville of cities) {
+                    let option = document.createElement("option"); 
+                    option.dataset.ville = JSON.stringify(ville);
+                    option.value = ville.name+"---"+ville.cp+"---"+ville.dept;
                     selectPannel.appendChild(option);
-                    option.value = ville.nom+"---"+ville.departement.code+"---"+ville.departement.nom;
                 }
 
             }
@@ -40,4 +55,10 @@ function getCityList() {
     //On envoie la requete
     xmlhttp.send();
 
+}
+
+function sendGPS(){
+    let datalist = $(this).parent().next();
+    let option = datalist.find("[value='"+$(this).val()+"']");
+    $("#announcements_coordinates").val(JSON.stringify(option.data('ville')));
 }
