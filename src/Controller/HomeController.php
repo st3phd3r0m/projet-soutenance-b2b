@@ -93,6 +93,8 @@ class HomeController extends AbstractController
             $announcement->setUser($this->getUser());
             $announcement->setRef($maxRef);
             $announcement->setCreatedAt(new \DateTime('now'));
+            
+            $announcement->setUnlockCount(0);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($announcement);
