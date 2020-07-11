@@ -9,6 +9,7 @@
 
         <div class="card_bloc_2">
             <div class="card_category pinkBackground">{{ announcement.category.name }}</div>
+            <p>{{ announcement.activitySector.name }}</p>
             <div class="card_title">{{ announcement.title }}</div>
             <div class="card_text">{{ announcement.description }}</div>
             <div class="card_announcement">Annonce : {{ announcement.ref }}</div>
@@ -21,7 +22,7 @@
 
         <div class="card_bloc_3">
             <div class="informations">
-                <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation : {{ announcement.postalCode }}</div>
+                <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</div>
                 <div class="card_alternative_text"><i class="las la-clock"></i>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
                 <div class="card_alternative_text"><i class="las la-phone"></i>Telephone : {{ announcement.user.phone }} </div>
                 <div class="card_alternative_text"><i class="las la-envelope"></i>Email : {{ announcement.user.email }}</div>

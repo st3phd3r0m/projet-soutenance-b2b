@@ -77,6 +77,16 @@ class Announcements
     private $postal_code;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $departememt;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    private $dept_code;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
      */
     private $gps_location = [];
@@ -401,4 +411,27 @@ class Announcements
         return $this;
     }
 
+    public function getDepartememt(): ?string
+    {
+        return $this->departememt;
+    }
+
+    public function setDepartememt(string $departememt): self
+    {
+        $this->departememt = $departememt;
+
+        return $this;
+    }
+
+    public function getDeptCode(): ?string
+    {
+        return $this->dept_code;
+    }
+
+    public function setDeptCode(string $dept_code): self
+    {
+        $this->dept_code = $dept_code;
+
+        return $this;
+    }
 }

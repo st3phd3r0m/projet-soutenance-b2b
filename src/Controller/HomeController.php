@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Announcements;
 use App\Form\AnnouncementsType;
+use App\Repository\ActivitySectorRepository;
 use App\Repository\AnnouncementsRepository;
 use App\Repository\CategoriesRepository;
 use Knp\Component\Pager\PaginatorInterface;
@@ -16,24 +17,49 @@ class HomeController extends AbstractController
 {
 
     /**
-     * @Route("/", name="home")
+     * @Route("/", name="home", methods={"GET"})
      */
-    public function index(AnnouncementsRepository $announcementsRepository, CategoriesRepository $categoriesRepository, PaginatorInterface $paginator, Request $request)
+    public function index(AnnouncementsRepository $announcementsRepository, CategoriesRepository $categoriesRepository, ActivitySectorRepository $activitySectorRepository, PaginatorInterface $paginator, Request $request)
     {
 
-        $announcements = $paginator->paginate(
-            $announcementsRepository->findBy([], ['created_at' => 'DESC']),
-            //Le numero de la page, si aucun numero, on force la page 1
-            $request->query->getInt('page', 1),
-            //Nombre d'élément par page
-            5
-        );
+        //Récupération des données de la requete GET
+        $criteria = $request->query->all();
 
+        //Est-ce que le boutton de la barre de recherche a été cliqué
+        if( !empty($criteria)
+        ){
+            //oui
+            $announcements = $paginator->paginate(
+                //Appel de la méthode de requete DQL de recherche
+                $announcementsRepository->searchFilter($criteria),
+                //Le numero de la page, si aucun numero, on force la page 1
+                $request->query->getInt('page', 1),
+                //Nombre d'élément par page
+                5
+            );
+
+        }else{
+            //non
+            $announcements = $paginator->paginate(
+                $announcementsRepository->findBy([], ['created_at' => 'DESC']),
+                //Le numero de la page, si aucun numero, on force la page 1
+                $request->query->getInt('page', 1),
+                //Nombre d'élément par page
+                5
+            );
+            
+        }
+
+        $announcementsNoPag = $announcementsRepository->findAll();
         $categories = $categoriesRepository->findAll();
+        $activitySectors = $activitySectorRepository->findAll();
+
 
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements,
-            'categories' => $categories
+            'categories' => $categories,
+            'activitySectors' => $activitySectors,
+            'announcementsNoPag' => $announcementsNoPag
         ]);
     }
 
@@ -72,12 +98,14 @@ class HomeController extends AbstractController
 
             //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
             $location = json_decode($form->get("coordinates")->getData());
-            // dd($location);
             $announcement->setCity($location->name);
             $announcement->setPostalCode($location->cp);
-            $gps=[$location->long,
-                  $location->lat];
+            $announcement->setDeptCode($location->deptCode);
+            $announcement->setDepartememt($location->dept);
+            $gps=['long'=>$location->long,
+                  'lat'=>$location->lat];
             $announcement->setGpsLocation($gps);
+
 
             //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
             $key_words = $form->get("key_words")->getData();
@@ -111,6 +139,9 @@ class HomeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+
      /**
       * @Route("/search", name="search")
       */
