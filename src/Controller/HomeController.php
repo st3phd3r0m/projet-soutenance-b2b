@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Announcements;
+use App\Entity\UnlockedAnnouncements;
 use App\Form\AnnouncementsType;
 use App\Repository\ActivitySectorRepository;
 use App\Repository\AnnouncementsRepository;
@@ -129,6 +130,14 @@ class HomeController extends AbstractController
 
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($announcement);
+                $entityManager->flush();
+
+                //L'auteur de l'annonce accède aux contenus bloqués de l'annonce
+                //On instancie l'entité UnlockedAnnouncements
+                $unlockedAnnouncement = new UnlockedAnnouncements;
+                $unlockedAnnouncement->setUser($this->getUser());
+                $unlockedAnnouncement->setAnnouncements($announcement);
+                $entityManager->persist($unlockedAnnouncement);
                 $entityManager->flush();
 
                 //Envoi d'un message de succès

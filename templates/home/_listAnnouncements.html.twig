@@ -73,16 +73,18 @@
         <div class="card_bloc_3">
             <div class="informations">
 
-                {% if app.user.unlockedAnnouncements is not empty %}
-
-
                 {% set unlockedAnnouncement = false %}
 
-                {% for array in app.user.unlockedAnnouncements %}
-                    {% if announcement.id == array.announcements.id %}
-                        {% set unlockedAnnouncement = true %}
-                    {% endif %}
-                {% endfor %}
+
+                {% if app.user %}
+
+                    {% for array in app.user.unlockedAnnouncements %}
+                        {% if announcement.id == array.announcements.id %}
+                            {% set unlockedAnnouncement = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
 
                 <div class="card_alternative_text">
                     <p><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</p>
@@ -124,8 +126,6 @@
                 </div>
 
                 <p>Coordonnées débloquées {{ announcement.unlockCount }} fois.</p>
-
-            {% endif %}
 
 
 
