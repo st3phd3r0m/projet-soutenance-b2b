@@ -29,7 +29,7 @@ class AnnouncementsRepository extends ServiceEntityRepository
 
     public function search(string $searchterm) {
         return $this->createQueryBuilder('p')
-         ->andWhere('MATCH_AGAINST(p.title, p.content) AGAINST (:searchterm boolean) >0')
+         ->andWhere('MATCH_AGAINST(p.title, p.description) AGAINST (:searchterm boolean) >0')
          ->setParameter('searchterm', $searchterm)
          ->getQuery()
          ->getResult();
