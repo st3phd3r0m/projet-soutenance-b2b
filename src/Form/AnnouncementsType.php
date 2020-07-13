@@ -32,8 +32,11 @@ class AnnouncementsType extends AbstractType
             ->add('title', TextType::class, [
                 'required' => true,
                 'label'=>'Le titre de votre annonce',
-                'attr'=>[
-                    'class'=>'form-control'
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -51,6 +54,12 @@ class AnnouncementsType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required'=>true,
                 'label'=>'Le contenu de votre annonce',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir le contenu de votre annonce',
@@ -67,50 +76,100 @@ class AnnouncementsType extends AbstractType
             ->add('notes', TextareaType::class, [
                 // 'required'=>true,
                 'label'=>'Ajouter accessoirement une note pour votre annonce',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ]) 
             ->add('key_words', TextType::class,[
                 'label'=>'Ajouter des mots-clés, délimités par des points-virgules (";"), afin de référencer votre annonce : ',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'mapped' => false,
             ])
             ->add('price_min', MoneyType::class, [
                 'label'=>'entre : ',
                 'mapped' => false,
-                'attr'=>['value'=>'1000']
+                'attr'=>[
+                    'value'=>'1000',
+                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
+
+                ]
             ])
             ->add('price_max', MoneyType::class, [
                 'label'=>'et : ',
                 'mapped' => false,
-                'attr'=>['value'=>'100000']
+                // 'attr'=>['value'=>'100000']
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
+                    'value'=>'100000'
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ])
             ->add('category', EntityType::class, [
                 'label'=>'Quel est le type de l\'annonce ?',
                 'class'=> Categories::class,
-                'choice_label'=> 'name'
+                'choice_label'=> 'name',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ])
             ->add('activity_sector', EntityType::class, [
                 'label'=>'Secteur d\'activité',
                 'class'=> ActivitySector::class,
                 'choice_label'=> 'name',
-                'attr'=>['class'=>'actSect']
+                // 'attr'=>['class'=>'actSect']     ICI A VOIR !!!
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 actSelect'
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ])
             ->add('city', TextType::class, [
                 'required' => true,
                 'label'=>'Ville d\'intervention',
                 'mapped' => false,
-                'attr'=>[
-                    'class'=>'form-control',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
                     'list'=>'selectPannel',
                     'autocomplete'=>'off'
-                ]
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ])
             ->add('coordinates', HiddenType::class, [
                 'required' => true,
                 'mapped' => false,
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
             ])
             ->add('urgency', ChoiceType::class, [
 				'label' => 'Urgence de l\'annonce',
 				'expanded' => true,
-				'multiple' => false,
+                'multiple' => false,
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
 				'choices' => [
 					'Très urgent' => '3',
                     'Urgent' => '2',
@@ -121,6 +180,12 @@ class AnnouncementsType extends AbstractType
                 'label'=>'Image d\'illustration de votre annonce',
                 'download_link'=>false,
                 'imagine_pattern'=>'miniatures',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
                 'constraints'=>[
                     new Image([
                         'maxSize'=>'2M',
@@ -130,7 +195,12 @@ class AnnouncementsType extends AbstractType
                     ])
                 ]
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('Valider', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn pinkBackground text-center'
+                ],
+                
+            ])
 
         ;
     }
