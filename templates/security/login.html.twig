@@ -3,6 +3,11 @@
 {% block title %} Yeah-Connexion{% endblock %}
 
 {% block body %}
+
+    {% for message in app.flashes('pleaseConnect') %}
+    <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endfor %}
+    
 <div class="w-100 mx-auto fond">
 
     <form method="post" class="w-50 mx-auto">

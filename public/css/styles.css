@@ -4,8 +4,9 @@ body {
     font-size: 14px;
 }
 
-a:active {
+a:hover {
     color:black; 
+    text-decoration: none;
 }
 
 /* Fin Propriétés globales */
@@ -49,7 +50,7 @@ header .logo img {
     margin: 10px;
 }
 
-header .pinkBackground {
+header .btn {
     display: none;
 }
 
@@ -395,7 +396,7 @@ main section p {
 
     .buttonList .button {
         margin: 5px 0;
-        width: 100%;
+        width: 70%;
     }
 
     .buttonList .button:last-child{
@@ -410,12 +411,90 @@ main section p {
 /*Fin Vue tablette */
 
 @media screen and (min-width: 1024px) {
+    header {
+        display: flex;
+        align-items: center;
+        padding: 0 20px; 
+    }
+    .navbar-toggler{
+        display: none;
+    }
 
-    main{
-        display: grid;
+    .navbar-collapse {
+        display: block !important;
+    }
+
+    header ul {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+    }
+
+    header h1{
+        margin: 0;
+        font-size: 21px;
+        padding: 0 30px;
+        width: 100%;
+    }
+
+    header .btn {
+        display: block;
+        font-size: 14px;
+        min-width: 180px;
+    }
+
+    nav a {
+        display: flex;
+        flex-direction: column;
+    }
+
+    nav i {
+        font-size: 30px;
     }
     
     .left_bloc{
+        width: 60%;
     }
+
+    main .button {
+        width: 40%;
+        border-radius: 5px;
+    }
+
+    .search_bar{
+        flex-direction: row;
+    }
+
+    .search_bar .button {
+        margin: 0; 
+        min-width: 100px;
+        border-radius: 0;
+        border-top-right-radius: 41px; 
+        border-bottom-right-radius: 41px;  
+        padding-right: 15px;
+    }
+
+    .search_bar > div {
+        margin: 0;
+    }
+
+    .search_bar input, .search_bar select {
+        height: 100%;
+        border-radius: 0; 
+        border : none;
+    }
+
+    .search_bar div:first-child input{
+        border-top-left-radius: 41px; 
+        border-bottom-left-radius: 41px; 
+        padding-left: 15px;  
+    }
+
+    .map {
+        width: 40%;
+    }
+
+
+
 }
 

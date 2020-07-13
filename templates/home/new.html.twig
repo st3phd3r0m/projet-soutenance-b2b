@@ -13,8 +13,8 @@
 
                 {{ form_start(form) }}
 
-                {{ form_row(form.title)}}
-                {{ form_row(form.description)}}
+                {{ form_row(form.title) }}
+                {{ form_row(form.description) }}
 
                 <div>
                     <p>Budget :</p>
@@ -38,11 +38,5 @@
 
         </div>
     </div>
-
-{% endblock %}
-{% block javascripts %}
-    {# js pour affichage des curseurs (gamme de budget) #}
-    <script src="{{ asset('js/sliderBudget.js') }}"></script>
-    <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
 
 {% endblock %}

@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=AnnouncementsRepository::class)
- * @ORM\Table(indexes={@ORM\Index(name="search", columns={"title", "description"}, flags={"fulltext"})})
+ * @ORM\Table(indexes={@ORM\Index(columns={"title", "description"}, flags={"fulltext"})})
  * @Vich\Uploadable
  */
 class Announcements
@@ -77,6 +77,16 @@ class Announcements
     private $postal_code;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $departememt;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    private $dept_code;
+
+    /**
      * @ORM\Column(type="json", nullable=true)
      */
     private $gps_location = [];
@@ -123,6 +133,16 @@ class Announcements
      * @ORM\Column(type="integer")
      */
     private $unlock_count;
+
+    /**
+     * @ORM\OneToMany(targetEntity=UnlockedAnnouncements::class, mappedBy="announcements", cascade={"persist"})
+     */
+    private $unlockedAnnouncements;
+
+    public function __construct()
+    {
+        $this->unlockedAnnouncements = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -360,4 +380,58 @@ class Announcements
         return $this;
     }
 
+    /**
+     * @return Collection|UnlockedAnnouncements[]
+     */
+    public function getUnlockedAnnouncements(): Collection
+    {
+        return $this->unlockedAnnouncements;
+    }
+
+    public function addUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if (!$this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements[] = $unlockedAnnouncement;
+            $unlockedAnnouncement->setAnnouncements($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUnlockedAnnouncement(UnlockedAnnouncements $unlockedAnnouncement): self
+    {
+        if ($this->unlockedAnnouncements->contains($unlockedAnnouncement)) {
+            $this->unlockedAnnouncements->removeElement($unlockedAnnouncement);
+            // set the owning side to null (unless already changed)
+            if ($unlockedAnnouncement->getAnnouncements() === $this) {
+                $unlockedAnnouncement->setAnnouncements(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getDepartememt(): ?string
+    {
+        return $this->departememt;
+    }
+
+    public function setDepartememt(string $departememt): self
+    {
+        $this->departememt = $departememt;
+
+        return $this;
+    }
+
+    public function getDeptCode(): ?string
+    {
+        return $this->dept_code;
+    }
+
+    public function setDeptCode(string $dept_code): self
+    {
+        $this->dept_code = $dept_code;
+
+        return $this;
+    }
 }

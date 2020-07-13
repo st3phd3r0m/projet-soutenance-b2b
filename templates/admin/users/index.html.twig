@@ -3,55 +3,51 @@
 {% block title %}Users index{% endblock %}
 
 {% block body %}
-    <h1 class=" titre mb-4 pt-4 text-center"> Yeah-Utilisateurs</h1>
+    <h1 class=" titre mb-4 pt-4 text-center">Utilisateurs</h1>
 
-    <section class="section-newVoi section-t8 fond">
+    <section class="fond">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                     <div class="title-wrap d-flex justify-content-center">
-                        <div class="title-box">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Lastname</th>
-                                        <th>Firstname</th>
-                                        <th>Email</th>
-                                        <th>Numéro de téléphone</th>
-                                        <th>Roles</th>
-                                        <th>actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                {% for user in users %}
-                                    <tr>
-                                        <td>{{ user.lastname }}</td>
-                                        <td>{{ user.firstname }}</td>
-                                        <td>{{ user.email }}</td>
-                                        <td>{{ user.phone }}</td>
-                                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                                        <td>
-                                            <a href="{{ path('admin_users_show', {'slug': user.slug}) }}">Voir</a>
-                                            <a href="#">edit</a>
-                                        </td>
-                                    </tr>
-                                {% else %}
-                                    <tr>
-                                        <td colspan="8">no records found</td>
-                                    </tr>
-                                {% endfor %}
-                                </tbody>
-                            </table>
+            <div class="col-10 mx-auto">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Lastname</th>
+                            <th>Firstname</th>
+                            <th>Email</th>
+                            <th>Numéro de téléphone</th>
+                            <th>Roles</th>
+                            <th>actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.lastname }}</td>
+                            <td>{{ user.firstname }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                            <td>
+                                <a href="{{ path('admin_users_show', {'slug': user.slug}) }}">Voir</a>
+                                <a href="#">edit</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="8">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
 
-                            <div class="col text-center">
-                                <button class="btn bouton" type="submit">
-                                    <a href="{{ path('admin_users_new') }}" class=" btn pinkBackground mb-4">Créer un nouvel utilisateur</a>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {# <div class="col text-center">
+                    <button class="btn bouton" type="submit">
+                        <a href="{{ path('admin_users_new') }}" class=" btn pinkBackground mb-4">Créer un nouvel utilisateur</a>
+                    </button>
+                </div> #}
             </div>
         </div>
     </section>
+
+    
 {% endblock %}

@@ -27,7 +27,44 @@ class AnnouncementsRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function search(string $searchterm) {
+    public function searchFilter(array $criteria)
+    {
+        $query = $this->createQueryBuilder('a')
+                ->select('a')
+                ->innerJoin('a.category', 'c')
+                ->innerJoin('a.activity_sector', 's');
+
+        if( !empty($criteria["adTypeFilter"]) ){
+            $query->andWhere('c.id = :category')
+                ->setParameter('category', $criteria["adTypeFilter"]);
+        }
+        if( !empty($criteria["activitySectorFilter"]) ){
+            $query->andWhere('s.id = :activitySector')
+                ->setParameter('activitySector', $criteria["activitySectorFilter"]);
+        }
+        if( !empty($criteria["deptCode"]) ){
+            $query->andWhere('a.dept_code = :deptCode')
+                ->setParameter('deptCode', $criteria["deptCode"]);
+        }
+        if( !empty($criteria["search"]) ){
+            $query->andWhere('MATCH_AGAINST(a.title, a.description) AGAINST (:searchterm boolean) >0')
+                ->andWhere("a.key_words LIKE :searchterm2")
+                ->setParameter('searchterm', $criteria["search"])
+                ->setParameter('searchterm2', '%'.$criteria["search"].'%');
+        }
+
+        $query->getQuery()->getResult();
+
+        return $query;
+    }
+
+
+
+
+
+
+    public function search(string $searchterm)
+    {
         return $this->createQueryBuilder('p')
          ->andWhere('MATCH_AGAINST(p.title, p.description) AGAINST (:searchterm boolean) >0')
          ->setParameter('searchterm', $searchterm)

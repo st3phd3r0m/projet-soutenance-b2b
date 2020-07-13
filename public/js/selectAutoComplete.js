@@ -1,6 +1,12 @@
 let numbOfSuggestion = 5;
 
 $(document).ready(function() {
+
+
+    //Elements de home/index.html.twig
+    // $('#categoryFilter').select2();
+
+    // Elements de home/new.html.twig
     $('.actSect').select2();
     $('#announcements_city').on('keyup', getCityList);
     $('#announcements_city').on('change', sendGPS);
@@ -27,6 +33,7 @@ function getCityList() {
                         cities[compt]={
                             'name':ville.nom,
                             'dept':ville.departement.nom,
+                            'deptCode':ville.departement.code,
                             'cp':cp,
                             'long': ville.centre.coordinates[0],
                             'lat': ville.centre.coordinates[1]

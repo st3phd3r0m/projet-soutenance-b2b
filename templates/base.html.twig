@@ -37,15 +37,15 @@
                         </a>
                     </li>
                     <li>
-                        <a href="" title="Recherche">
-                            <i class="las la-search"></i>
-                            <span>Recherche</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="" title="Messagerie">
                             <i class="las la-envelope"></i>
                             <span>Message</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('search')}}" title="Recherche">
+                            <i class="las la-search"></i>
+                            <span>Recherche</span>
                         </a>
                     </li>
                     <li>
@@ -76,6 +76,9 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         {# CDN noUiSlider #}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js"></script>
+        {# js pour affichage des curseurs (gamme de budget) #}
+        <script src="{{ asset('js/sliderBudget.js') }}"></script>
+        <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
