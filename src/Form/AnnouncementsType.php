@@ -96,7 +96,11 @@ class AnnouncementsType extends AbstractType
             ->add('price_min', MoneyType::class, [
                 'label'=>'entre : ',
                 'mapped' => false,
-                'attr'=>['value'=>'1000']
+                'attr'=>[
+                    'value'=>'1000',
+                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
+
+                ]
             ])
             ->add('price_max', MoneyType::class, [
                 'label'=>'et : ',
@@ -191,7 +195,12 @@ class AnnouncementsType extends AbstractType
                     ])
                 ]
             ])
-            ->add('Valider', SubmitType::class)
+            ->add('Valider', SubmitType::class, [
+                'attr' => [
+                    'class' => 'btn pinkBackground text-center'
+                ],
+                
+            ])
 
         ;
     }

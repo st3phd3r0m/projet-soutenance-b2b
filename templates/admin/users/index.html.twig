@@ -1,10 +1,31 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Users index{% endblock %}
+{% block title %}Users {% endblock %}
 
 {% block body %}
-    <h1 class=" titre mb-4 pt-4 text-center">Utilisateurs</h1>
 
+    <h1 class=" titre mb-4 pt-4 text-center">Utilisateurs</h1>
+{# <div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 2
+    </div>
+    <div class="col">
+      2 of 2
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      2 of 3
+    </div>
+    <div class="col">
+      3 of 3
+    </div>
+  </div>
+</div> #}
     <section class="fond">
         <div class="container">
             <div class="col-10 mx-auto">
@@ -40,7 +61,7 @@
                     </tbody>
                 </table>
 
-                {# <div class="col text-center">
+                {# <div class="col text-center"> sauf caaaaaaaaaaaaaaaaaa
                     <button class="btn bouton" type="submit">
                         <a href="{{ path('admin_users_new') }}" class=" btn pinkBackground mb-4">Créer un nouvel utilisateur</a>
                     </button>
@@ -49,5 +70,4 @@
         </div>
     </section>
 
-    
 {% endblock %}
