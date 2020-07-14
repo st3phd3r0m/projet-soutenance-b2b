@@ -101,14 +101,22 @@
                     <div class="card_alternative_text">
                         <p>
                             <i class="las la-phone"></i> 
-                            <a href="tel:{{ ( unlockedAnnouncement == true ) ? announcement.user.phone : '#' }}">{{ ( unlockedAnnouncement == true ) ? announcement.user.phone : 'disponible' }}</a>                        
+                            {% if unlockedAnnouncement == true %}
+                                <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
+                            {% else %}      
+                                disponible 
+                            {% endif %}                     
                         </p>
 
                     </div>
                     <div class="card_alternative_text">
                         <p>
                             <i class="las la-envelope"></i>
-                            <a href="mailto:{{ ( unlockedAnnouncement == true ) ? announcement.user.email : '#' }}">{{ ( unlockedAnnouncement == true ) ? announcement.user.email : 'disponible' }}</a>                           
+                            {% if unlockedAnnouncement == true %}
+                                <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
+                            {% else %}      
+                                disponible 
+                            {% endif %}                      
                         </p>
                     </div>                
                 </address>
@@ -127,8 +135,6 @@
 
                 <p>Coordonnées débloquées {{ announcement.unlockCount }} fois.</p>
 
-
-
             </div>
 
             <div class="buttonList">
@@ -136,7 +142,12 @@
                 <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
                 <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
                 <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
-                <a href="#" type="button" class=" button violetBackground">Répondre</a>
+
+                {# Ce boutton ouvre une modal bootsrap #}
+                <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncementModal">Débloquer</button>
+
+                {{ include('home/_unlockAnnouncement.html.twig') }}
+
             </div>
         </div>
     </div>

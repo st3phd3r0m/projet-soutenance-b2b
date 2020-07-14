@@ -40,6 +40,11 @@ class Categories
      */
     private $slug;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $credits_to_unlock;
+
     public function __construct()
     {
         $this->announcements = new ArrayCollection();
@@ -114,6 +119,18 @@ class Categories
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getCreditsToUnlock(): ?int
+    {
+        return $this->credits_to_unlock;
+    }
+
+    public function setCreditsToUnlock(int $credits_to_unlock): self
+    {
+        $this->credits_to_unlock = $credits_to_unlock;
 
         return $this;
     }

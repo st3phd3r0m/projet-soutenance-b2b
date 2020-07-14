@@ -84,6 +84,11 @@ class Users implements UserInterface
      */
     private $unlockedAnnouncements;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $account;
+
     public function __construct()
     {
         $this->compagnies = new ArrayCollection();
@@ -348,6 +353,18 @@ class Users implements UserInterface
                 $unlockedAnnouncement->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAccount(): ?int
+    {
+        return $this->account;
+    }
+
+    public function setAccount(int $account): self
+    {
+        $this->account = $account;
 
         return $this;
     }

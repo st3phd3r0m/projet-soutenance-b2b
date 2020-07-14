@@ -34,6 +34,11 @@ class Subscription
      */
     private $subscriptionPurchases;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $credit;
+
     public function __construct()
     {
         $this->subscriptionPurchases = new ArrayCollection();
@@ -95,6 +100,18 @@ class Subscription
                 $subscriptionPurchase->setSubscription(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCredit(): ?int
+    {
+        return $this->credit;
+    }
+
+    public function setCredit(int $credit): self
+    {
+        $this->credit = $credit;
 
         return $this;
     }
