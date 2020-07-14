@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Categories index{% endblock %}
+
+{% block body %}
+    <h1>Categories index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Is_illimited</th>
+                <th>Slug</th>
+                <th>Credits_to_unlock</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.isIllimited ? 'Yes' : 'No' }}</td>
+                <td>{{ category.slug }}</td>
+                <td>{{ category.creditsToUnlock }}</td>
+                <td>
+                    <a href="{{ path('admin_categories_edit', {'id': category.id}) }}">edit</a>
+                    <a href="{{ path('admin_categories_delete', {'id': category.id}) }}">delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('admin_categories_new') }}">Create new</a>
+{% endblock %}
