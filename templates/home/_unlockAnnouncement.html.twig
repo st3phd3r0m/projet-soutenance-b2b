@@ -1,9 +1,10 @@
 <!-- Modal -->
-<div class="modal fade" id="unlockAnnoncementModal" tabindex="-1" role="dialog" aria-labelledby="unlockAnnoncementModalLabel" aria-hidden="true">
+<div class="modal fade" id="unlockAnnoncement{{ announcement.id }}Modal" tabindex="-1" role="dialog" aria-labelledby="unlockAnnoncement{{ announcement.id }}ModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
+        
             <div class="modal-header">
-                <h5 class="modal-title" id="unlockAnnoncementModalLabel">Vous souhaitez être mis en relation avec cet utilisateur pour l’annonce : {{ announcement.ref }}</h5>
+                <h5 class="modal-title" id="unlockAnnoncement{{ announcement.id }}ModalLabel">Vous souhaitez être mis en relation avec cet utilisateur pour l’annonce : {{ announcement.ref }}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
                 </button>
