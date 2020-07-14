@@ -30,7 +30,7 @@ class AdminController extends AbstractController
     // -------------------------------------------------------------------------------
 
     /**
-     * @Route("/", name="admin_dashboard", )
+     * @Route("/", name="admin_dashboard")
      */
     public function dashboard()
     {
