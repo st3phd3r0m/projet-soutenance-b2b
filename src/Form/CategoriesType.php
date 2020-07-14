@@ -39,16 +39,14 @@ class CategoriesType extends AbstractType
                 ])
             ]
         ])
-            ->add('is_illimited')
-            ->add('credits_to_unlock', IntegerType::class, [
-                'label'=>'Cout d\'un débloquage en credits : ',
-                'mapped' => true,
-                'attr'=>[
-                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
-    
-                ]
-            ])
-        ;
+        ->add('credits_to_unlock', IntegerType::class, [
+            'label'=>'Cout d\'un débloquage en credits : ',
+            'mapped' => true,
+            'attr'=>[
+                'class' => 'form-control form-control-lg form-control-a mb-3 ',
+
+            ]
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

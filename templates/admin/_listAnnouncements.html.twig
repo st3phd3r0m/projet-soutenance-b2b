@@ -1,0 +1,114 @@
+<!--Bloc Carte entreprise-->
+    <div class="card enable-pointer-cursor">
+        <div class="card_bloc_1">
+            <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
+            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+        </div>
+
+        <div class="card_bloc_2">
+            <div class="card_category pinkBackground">
+                <p>{{ announcement.category.name }}</p>
+            </div>
+            <p>{{ announcement.activitySector.name }}</p>
+            <div class="card_title">
+                <h2>{{ announcement.title }}</h2>
+            </div>
+            <div class="card_text">
+                <p>{{ announcement.description }}</p>
+            </div>
+            <div class="card_announcement">
+                <p>Annonce. {{ announcement.ref }}</p>
+            </div>
+            
+            <div class="keyWords"> Mots-clés :  
+                <p>
+                    {% for keyWords in announcement.keyWords %} 
+                        #{{ keyWords }}  
+                    {% endfor %}                
+                </p>         
+            </div>
+        </div>
+
+        <div class="card_bloc_3">
+            <div class="informations">
+
+                {% set unlockedAnnouncement = false %}
+
+
+                {% if app.user %}
+
+                    {% for array in app.user.unlockedAnnouncements %}
+                        {% if announcement.id == array.announcements.id %}
+                            {% set unlockedAnnouncement = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="card_alternative_text">
+                    <p><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</p>
+                </div>
+                <div class="card_alternative_text">
+                    <p>
+                        <i class="las la-clock"></i> 
+                        <time datetime="{{ announcement.createdAt | date('d.m.Y') }}">
+                            {{ announcement.createdAt | date('d.m.Y')}}
+                        </time>
+                    </p>
+                </div>
+                <address>
+                    <div class="card_alternative_text">
+                        <p>
+                            <i class="las la-phone"></i> 
+                            {% if unlockedAnnouncement == true %}
+                                <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
+                            {% else %}      
+                                disponible 
+                            {% endif %}                     
+                        </p>
+
+                    </div>
+                    <div class="card_alternative_text">
+                        <p>
+                            <i class="las la-envelope"></i>
+                            {% if unlockedAnnouncement == true %}
+                                <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
+                            {% else %}      
+                                disponible 
+                            {% endif %}                      
+                        </p>
+                    </div>                
+                </address>
+                <div class="card_alternative_text">
+                    <p>
+                        <i class="las la-euro-sign"></i> 
+                        
+                        {% if unlockedAnnouncement %}
+                            {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;
+                        {% else %}
+                            disponible
+                        {% endif %}                 
+                    </p>
+
+                </div>
+
+                <p>Coordonnées débloquées {{ announcement.unlockCount }} fois.</p>
+
+            </div>
+
+            <div class="buttonList">
+                <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
+                <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
+                <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
+                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
+
+                {# Ce boutton ouvre une modal bootsrap #}
+                <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
+
+                {{ include('home/_unlockAnnouncement.html.twig') }}
+
+            </div>
+        </div>
+    </div>
+<!--Fin Bloc Carte entreprise-->  
+
