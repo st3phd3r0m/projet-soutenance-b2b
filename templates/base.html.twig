@@ -22,7 +22,7 @@
             <div class="logo">
                 <a href="{{ path('home') }}" title="Accueil du site"><img src="{{ asset('images/logo_Yeah.png') }}" alt="Logo Yeah!"></a>
             </div>
-            <button class="btn pinkBackground">Créer une publication</button>
+            <a href="{{ path('home_new') }}" class="button pinkBackground">Créer une publication</a>
             <h1>Le réseau social des professionnels</h1>
             
             <!--Menu Navigation-->
@@ -60,6 +60,11 @@
                                     {% if is_granted("ROLE_ADMIN") %}
                                         <a class="dropdown-item" href="{{ path('admin_dashboard') }}" title="Espace Administrateur">Espace Administrateur</a>
                                     {% endif %}
+
+                                    {% if is_granted("ROLE_USER") %}
+                                        <a class="dropdown-item" href="{{ path('profile_index') }}" title="Aller à votre espace personnel pour consulter les annonces que vous avez publiées">Consulter vos publications</a>
+                                    {% endif %}
+
                                         {# <a class="dropdown-item" href="{{ path('customer_details') }}" title="Espace Client">Espace Client</a> #}
                                         <a class="dropdown-item bouton" href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion</a>                            
                                 </div>

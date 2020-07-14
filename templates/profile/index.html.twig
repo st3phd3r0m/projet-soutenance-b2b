@@ -3,4 +3,19 @@
 {% block title %} Yeah! - Espace personnel{% endblock %}
 
 {% block body %}
+
+    <main>
+
+        <!--Bloc Carte entreprise-->
+        {% for announcement in announcements %} 
+            {{ include('profile/_listAnnouncements.html.twig') }}
+        {% endfor %}
+
+        <div>
+            {{ knp_pagination_render(announcements) }}
+        </div>
+        <!--Fin Bloc Carte entreprise-->
+
+    </main>
+
 {% endblock %}
