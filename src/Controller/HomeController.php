@@ -8,6 +8,7 @@ use App\Form\AnnouncementsType;
 use App\Repository\ActivitySectorRepository;
 use App\Repository\AnnouncementsRepository;
 use App\Repository\CategoriesRepository;
+use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -61,6 +62,77 @@ class HomeController extends AbstractController
             'activitySectors' => $activitySectors,
             'announcementsNoPag' => $announcementsNoPag
         ]);
+    }
+
+    /**
+     * @Route("/unlock/{slug}", name="home_unlock", methods={"GET"})
+     * @param string $slug
+     * @param Request $request
+     * @return Response
+     */
+    public function unlockAnnouncement(Announcements $announcement, UsersRepository $usersRepository, Request $request)
+    {
+
+
+        if ($this->getUser()) {
+
+            //Nbre de crédits sur le compte de l'utilisateur connecté
+            $accountUser = $this->getUser()->getAccount();
+            //Nbre de crédits recquis pour débloquer l'annonce
+            $requiredCredit = $announcement->getCategory()->getCreditsToUnlock();
+
+            if ($accountUser >= $requiredCredit) {
+
+                //Prélèvement de crédits sur le compte utilisateur
+                $accountUser -= $requiredCredit;
+                //Màj sur la variable session utilisateur
+                $this->getUser()->setAccount($accountUser);
+                //Màj en bdd
+                $user = $usersRepository->find($this->getUser());        
+                $user->setAccount($accountUser);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
+
+                //Instanciation de UnlockedAnnouncements pour stocker l'annonce débloquée par l'utilisateur
+                $unlockedAnnouncement = new UnlockedAnnouncements;
+                $unlockedAnnouncement->setUser($this->getUser());
+                $unlockedAnnouncement->setAnnouncements($announcement);
+
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($unlockedAnnouncement);
+                $entityManager->flush();
+
+                
+                //Màj de compteur de déblocage de l'annonce dans l'entité Announcements
+                $unlock_count =  $announcement->getUnlockCount();
+                $announcement->setUnlockCount($unlock_count++);
+               
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($announcement);
+                $entityManager->flush();
+
+
+                //Envoi d'un message de succès
+                $this->addFlash('successUnlock', 'Les coordonnéees de l\'annonceur ont bien été débloquées.');
+
+                return $this->redirectToRoute('home');
+            } else {
+
+                //Envoi d'un message de succès
+                $this->addFlash('failUnlock', 'Le nombre de crédits sur votre compte est insuffisant pour débloquer les coordonnées de l\'annonceur.');
+
+                return $this->redirectToRoute('home');
+            }
+        } else {
+
+            //Envoi d'un message de succès
+            $this->addFlash('pleaseConnect', 'Veuillez vous connecter pour débloquer les coordonnées de l\'annonceur.');
+
+            return $this->redirectToRoute('app_login');
+        }
+
     }
 
 

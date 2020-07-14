@@ -1,25 +1,42 @@
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#unlockAnnoncementsModal">
-  Launch demo modal
-</button>
-
 <!-- Modal -->
-<div class="modal fade" id="unlockAnnoncementsModal" tabindex="-1" role="dialog" aria-labelledby="unlockAnnoncementsModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="unlockAnnoncementsModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+<div class="modal fade" id="unlockAnnoncementModal" tabindex="-1" role="dialog" aria-labelledby="unlockAnnoncementModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="unlockAnnoncementModalLabel">Vous souhaitez être mis en relation avec cet utilisateur pour l’annonce : {{ announcement.ref }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="card_bloc_2">
+                    <div class="card_category pinkBackground">
+                        <p>{{ announcement.category.name }}</p>
+                    </div>
+                    <p>{{ announcement.activitySector.name }}</p>
+                    <div class="card_title">
+                        <h2>{{ announcement.title }}</h2>
+                    </div>
+                    <div class="card_text">
+                        <p>{{ announcement.description }}</p>
+                    </div>
+                </div>
+
+                <div class="card_bloc_2">
+                    <div class="card_title">
+                        <p>Débloquer les coordonnées de l'annonceur pour {{ announcement.category.creditsToUnlock  }} crédit{{ (announcement.category.creditsToUnlock > 1)?'s':'' }}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="button darkGreyBackground" data-dismiss="modal">Fermer</button>
+                <a href="{{ path('home_unlock', {slug : announcement.slug} ) }}" type="button" class="button violetBackground">Débloquer</a>
+            </div>
+
+        </div>
     </div>
-  </div>
 </div>

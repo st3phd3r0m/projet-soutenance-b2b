@@ -9,6 +9,13 @@
     <div class="alert alert-success" role="alert">{{ message }}</div>
     {% endfor %}
 
+    {% for message in app.flashes('successUnlock') %}
+    <div class="alert alert-success" role="alert">{{ message }}</div>
+    {% endfor %}
+
+    {% for message in app.flashes('failUnlock') %}
+    <div class="alert alert-warning" role="alert">{{ message }}</div>
+    {% endfor %}
     
     <main>
         <div class="left_bloc">
@@ -108,7 +115,6 @@
                 <!--Bloc Carte entreprise-->
                 {% for announcement in announcements %} 
                     {{ include('home/_listAnnouncements.html.twig') }}
-                    
                 {% endfor %}
 
                 <div>
