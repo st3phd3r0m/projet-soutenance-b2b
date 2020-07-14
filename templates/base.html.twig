@@ -49,10 +49,29 @@
                         </a>
                     </li>
                     <li>
-                        <a href= "{{ path('app_login') }}" title=" Page de connexion">
-                            <i class="las la-user"></i>
-                            <span>Se connecter</span>
-                        </a>
+                        <div class="d-block text-center mr-5">
+                            <div class="dropdown show">
+                            {% if app.user %}
+                                <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
+                                    <i class="las la-user"></i>
+                                    <p>Bonjour {{ app.user.firstname }}</p>
+                                </div> 
+                                <div class="dropdown-menu">
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <a class="dropdown-item" href="{{ path('admin_dashboard') }}" title="Espace Administrateur">Espace Administrateur</a>
+                                    {% endif %}
+                                        {# <a class="dropdown-item" href="{{ path('customer_details') }}" title="Espace Client">Espace Client</a> #}
+                                        <a class="dropdown-item bouton" href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion</a>                            
+                                </div>
+                            {% else %}
+
+                                <a href= "{{ path('app_login') }}" title="Page de connexion">
+                                    <i class="las la-user"></i>
+                                    <span>Se connecter</span>
+                                </a>
+                            {% endif %}
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>

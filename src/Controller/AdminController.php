@@ -25,6 +25,18 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class AdminController extends AbstractController
 {
+    // -------------------------------------------------------------------------------
+    // ----------------------- Page d'acceuil Administration -----------------------
+    // -------------------------------------------------------------------------------
+
+    /**
+     * @Route("/", name="admin_dashboard", )
+     */
+    public function dashboard()
+    {
+        return $this->render('admin/index.html.twig');
+    }
+
 
     // -------------------------------------------------------------------------------
     // ----------------------- Administration des Utilisateurs -----------------------
