@@ -20,59 +20,7 @@
     
 
             <!--Bloc Carte annonce-->
-            <article class="card">
-                <div>
-                    <img src="{{ asset('images/announcements/'~ announcement.image ) }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
-                    {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
-                </div>
-
-                <div>
-                    <div>{{ announcement.category.name }}</div>
-                    <div class="card_title">
-                        <h2>
-                            {{ announcement.title }}
-                        </h2>
-                        <p>
-                            Recherche : {{ announcement.profession.name }}
-                        </p>
-                    
-                    </div>
-                    <div class="card_text">
-                        <p>
-                           Description : {{ announcement.description }}
-                        </p>
-                        <p>
-                           Urgence de l'annonce : {{ announcement.urgency }}
-                        </p>
-                    </div>
-                    <div class="card_text">Annonce {{ announcement.ref }}</div>
-                    <div> Mots-clès           
-                        {% for keyWords in announcement.keyWords %} 
-                            #{{ keyWords }}, 
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div>
-                    <div>
-                        <div>Localisation : {{ announcement.postalCode }}</div>
-                        <div>Ville : {{ announcement.city }}</div>
-                        <div>Localisation gps : {{ announcement.gpsLocation[0] }} ,  {{ announcement.gpsLocation[1] }}</div>
-                        <div>Date de publication  : {{ announcement.createdAt | date('d.m.Y')}}</div>
-                        <div>Telephone : {{ announcement.user.phone }} </div>
-                        <div>Mail : {{ announcement.user.email }}</div>
-                        <div>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
-                    </div>
-
-                    <div class="buttonList">
-                        <button type="button" class=" btn darkGreyBackground">Partager</button>
-                        <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
-                        <button type="button" class=" btn darkGreyBackground">Recommander</button>
-                        <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
-                        <button type="button" class=" btn violetBackground">Répondre</button>
-                    </div>
-                </div>
-            </article>
+            {{ include('home/_listAnnouncements.html.twig') }}
             <!--Fin Bloc annonce-->    
 
 
