@@ -24,7 +24,6 @@ class HomeController extends AbstractController
      */
     public function index(AnnouncementsRepository $announcementsRepository, CategoriesRepository $categoriesRepository, ActivitySectorRepository $activitySectorRepository, PaginatorInterface $paginator, Request $request)
     {
-
         // dd($this->getUser());
 
         //Récupération des données de la requete GET
@@ -55,15 +54,18 @@ class HomeController extends AbstractController
         $announcementsNoPag = $announcementsRepository->findAll();
         $categories = $categoriesRepository->findAll();
         $activitySectors = $activitySectorRepository->findAll();
-
+        $citiesCoord = $this->getCitiesCoordinatesFromAnnoucements($announcements);
 
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements,
             'categories' => $categories,
             'activitySectors' => $activitySectors,
-            'announcementsNoPag' => $announcementsNoPag
+            'announcementsNoPag' => $announcementsNoPag,
+            'citiesCoord' => $citiesCoord
         ]);
     }
+
+    
 
     /**
      * @Route("/unlock/{slug}", name="home_unlock", methods={"GET"})
@@ -150,7 +152,6 @@ class HomeController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
     }
-
 
     /**
      * @Route("/show/{slug}", name="home_show")
@@ -246,8 +247,6 @@ class HomeController extends AbstractController
         }
     }
 
-
-
     /**
      * @Route("/search", name="search")
      */
@@ -261,5 +260,23 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements
         ]);
+    }
+    
+    /**
+     * Retourne la liste des coordonnées des villes contenues dans un tableau d'objets [Annoucements]
+     *
+     * @param [array] $announcements
+     * @return string
+     */
+    private function getCitiesCoordinatesFromAnnoucements($announcements) {
+        // Construction de la chaine de caracteres JSON
+        $citiesCoord = '{';
+        foreach ($announcements as $announcement) {
+            // ex: "Paris" : {"lat": 1, "long": 1},
+            $citiesCoord = $citiesCoord.'"'.$announcement->getCity().'":'.json_encode($announcement->getGpsLocation()).',';
+        }
+        $citiesCoord = $citiesCoord.'}';
+        // Suppression de la virgule de trop
+        return str_replace('},}', '}}', $citiesCoord);
     }
 }

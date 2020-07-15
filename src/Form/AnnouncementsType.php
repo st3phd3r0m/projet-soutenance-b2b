@@ -238,12 +238,6 @@ class AnnouncementsType extends AbstractType
 				'label' => 'Urgence de l\'annonce',
 				'expanded' => true,
                 'multiple' => false,
-                // 'attr' => [
-                //     'class' => 'form-control form-control-lg form-control-a mb-3 '
-                // ],
-                // 'label_attr' => [
-                //     'class' => 'policeForm'
-                // ],
 				'choices' => [
 					'Très urgent' => '3',
                     'Urgent' => '2',
@@ -252,15 +246,15 @@ class AnnouncementsType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class,[
                 'required' => false,
-                'label'=>'Image d\'illustration de votre annonce',
+                'label'=>'',
                 'download_link'=>false,
                 'imagine_pattern'=>'miniatures',
-                // 'attr' => [
-                //     'class' => 'form-control form-control-lg form-control-a mb-3 '
-                // ],
-                // 'label_attr' => [
-                //     'class' => 'policeForm'
-                // ],
+                'attr' => [
+                    'class' => 'img-file'
+                ],
+                'label_attr' => [
+                    'class' => 'label-file '
+                ],
                 'constraints'=>[
                     new Image([
                         'maxSize'=>'2M',
