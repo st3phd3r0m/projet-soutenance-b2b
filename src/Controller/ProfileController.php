@@ -9,6 +9,7 @@ use App\Entity\Users;
 use App\Form\AnnouncementsType;
 use App\Form\UsersType;
 use App\Repository\AnnouncementsRepository;
+use App\Repository\SubscriptionPurchasesRepository;
 use App\Repository\SubscriptionRepository;
 use App\Repository\UsersRepository;
 use Dompdf\Dompdf;
@@ -66,6 +67,19 @@ class ProfileController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/orders/record", name="profile_orders_record")
+     */
+    public function ordersRecord(SubscriptionPurchasesRepository $subscriptionPurchasesRepository)
+    {
+        $user = $this->getUser();
+
+        $subscriptionPurchases = $subscriptionPurchasesRepository->findBy(['user' => $user], ['ordered_at' => 'DESC']);
+
+        return $this->render('profile/ordersRecord.html.twig', [
+            'subscriptionPurchases' => $subscriptionPurchases,
+        ]);
+    }
 
     /**
      * @Route("/edit/{slug}", name="profile_edit", methods={"GET","POST"})
