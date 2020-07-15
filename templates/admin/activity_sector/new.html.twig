@@ -1,11 +1,11 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}New ActivitySector{% endblock %}
+{% block title %}Nouveau secteur d'activité{% endblock %}
 
 {% block body %}
-    <h1>Create new ActivitySector</h1>
+    <h1>Nouveau secteur d'activité</h1>
 
     {{ include('admin/activity_sector/_form.html.twig') }}
 
-    <a href="{{ path('admin_activity_sector_index') }}">back to list</a>
+    <a href="{{ path('admin_activity_sector_index') }}">Retour à la liste</a>
 {% endblock %}

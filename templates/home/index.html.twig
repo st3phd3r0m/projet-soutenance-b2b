@@ -35,14 +35,6 @@
             <!--Liste entreprises-->
             <section>
             <!--Barre de recherche-->
-                {#<div class="search_filter">
-                    <div class="search_bar">
-                        <form action="{{ path('search')}}" method="get">
-                            <div>
-                                <input type="text" name="search" placeholder"Que cherchez vous ?">
-                            </div>
-                        </form>#}
-
                 <div class="search_filter"> 
                     <form class="search_bar" action="{{ path('home') }}" method="get">
                         <div>
@@ -83,40 +75,7 @@
                 </div>
 
             <!--Bloc Carte entreprise-->
-                {#<div class="card">
-                    <div>
-                        <img src="" alt="">
-                    </div>
-    
-                    <div>
-                        <div class="card_category pinkBackground">Recherche prestataire</div>
-                        <div class="card_title">Création de charte graphique</div>
-                        <div class="card_text">Une entreprise recherche un graphiste afin de finaliser sa charte graphique, typographie et son logo.</div>
-                        <div class="card_announcement">Annonce 000-000</div>
-                        <div class="keyWords">#graphisme #motsclés</div>
-                    </div>
-    
-                    <div>
-                        <div class="informations">
-                            <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation</div>
-                            <div class="card_alternative_text"><i class="las la-clock"></i>Date</div>
-                            <div class="card_alternative_text"><i class="las la-phone"></i>Telephone</div>
-                            <div class="card_alternative_text"><i class="las la-envelope"></i>Email</div>
-                            <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif</div>
-                        </div>
-    
-                        <div class="buttonList">
-                            <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
-                            <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
-                            <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
-                            <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
-                            <a href="#" type="button" class=" button violetBackground">Répondre</a>
-                        </div>
-                    </div>
-                </div> #} 
-            <!--Fin Bloc Carte entreprise--> 
-
-                <!--Bloc Carte entreprise-->
+            
                 {% for announcement in announcements %} 
                     {{ include('home/_listAnnouncements.html.twig') }}
                 {% endfor %}
@@ -124,7 +83,7 @@
                 <div>
                 {{ knp_pagination_render(announcements) }}
                 </div>
-                <!--Fin Bloc Carte entreprise-->
+            <!--Fin Bloc Carte entreprise-->
             </section>
             <!--Fin Liste entreprises-->
         </div>

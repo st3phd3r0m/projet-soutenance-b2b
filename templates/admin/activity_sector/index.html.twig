@@ -1,14 +1,16 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}ActivitySector index{% endblock %}
+{% block title %}Liste des Secteurs d'activités{% endblock %}
 
 {% block body %}
-    <h1>ActivitySector index</h1>
+    <h1>Liste des Secteurs d'activités</h1>
+
+    <a href="{{ path('admin_activity_sector_new') }}">Nouveau</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -17,16 +19,15 @@
             <tr>
                 <td>{{ sector.name }}</td>
                 <td>
-                    <a href="{{ path('admin_activity_sector_edit', {'id': sector.id}) }}">edit</a>
+                    <a href="{{ path('admin_activity_sector_edit', {'id': sector.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun élément à afficher</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_activity_sector_new') }}">Create new</a>
 {% endblock %}
