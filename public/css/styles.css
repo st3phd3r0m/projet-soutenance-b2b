@@ -475,7 +475,7 @@ main section p {
         margin: 0;
     }
 
-    main {
+    main:not(#layoutSidenav_content) {
         display: flex;
         flex-direction: column;
         padding: 40px;
@@ -531,6 +531,25 @@ main section p {
         right: 0;
         touch-action: pan-x pan-y;
     }
+  .label-file{
+    cursor: pointer;
+    
+    font-weight: bold;
+    width: 100px;
+    height: 100px;
+  }
+  
+  .label-file:hover {
+    color: #25a5c4;
+}
+.img-file{
+    position: absolute;
+    margin-top: 3px;
+    margin-left: 3px;
+    height: 1px;
+    width: 1px;
+    z-index: -5;
+}
 
     footer {
         width: 60%;

@@ -10,6 +10,7 @@
 
             <h2 class="m-5">Historique de vos commandes</h2>
 
+        {% if subscriptionPurchases is not empty %}
             <div class="table-responsive">
 
                 {# Début tableau #}
@@ -58,6 +59,40 @@
 
             </div>
      
+        {% else %}
+
+            <p>Vous n'avez acheté aucun abonnement pour le moment.</p>
+
+        {% endif %}
+
+            <!-- Button trigger modal -->
+            <button type="button" class="button pinkBackground" data-toggle="modal" data-target="#reloadAccountModal">Ajouter des crédits à votre compte
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="reloadAccountModal" tabindex="-1" role="dialog" aria-labelledby="reloadAccountModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reloadAccountModalLabel">Recharger votre compte en crédits</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        {% for subscription in subscriptions %}
+
+                        <a class="d-inline-block button pinkBackground w-25" href="{{ path('profile_confirm_subscription', {id: subscription.id }) }}" type="button">Ajouter {{ subscription.credit }} crédits avec le {{ subscription.name }} pour {{ subscription.price }} &euro;</a>
+
+                        {% endfor %}
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                    </div>
+                    </div>
+                </div>
+            </div> 
 
         </div>
     </main>

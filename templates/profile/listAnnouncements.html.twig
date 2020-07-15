@@ -5,9 +5,11 @@
 
 {% block body %}
 
-    <main class="pt-85">
+<main id="pt-85 layoutSidenav_content">
 
-        <h1>Liste de vos articles</h1>
+    <div class="container-fluid">
+
+        <h1 class="m-5">Liste de vos articles</h1>
 
         {% for announcement in announcements %} 
 
@@ -123,6 +125,7 @@
         </div>
         <!--Fin Bloc Carte entreprise-->
 
-    </main>
+    </div>
+</main>
 
 {% endblock %}

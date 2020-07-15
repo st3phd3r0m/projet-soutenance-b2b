@@ -11,14 +11,17 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Image;
@@ -197,17 +200,44 @@ class AnnouncementsType extends AbstractType
                 ] 
 
             ])
+            ->add('email', EmailType::class, [
+                'required' => true,
+                'label' => 'Adresse e-mail',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3'
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'L\adresse e-mail est obligatoire'
+                    ]),
+                    new Email([
+                        'message' => 'Votre adresse e-mail est invalide'
+                    ])
+                ]
+            ])
+            ->add('phone', TelType::class, [
+                'required' => true,
+                'label' => 'Télephone',
+                'attr' => [
+                    'class' => 'form-control form-control-lg form-control-a mb-3',
+                ],
+                'label_attr' => [
+                    'class' => 'policeForm'
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Le numéro de télephone est obligatoire'
+                    ])
+                ]
+            ])
             ->add('urgency', ChoiceType::class, [
-                'required' => false,
+                'required' => true,
 				'label' => 'Urgence de l\'annonce',
 				'expanded' => true,
                 'multiple' => false,
-                // 'attr' => [
-                //     'class' => 'form-control form-control-lg form-control-a mb-3 '
-                // ],
-                // 'label_attr' => [
-                //     'class' => 'policeForm'
-                // ],
 				'choices' => [
 					'Très urgent' => '3',
                     'Urgent' => '2',
@@ -216,15 +246,15 @@ class AnnouncementsType extends AbstractType
             ])
             ->add('imageFile', VichImageType::class,[
                 'required' => false,
-                'label'=>'Image d\'illustration de votre annonce',
+                'label'=>'',
                 'download_link'=>false,
                 'imagine_pattern'=>'miniatures',
-                // 'attr' => [
-                //     'class' => 'form-control form-control-lg form-control-a mb-3 '
-                // ],
-                // 'label_attr' => [
-                //     'class' => 'policeForm'
-                // ],
+                'attr' => [
+                    'class' => 'img-file'
+                ],
+                'label_attr' => [
+                    'class' => 'label-file '
+                ],
                 'constraints'=>[
                     new Image([
                         'maxSize'=>'2M',
