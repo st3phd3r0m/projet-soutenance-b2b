@@ -1,0 +1,90 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %} Yeah! - Votre commande {% endblock %}
+
+{% block body %}
+
+    <main id="layoutSidenav_content">
+
+        <div class="float-right">
+
+            <a class="button pinkBackground" type="button" title="Télécharger votre facture" href="{{ path('profile_bill', {'id': subscriptionPurchase.id }) }}">Télécharger votre facture</a>  
+
+        </div>
+
+        <section class="w-50 mx-auto">
+
+            <h1 class="mt-5 pt-5 font-weight-bold">Nous vous remercions pour votre commande ! Voici votre facture.</h1>
+
+
+
+            <h2 class="my-5"> Votre commande du {{ subscriptionPurchase.orderedAt | date('d.m.Y') }}</h2>
+
+            <h2>Informations client</h2>
+            {# Début tableau #} 
+            <table class="table table-bordered text-center" id="dataTable" cellspacing="0">
+                {# DEBUT THEAD #}
+                <thead>
+                    <tr>   
+                        <th scope="col">Client</th> 
+                        <th scope="col">Date de la commande</th>
+                    </tr>
+                </thead>
+                {# FIN THEAD #}
+
+
+                {# DEBUT TBODY #}
+                <tbody>
+                    <tr>   
+                        <td>{{ app.user.firstname }} {{ app.user.lastname }}</td> 
+                        <td>{{ subscriptionPurchase.orderedAt | date('d.m.Y')  }}</td>
+                    </tr>
+                </tbody>
+                {# FIN TBODY #}
+            </table>
+
+            <h2>Articles commandés</h2>
+            {# Début tableau #}
+            <table class="table table-bordered text-center" id="dataTable" cellspacing="0">
+                {# DEBUT THEAD #}
+                <thead>
+                    <tr>
+                        <th scope="col">Nom du produit</th>
+                        <th scope="col">Prix unitaire</th>
+                        <th scope="col">Quantité</th>
+                        <th scope="col">Montant</th>
+                    </tr>
+                </thead>
+                {# FIN THEAD #}
+
+                {# DEBUT TBODY #}
+                <tbody>
+
+                    <tr>
+                        <td>{{ subscriptionPurchase.subscription.name }}</td>    
+                        <td>{{ subscriptionPurchase.subscription.price }} &euro;</td>
+                        <td>{{ subscriptionPurchase.quantity }}</td>
+                        <td>{{ subscriptionPurchase.amount }} &euro;</td>
+                    </tr>
+                    <tr>
+                        <th colspan="2"></th>
+                        <td>
+                            <span class="font-weight-bold">Montant total à régler : </span>
+                        </td>    
+                        <td><span class="font-weight-bold">{{ subscriptionPurchase.amount }} &euro;</span></td>
+                    </tr>
+
+                </tbody>
+                {# FIN TBODY #}
+            </table>        
+        
+        
+        </section>
+
+
+    </main>
+
+{% endblock %}
+
+

@@ -61,7 +61,7 @@
                         <div class="modal-body">
                             {% for subscription in subscriptions %}
 
-                            <a class="d-inline-block button pinkBackground w-25 h-25" type="button">Ajouter {{ subscription.credit }} crédits avec le {{ subscription.name }} pour {{ subscription.price }} &euro;</a>
+                            <a class="d-inline-block button pinkBackground w-25" href="{{ path('profile_confirm_subscription', {id: subscription.id }) }}" type="button">Ajouter {{ subscription.credit }} crédits avec le {{ subscription.name }} pour {{ subscription.price }} &euro;</a>
 
                             {% endfor %}
 
@@ -77,10 +77,6 @@
         
         
         </div>
-
-
-
-
     
 
     </div>

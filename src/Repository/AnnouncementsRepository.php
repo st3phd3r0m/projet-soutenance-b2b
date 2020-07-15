@@ -48,7 +48,7 @@ class AnnouncementsRepository extends ServiceEntityRepository
         }
         if( !empty($criteria["search"]) ){
             $query->andWhere('MATCH_AGAINST(a.title, a.description) AGAINST (:searchterm boolean) >0')
-                ->andWhere("a.key_words LIKE :searchterm2")
+                ->orWhere("a.key_words LIKE :searchterm2")
                 ->setParameter('searchterm', $criteria["search"])
                 ->setParameter('searchterm2', '%'.$criteria["search"].'%');
         }
