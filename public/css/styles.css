@@ -139,6 +139,7 @@ main section p {
 .search_bar {
     display: flex;
     flex-direction: column;
+    margin-bottom: 40px;
 }
 
 .search_bar div {
@@ -149,6 +150,7 @@ main section p {
 
 .search_bar .button {
     margin-top: 15px;
+
 }
 
 .search_bar input, .search_bar select {
@@ -261,6 +263,10 @@ main section p {
     background-color: white;
     border-radius: 50%;
     box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.18) 0px 2px 4px;
+}
+
+#map {
+    display: none;
 }
 
 /* Fin Page Index */
@@ -407,14 +413,23 @@ main section p {
         width: 80%;
         margin: 25px auto 0;
     }
+
+    #map {
+        display: block;
+        height: 400px;
+    }
 }
 /*Fin Vue tablette */
 
+/* Vue ordinateur*/
 @media screen and (min-width: 1024px) {
     header {
         display: flex;
         align-items: center;
         padding: 0 20px; 
+        background: white;
+        position: fixed;
+        z-index: 100;
     }
     .navbar-toggler{
         display: none;
@@ -452,8 +467,18 @@ main section p {
         font-size: 30px;
     }
     
+    header .firstname {
+        margin: 0;
+    }
+
+    main {
+        display: flex;
+        padding: 85px 0 0 0;
+    }
+
     .left_bloc{
         width: 60%;
+        padding: 40px;
     }
 
     main .button {
@@ -490,8 +515,12 @@ main section p {
         padding-left: 15px;  
     }
 
-    .map {
+    #map {
+        position: fixed;
         width: 40%;
+        height: calc(100vh - 85px);
+        right: 0;
+        touch-action: pan-x pan-y;
     }
   .label-file{
     cursor: pointer;
@@ -513,6 +542,11 @@ main section p {
     z-index: -5;
 }
 
+    footer {
+        width: 60%;
+    }
 
 }
+/* Fin Vue ordinateur*/
+
 

@@ -18,7 +18,7 @@ class SubscriptionPurchases
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Subscription::class, inversedBy="subscriptionPurchases")
+     * @ORM\ManyToOne(targetEntity=Subscription::class, inversedBy="subscriptionPurchases", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $subscription;

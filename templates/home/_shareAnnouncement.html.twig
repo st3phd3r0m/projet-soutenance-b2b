@@ -1,0 +1,25 @@
+<!-- Modal -->
+<div class="modal fade" id="shareAnnoncement{{ announcement.id }}Modal" tabindex="-1" role="dialog"
+    aria-labelledby="unlockAnnoncement{{ announcement.id }}ModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="shareAnnoncement{{ announcement.id }}ModalLabel">Partager cette annonce</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                {% block javascripts %}
+                <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5f0f085b6216ed001244063b&product=inline-share-buttons" async="async"></script>
+                {% endblock %}
+
+                <div class="sharethis-inline-share-buttons"></div>
+            </div>
+        </div>
+    </div
+
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v7.0" nonce="Wib8BPpI"></script>

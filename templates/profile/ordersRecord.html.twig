@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Yeah! - Historique de vos commandes{% endblock %}
+
+{% block body %}
+
+    <main id="layoutSidenav_content">
+
+        <div class="container-fluid">
+
+            <h2 class="m-5">Historique de vos commandes</h2>
+
+            <div class="table-responsive">
+
+                {# Début tableau #}
+                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                    {# DEBUT THEAD #}
+                    <thead>
+                        <tr>
+
+                            <th scope="col">#</th>     
+                            <th scope="col">Nom du produit</th>
+                            <th scope="col">Date de la commande</th>
+                            <th scope="col">Prix unitaire</th>
+                            <th scope="col">Quantité</th>
+                            <th scope="col">Montant</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    {# FIN THEAD #}
+
+                    {# DEBUT TBODY #}
+                    <tbody>
+
+                        {% for subscriptionPurchase in subscriptionPurchases %}
+                            <tr>
+                                <td>{{ subscriptionPurchase.id }}</td>  
+                                <td>{{ subscriptionPurchase.subscription.name }}</td>    
+                                <td>{{ subscriptionPurchase.orderedAt | date('d.m.Y')  }}</td>
+                                <td>{{ subscriptionPurchase.subscription.price }} &euro;</td>
+                                <td>{{ subscriptionPurchase.quantity }}</td>
+                                <td>{{ subscriptionPurchase.amount }} &euro;</td>
+                                <td>
+                                
+                                    <a class="button pinkBackground" type="button" title="Télécharger votre facture" href="{{ path('profile_bill', {'id': subscriptionPurchase.id }) }}">Télécharger votre facture</a>  
+
+                                </td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                    {# FIN TBODY #}
+                </table>
+
+
+
+
+            </div>
+     
+
+        </div>
+    </main>
+
+   
+{% endblock %}
+
+
+
