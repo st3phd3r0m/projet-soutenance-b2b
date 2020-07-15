@@ -66,6 +66,6 @@ function getCityList() {
 
 function sendGPS(){
     let datalist = $(this).parent().next();
-    let option = datalist.find("[value='"+$(this).val()+"']");
+    let option = datalist.find('[value="'+$(this).val()+'"]');
     $("#announcements_coordinates").val(JSON.stringify(option.data('ville')));
 }
