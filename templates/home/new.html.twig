@@ -4,6 +4,7 @@
 
 {% block body %}
 <main class="fond">
+{{ form_start(form) }}
  <div class="row m-3 ">
     {# premiere partie #}
     <div class="col-2">
@@ -53,8 +54,11 @@
             {{ form_errors(form.activity_sector)}}
             </div>
         <div>
-            {{ form_widget(form.city) }}
-            {{ form_errors(form.city)}}
+            {# {{ form_widget(form.city) }} #}
+            {{ form_row(form.city)}}
+            <datalist id="selectPannel" autocomplete="off"></datalist>
+            {{ form_row(form.coordinates) }}
+
         </div>
         <div>
             <div>
@@ -70,8 +74,8 @@
             </div>
            
         </div>
-        <div class="buttonList">
-            {{ form_widget(form.Valider) }}
+        <div>
+            {{ form_row(form.Valider) }}
         </div>
     </div>
 

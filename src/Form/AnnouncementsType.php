@@ -92,7 +92,7 @@ class AnnouncementsType extends AbstractType
                 'label'=>'Ajouter des mots-clés, délimités par des points-virgules (";"), afin de référencer votre annonce : ',
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'form-control form-control-lg form-control-a mb-3 '
+                    'class' => ' form-control-lg form-control-a mb-3 w-100'
                 ],
                 // 'label_attr' => [
                 //     'class' => 'policeForm'
@@ -104,11 +104,10 @@ class AnnouncementsType extends AbstractType
                 'mapped' => false,
                 'attr'=>[
                     'value'=>'1000',
-                    'class' => ' form-control-lg form-control-a mb-3 w-100 ',
-
+                    'class' => ' form-control-lg form-control-a mb-3 w-100 '
                 ],
-                 'label_attr' => [
-                    'class' => 'form-control form-control-lg form-control-a mb-3 ',
+                'label_attr' => [
+                    'class' => 'policeForm'
                 ],
                 'constraints' => [
                     new NotBlank([
@@ -162,7 +161,7 @@ class AnnouncementsType extends AbstractType
             ])
             ->add('city', TextType::class, [
                 'required' => true,
-                'label'=>'Ville d\'intervention',
+                'label'=> false,
                 'mapped' => false,
                 'attr' => [
                     'class' => 'form-control-lg form-control-a mb-3 ',
@@ -184,12 +183,6 @@ class AnnouncementsType extends AbstractType
             ->add('coordinates', HiddenType::class, [
                 'required' => true,
                 'mapped' => false,
-                // 'attr' => [
-                //     'class' => 'form-control form-control-lg form-control-a mb-3 '
-                // ],
-                // 'label_attr' => [
-                //     'class' => 'policeForm'
-                // ],
                 'attr' => [
                     'class' => 'form-control form-control-lg form-control-a mb-3 '
                 ],
