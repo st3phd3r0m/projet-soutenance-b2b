@@ -139,6 +139,16 @@ class Announcements
      */
     private $unlockedAnnouncements;
 
+    /**
+     * @ORM\Column(type="string", length=20)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=180)
+     */
+    private $email;
+
     public function __construct()
     {
         $this->unlockedAnnouncements = new ArrayCollection();
@@ -431,6 +441,30 @@ class Announcements
     public function setDeptCode(string $dept_code): self
     {
         $this->dept_code = $dept_code;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getEmail(): ?string
+    {
+        return $this->email;
+    }
+
+    public function setEmail(string $email): self
+    {
+        $this->email = $email;
 
         return $this;
     }

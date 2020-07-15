@@ -70,14 +70,17 @@ class ProfileController extends AbstractController
     /**
      * @Route("/orders/record", name="profile_orders_record")
      */
-    public function ordersRecord(SubscriptionPurchasesRepository $subscriptionPurchasesRepository)
+    public function ordersRecord(SubscriptionPurchasesRepository $subscriptionPurchasesRepository, SubscriptionRepository $subscriptionRepository)
     {
         $user = $this->getUser();
 
         $subscriptionPurchases = $subscriptionPurchasesRepository->findBy(['user' => $user], ['ordered_at' => 'DESC']);
 
+        $subscriptions = $subscriptionRepository->findAll();
+
         return $this->render('profile/ordersRecord.html.twig', [
             'subscriptionPurchases' => $subscriptionPurchases,
+            'subscriptions'=>$subscriptions
         ]);
     }
 
@@ -222,7 +225,7 @@ class ProfileController extends AbstractController
      * @Route("/store/transaction", name="store_transaction", methods={"GET","POST"})
      * @return Response
      */
-    public function storeTransaction(SubscriptionRepository $subscriptionRepository): Response
+    public function storeTransaction(SubscriptionRepository $subscriptionRepository, UsersRepository $usersRepository): Response
     {
 
         $entityManager = $this->getDoctrine()->getManager();
@@ -243,8 +246,15 @@ class ProfileController extends AbstractController
         $subscriptionPurchase->setQuantity($cartSession['quantity']);
         $subscriptionPurchase->setAmount($total);
         $subscriptionPurchase->setActive(true);
-
         $entityManager->persist($subscriptionPurchase);
+        $entityManager->flush();
+
+        //Rechargement en crédits du compte utilisateur
+        $user = $usersRepository->find($this->getUser());
+        $currentBalance = $user->getAccount();
+        $currentBalance += $subscription->getCredit();
+        $user->setAccount($currentBalance);
+        $entityManager->persist($user);
         $entityManager->flush();
 
         //On vide le panier de la variable globale de session
