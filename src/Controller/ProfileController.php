@@ -7,6 +7,7 @@ use App\Entity\Users;
 use App\Form\AnnouncementsType;
 use App\Form\UsersType;
 use App\Repository\AnnouncementsRepository;
+use App\Repository\SubscriptionRepository;
 use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -113,13 +114,15 @@ class ProfileController extends AbstractController
     /**
      * @Route("/account", name="profile", methods={"GET"})
      */
-    public function account(UsersRepository $usersRepository, Request $request)
+    public function account(UsersRepository $usersRepository, SubscriptionRepository $subscriptionRepository, Request $request)
     {
 
+        $subscriptions = $subscriptionRepository->findAll();
         $user = $usersRepository->find($this->getUser());
 
         return $this->render('profile/account.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'subscriptions' => $subscriptions
         ]);
     }
 
