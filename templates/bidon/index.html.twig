@@ -4,112 +4,41 @@
 
 
 {% block body %}
-<main>
-{# Debut partie du haut #}
-   <div class="partie_haut">
-        <div class="photo">
 
+<!--Bloc Carte entreprise-->
+    <div class="card">
+        <div class="card_bloc_1 bg-warning">
+            {# <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+        
         </div>
 
-        <div>
-            <div>
-                <select name="categoryFilter" id="categoryFilter" class="pinkBackground">
-                    <option value="">Catégorie</option>
-                </select>
+        <div class="card_bloc_2">
+            <div class="card_category pinkBackground">
+                {# <p>{{ announcement.category.name }}</p> #}
             </div>
-            <div>
-                <input type="text" placeholder="Choisir un titre">
+            {# <p>{{ announcement.activitySector.name }}</p> #}
+            <div class="card_title bg-primary">
+                {# <h2>{{ announcement.title }}</h2> #}
             </div>
-            <div>
-                <input type="textarea" placeholder="Description de votre annonce">
+            <div class="card_text bg-danger">
+                {# <p>{{ announcement.description }}</p> #}
             </div>
-            <div>
-                <select name="keyWordFilter" id="keyWordFilter">
-                    <option value="">Mots clés</option>
-                </select>
+            <div class="card_announcement">
+                {# <p>Annonce. {{ announcement.ref }}</p> #}
             </div>
             
-        </div>
-        
-   </div>{# fin partie haut #}
-   
-   {# Partie_note #}
-   <div class="partie_note">
-   
-        <div class="select_note">{# Select_note #}
-            <div>
-                <input type="text" placeholder="Contact">
+            <div class="keyWords"> Mots-clés :  
+                {# <p>
+                    {% for keyWords in announcement.keyWords %} 
+                        #{{ keyWords }}  
+                    {% endfor %}                
+                </p>          #}
             </div>
-            <div>
-                <input type="text" placeholder="Adresse">
-            </div>
-            <div>
-                <input type="textarea" placeholder="Notes">
-            </div>
-        </div>{# Fin Select_note #}
-
-        {# selection urgence #}
-        <div class="select_urgence">
-            <select name="urgencyFilter" id="urgencyFilter">
-                <option value="">Urgence</option>
-                <option value="rouge">Très urgent</option>
-                <option value="orange">Urgent</option>
-                <option value="bleu">Pas urgent</option>
-            </select>
-        </div>{# Finselection urgence #} 
-
-        {# contrepartie #}
-         <div class="select_contrepartie">
-            <select name="paymentFilter" id="paymentFilter">
-                <option value="">Contrepartie</option>
-                <option value="euros">euros</option>
-                <option value="bonAchat">Bon d'achat</option>
-                <option value="bonCadeau">Bon cadeau</option>
-            </select>
-
-        </div>{# Fin contrepartie #}
-
-   </div>{# fin partie_note #}
-        
-    {# selection  #}
-   <div class="partie_bas">
-
-        <div class="selection">
-            <div>
-                <select name="locationFilter" id="locationFilter"> 
-                    <option value=""><i class="las la-map-marker"></i>Localisation</option>
-                </select>
-            </div>
-            <div>
-                <i class="las la-calendar"></i>
-                <input type="date">
-            </div>
-             <div>
-                <i class="las la-phone"></i>
-                <input type="tel">
-            </div>
-             <div>
-                <i class="las la-envelope"></i>
-                <input type="email">
-            </div>
-            <div>
-                <i class="las la-euro-sign"></i>
-                <input type="text" placeholder="fourchette de prix">
-            </div>
-        </div>{# Fin selection #}
-
-        <div class="buttonList">
-            <button type="button" class=" btn darkGreyBackground">Partager</button>
-            <button type="button" class=" btn darkGreyBackground">Enregistrer</button>
-            <button type="button" class=" btn darkGreyBackground">Recommander</button>
-            <button type="button" class=" btn lightGreyBackground">Contrepartie</button>
-            <button type="button" class=" btn violetBackground">Répondre</button>
         </div>
 
-
-    
-   </div>{# Fin partie du bas  #}
-
-</main>
+        </div>
+    </div>
+<!--Fin Bloc Carte entreprise-->  
 
 {% endblock %}
