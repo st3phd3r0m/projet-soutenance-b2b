@@ -305,6 +305,10 @@ main section p {
     letter-spacing: 0.030em;
   }
 
+  .pt-85{
+      padding-top: 85px;
+  }
+
   .fond {
       background-color: #ebf2e3;
   }
@@ -471,8 +475,13 @@ main section p {
         margin: 0;
     }
 
-    main {
+    main{
         display: flex;
+        flex-direction: column;
+        padding: 40px;
+    }
+
+    main.noPadding {
         padding: 85px 0 0 0;
     }
 
