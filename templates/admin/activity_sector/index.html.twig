@@ -1,14 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}ActivitySector index{% endblock %}
+{% block title %}Liste des Secteurs d'activités{% endblock %}
 
 {% block body %}
-    <h1>ActivitySector index</h1>
+    <h1>Liste des Secteurs d'activités</h1>
+
+    <a href="{{ path('admin_activity_sector_new') }}">Nouveau</a>
 
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Nom</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -17,20 +19,15 @@
             <tr>
                 <td>{{ sector.name }}</td>
                 <td>
-                    <form method="post" action="{{ path('admin_activity_sector_delete', {'id': sector.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sector.id) }}">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                    <a href="{{ path('admin_activity_sector_edit', {'id': sector.id}) }}">Editer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucun élément à afficher</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('admin_activity_sector_new') }}">Create new</a>
 {% endblock %}

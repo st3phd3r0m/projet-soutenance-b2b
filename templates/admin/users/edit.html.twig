@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Edit Users{% endblock %}
+{% block title %}Edition des rôles des utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Edit Users</h1>
+    <h1>Edition des rôles des utilisateurs</h1>
 
-    {{ include('users/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/users/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('users_index') }}">back to list</a>
+    <a href="{{ path('admin_users_index') }}">Retour à la liste</a>
 
-    {{ include('users/_delete_form.html.twig') }}
+    {{ include('admin/users/_delete_form.html.twig') }}
 {% endblock %}

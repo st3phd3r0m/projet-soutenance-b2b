@@ -8,6 +8,7 @@ use App\Form\AnnouncementsType;
 use App\Repository\ActivitySectorRepository;
 use App\Repository\AnnouncementsRepository;
 use App\Repository\CategoriesRepository;
+use App\Repository\UnlockedAnnouncementsRepository;
 use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -70,45 +71,61 @@ class HomeController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function unlockAnnouncement(Announcements $announcement, UsersRepository $usersRepository, Request $request)
+    public function unlockAnnouncement(Announcements $announcement, UsersRepository $usersRepository,  UnlockedAnnouncementsRepository $unlockedAnnouncementsRepository, Request $request)
     {
 
-
+        //L'utilisateur doit être connecté pour débloquer les coordonnées d'un annonceur
         if ($this->getUser()) {
 
-            //Nbre de crédits sur le compte de l'utilisateur connecté
-            $accountUser = $this->getUser()->getAccount();
+            //On interroge la table unlockedAnnouncements pour savoir si l'utilisateur a déjà débloqué l'annonce
+            $didTheUserUnlockedIt = $unlockedAnnouncementsRepository->findOneBy([
+                'user'=> $this->getUser()->getId(),
+                'announcements'=> $announcement->getId()
+                ]);
+
+            //Nbre de crédits sur le compte en bdd de l'utilisateur connecté
+            $accountUser =  $usersRepository->find( $this->getUser() )->getAccount();
             //Nbre de crédits recquis pour débloquer l'annonce
             $requiredCredit = $announcement->getCategory()->getCreditsToUnlock();
 
-            if ($accountUser >= $requiredCredit) {
+            if($didTheUserUnlockedIt != null){
+
+                //Envoi d'un message de succès
+                $this->addFlash('successUnlock', 'Vous aviez déjà débloqué les coordonnéees de cet l\'annonceur.');
+
+                return $this->redirectToRoute('home');
+
+            }elseif ($accountUser >= $requiredCredit) {
 
                 //Prélèvement de crédits sur le compte utilisateur
                 $accountUser -= $requiredCredit;
                 //Màj sur la variable session utilisateur
                 $this->getUser()->setAccount($accountUser);
                 //Màj en bdd
-                $user = $usersRepository->find($this->getUser());        
+                $user = $usersRepository->find($this->getUser());
                 $user->setAccount($accountUser);
-
+                //Persist sur la bdd
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
+
+                //Envoi d'un message de succès
+                $this->addFlash('successWithdraw', 'Votre compte a été prélevé.');
 
                 //Instanciation de UnlockedAnnouncements pour stocker l'annonce débloquée par l'utilisateur
                 $unlockedAnnouncement = new UnlockedAnnouncements;
                 $unlockedAnnouncement->setUser($this->getUser());
                 $unlockedAnnouncement->setAnnouncements($announcement);
-
+                //Persist sur la bdd
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($unlockedAnnouncement);
                 $entityManager->flush();
 
-                
                 //Màj de compteur de déblocage de l'annonce dans l'entité Announcements
                 $unlock_count =  $announcement->getUnlockCount();
-                $announcement->setUnlockCount($unlock_count++);
-               
+                $unlock_count++;
+                $announcement->setUnlockCount($unlock_count);
+                //Persist sur la bdd
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($announcement);
                 $entityManager->flush();
@@ -132,7 +149,6 @@ class HomeController extends AbstractController
 
             return $this->redirectToRoute('app_login');
         }
-
     }
 
 

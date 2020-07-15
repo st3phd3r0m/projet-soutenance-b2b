@@ -22,7 +22,7 @@
             <div class="logo">
                 <a href="{{ path('home') }}" title="Accueil du site"><img src="{{ asset('images/logo_Yeah.png') }}" alt="Logo Yeah!"></a>
             </div>
-            <button class="btn pinkBackground">Créer une publication</button>
+            <a href="{{ path('home_new') }}" type="button" class="btn pinkBackground">Créer une publication</a>
             <h1>Le réseau social des professionnels</h1>
             
             <!--Menu Navigation-->
@@ -31,15 +31,15 @@
             <nav class="collapse navbar-collapse" id="navbarHeader">
                 <ul class="menu">
                     <li>
-                        <a href="" title="Favoris">
-                            <i class="las la-heart"></i>
-                            <span>Favoris</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="" title="Messagerie">
                             <i class="las la-envelope"></i>
                             <span>Message</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" title="Favoris">
+                            <i class="las la-heart"></i>
+                            <span>Favoris</span>
                         </a>
                     </li>
                     <li>
@@ -49,10 +49,34 @@
                         </a>
                     </li>
                     <li>
-                        <a href= "{{ path('app_login') }}" title=" Page de connexion">
-                            <i class="las la-user"></i>
-                            <span>Se connecter</span>
-                        </a>
+                        <div class="d-block text-center mr-5">
+                            <div class="dropdown show">
+                            {% if app.user %}
+                                <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
+                                    <i class="las la-user"></i>
+                                    <p>Bonjour {{ app.user.firstname }}</p>
+                                </div> 
+                                <div class="dropdown-menu">
+                                    {% if is_granted("ROLE_ADMIN") %}
+                                        <a class="dropdown-item" href="{{ path('admin_dashboard') }}" title="Espace Administrateur">Espace Administrateur</a>
+                                    {% endif %}
+
+                                    {% if is_granted("ROLE_USER") %}
+                                        <a class="dropdown-item" href="{{ path('profile_index') }}" title="Aller à votre espace personnel ">Espace personnel</a>
+                                    {% endif %}
+
+                                        {# <a class="dropdown-item" href="{{ path('customer_details') }}" title="Espace Client">Espace Client</a> #}
+                                        <a class="dropdown-item bouton" href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion</a>                            
+                                </div>
+                            {% else %}
+
+                                <a href= "{{ path('app_login') }}" title="Page de connexion">
+                                    <i class="las la-user"></i>
+                                    <span>Se connecter</span>
+                                </a>
+                            {% endif %}
+                            </div>
+                        </div>
                     </li>
                 </ul>
             </nav>

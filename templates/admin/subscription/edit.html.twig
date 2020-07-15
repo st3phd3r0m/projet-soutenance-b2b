@@ -1,13 +1,13 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Edit Subscription{% endblock %}
+{% block title %}Edition des packs{% endblock %}
 
 {% block body %}
-    <h1>Edit Subscription</h1>
+    <h1>Edition des packs</h1>
 
-    {{ include('admin/subscription/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/subscription/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('admin_subscription_index') }}">back to list</a>
+    <a href="{{ path('admin_subscription_index') }}">Retour à la liste</a>
 
     {{ include('admin/subscription/_delete_form.html.twig') }}
 {% endblock %}

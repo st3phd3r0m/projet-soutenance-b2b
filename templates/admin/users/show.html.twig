@@ -1,22 +1,22 @@
-{% extends 'base_admin.html.twig' %}
+{% extends 'admin/base_admin.html.twig' %}
 
 {% block title %}Users{% endblock %}
 
 {% block body %}
-    <h1 class=" titre mb-4 pt-4 text-center">Users</h1>
+    <h1 class=" titre mb-4 pt-4 text-center">Utilisateur</h1>
 
-    <a href="{{ path('admin_users_index') }}">back to list</a>
+    <a href="{{ path('admin_users_index') }}">Retour à la liste</a>
 
  <div class="col-sm col-lg-8 mr-4 mx-auto">
         <table class="table ">
             <tbody>
 
                 <tr>
-                    <th>Lastname</th>
+                    <th>Nom</th>
                     <td>{{ user.lastname }}</td>
                 </tr>
                 <tr>
-                    <th>Firstname</th>
+                    <th>Prénom</th>
                     <td>{{ user.firstname }}</td>
                 </tr>
                 <tr>
@@ -24,18 +24,18 @@
                     <td>{{ user.email }}</td>
                 </tr>
                 <tr>
-                    <th>Phone</th>
+                    <th>Numero de téléphone</th>
                     <td>{{ user.phone }}</td>
                 </tr>
                 <tr>
-                    <th>Roles</th>
+                    <th>Rôle</th>
                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 </tr>
             
             </tbody>
         </table>
 
-        {# Pour le Dashboard 4 onglet, surement à isolés dans des twig distincts : Entreprise(s), Annonces postées, Abonnements en cours, Historique des Abonnements et la liste des utilisateurs qui est dans admin/users/index.html.twig #}
+        {# faire différents onglets : Entreprise(s), Annonces postées, Hi4storique des Achats #}
 
         <!-- onglet "Entrepirses" -->
         <h3>Entreprises</h3>
@@ -65,41 +65,10 @@
     <h3>Annonces postées</h3>
 
     {% for announcement in announcements %}
-        {{ include('home/_listAnnouncements.html.twig') }}
+        {{ include('admin/_listAnnouncements.html.twig') }}
     {% else %}
             <p>Cet utilisateur n'a pas encore posté d'annonce</p>
     {% endfor %}
-
-    <!-- onglet "Abonnements en cours" pour voir les abonnements en cour -->
-    <h3>Abonnements en cours</h3>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Achat</th>
-                <th>montant</th>
-                <th>Date de paiement</th>
-                <th>Entreprise</th>
-                <th>Actif jusqu'au</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for activeSub in activeSubs %}
-            <tr>
-                <td>{{ activeSub.subscription.name }}</td>
-                <td>{{ activeSub.amount }}</td>
-                <td>{{ activeSub.orderedAt }}</td>
-                <td>{{ activeSub.compagny.name }}</td>
-                <td>brouette</td><!-- pas encore fais la formule mdr  -->
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Aucun ancien payement</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
 
     <!-- onglet "Historique des Abonnements" pour voir l'historique des abonnement -->
     <h3>Historique des Abonnements</h3>
@@ -114,7 +83,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for sub in subs %}
+        {% for sub in user.subscriptionPurchases == user %}
             <tr>
                 <td>{{ sub.subscription.name }}</td>
                 <td>{{ sub.amount }}</td>

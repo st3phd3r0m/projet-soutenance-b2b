@@ -36,7 +36,7 @@ class Announcements
     private $description;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $image;
 

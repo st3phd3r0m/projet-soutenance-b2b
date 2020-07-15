@@ -1,46 +1,5 @@
-
 <!--Bloc Carte entreprise-->
-    {# <div class="card">
-        <div class="card_bloc_1">
-            <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
-        </div>
-
-        <div class="card_bloc_2">
-            <div class="card_category pinkBackground">{{ announcement.category.name }}</div>
-            <p>{{ announcement.activitySector.name }}</p>
-            <div class="card_title">{{ announcement.title }}</div>
-            <div class="card_text">{{ announcement.description }}</div>
-            <div class="card_announcement">Annonce : {{ announcement.ref }}</div>
-            <div class="keyWords"> Mots-clés :           
-                {% for keyWords in announcement.keyWords %} 
-                    #{{ keyWords }}  
-                {% endfor %}
-            </div>
-        </div>
-
-        <div class="card_bloc_3">
-            <div class="informations">
-                <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</div>
-                <div class="card_alternative_text"><i class="las la-clock"></i>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
-                <div class="card_alternative_text"><i class="las la-phone"></i>Telephone : {{ announcement.user.phone }} </div>
-                <div class="card_alternative_text"><i class="las la-envelope"></i>Email : {{ announcement.user.email }}</div>
-                <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
-            </div>
-
-            <div class="buttonList">
-                <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
-                <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
-                <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
-                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
-                <a href="#" type="button" class=" button violetBackground">Répondre</a>
-            </div>
-        </div>
-    </div> #}
-<!--Fin Bloc Carte entreprise-->  
-
-
-<!--Bloc Carte entreprise-->
-    <div class="card">
+    <div class="card enable-pointer-cursor">
         <div class="card_bloc_1">
             <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
             {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
@@ -104,7 +63,7 @@
                             {% if unlockedAnnouncement == true %}
                                 <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
                             {% else %}      
-                                *********** 
+                                disponible 
                             {% endif %}                     
                         </p>
 
@@ -115,7 +74,7 @@
                             {% if unlockedAnnouncement == true %}
                                 <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
                             {% else %}      
-                                *********** 
+                                disponible 
                             {% endif %}                      
                         </p>
                     </div>                
@@ -127,7 +86,7 @@
                         {% if unlockedAnnouncement %}
                             {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;
                         {% else %}
-                            ***********
+                            disponible
                         {% endif %}                 
                     </p>
 

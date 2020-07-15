@@ -25,11 +25,6 @@ class Categories
     private $name;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $is_illimited;
-
-    /**
      * @ORM\OneToMany(targetEntity=Announcements::class, mappedBy="category")
      */
     private $announcements;
@@ -63,18 +58,6 @@ class Categories
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getIsIllimited(): ?bool
-    {
-        return $this->is_illimited;
-    }
-
-    public function setIsIllimited(bool $is_illimited): self
-    {
-        $this->is_illimited = $is_illimited;
 
         return $this;
     }
