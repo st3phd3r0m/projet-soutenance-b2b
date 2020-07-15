@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Yeah! - Espace personnel{% endblock %}
+
+{% block body %}
+
+    <main>
+
+        <ul>
+            <li>
+                <a class="dropdown-item" href="{{ path('profile_list') }}" title="Aller à la liste de vos annonces">Liste de vos annonces</a>
+            </li>
+
+            <li>
+                <a class="dropdown-item" href="{{ path('profile') }}" title="Vos informations personnelles">Vos informations personnelles</a>
+            </li>
+
+            <li>
+                {# <a class="dropdown-item" href="{{ path('profile_credit') }}" title="Recharger votre compte en crédits">Gestion de vos crédits</a> #}
+            </li>
+            <li>
+            
+            </li>
+        
+        </ul>
+
+    </main>
+
+{% endblock %}
