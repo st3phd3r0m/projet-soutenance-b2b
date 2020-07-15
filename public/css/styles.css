@@ -263,6 +263,10 @@ main section p {
     box-shadow: transparent 0px 0px 0px 1px, transparent 0px 0px 0px 4px, rgba(0, 0, 0, 0.18) 0px 2px 4px;
 }
 
+#map {
+    height: 200px;
+}
+
 /* Fin Page Index */
 
 /* Page dépot d'annonce */
@@ -410,6 +414,7 @@ main section p {
 }
 /*Fin Vue tablette */
 
+/* Vue ordinateur*/
 @media screen and (min-width: 1024px) {
     header {
         display: flex;
@@ -494,7 +499,7 @@ main section p {
         width: 40%;
     }
 
-
-
 }
+/* Vue ordinateur*/
+
 
