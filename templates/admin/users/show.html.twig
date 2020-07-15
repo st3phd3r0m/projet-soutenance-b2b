@@ -5,18 +5,18 @@
 {% block body %}
     <h1 class=" titre mb-4 pt-4 text-center">Users</h1>
 
-    <a href="{{ path('admin_users_index') }}">back to list</a>
+    <a href="{{ path('admin_users_index') }}">Retour à la liste</a>
 
  <div class="col-sm col-lg-8 mr-4 mx-auto">
         <table class="table ">
             <tbody>
 
                 <tr>
-                    <th>Lastname</th>
+                    <th>Nom</th>
                     <td>{{ user.lastname }}</td>
                 </tr>
                 <tr>
-                    <th>Firstname</th>
+                    <th>Prénom</th>
                     <td>{{ user.firstname }}</td>
                 </tr>
                 <tr>
@@ -24,11 +24,11 @@
                     <td>{{ user.email }}</td>
                 </tr>
                 <tr>
-                    <th>Phone</th>
+                    <th>Numero de téléphone</th>
                     <td>{{ user.phone }}</td>
                 </tr>
                 <tr>
-                    <th>Roles</th>
+                    <th>Rôle</th>
                     <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                 </tr>
             

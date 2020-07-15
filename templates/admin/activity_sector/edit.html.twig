@@ -1,11 +1,11 @@
 {% extends 'admin/base_admin.html.twig' %}
 
-{% block title %}Edit ActivitySector{% endblock %}
+{% block title %}Edition des secteurs d'activités{% endblock %}
 
 {% block body %}
-    <h1>Edit ActivitySector</h1>
+    <h1>Edition des secteurs d'activités</h1>
 
-    {{ include('admin/activity_sector/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('admin/activity_sector/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
 
-    <a href="{{ path('admin_activity_sector_index') }}">back to list</a>
+    <a href="{{ path('admin_activity_sector_index') }}">Retour à la liste</a>
 {% endblock %}
