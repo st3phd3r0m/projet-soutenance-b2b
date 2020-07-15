@@ -22,7 +22,7 @@
             <div class="logo">
                 <a href="{{ path('home') }}" title="Accueil du site"><img src="{{ asset('images/logo_Yeah.png') }}" alt="Logo Yeah!"></a>
             </div>
-            <button class="btn pinkBackground">Créer une publication</button>
+            <a href="{{ path('home_new') }}" type="button" class="btn pinkBackground">Créer une publication</a>
             <h1>Le réseau social des professionnels</h1>
             
             <!--Menu Navigation-->
@@ -31,15 +31,15 @@
             <nav class="collapse navbar-collapse" id="navbarHeader">
                 <ul class="menu">
                     <li>
-                        <a href="" title="Favoris">
-                            <i class="las la-heart"></i>
-                            <span>Favoris</span>
-                        </a>
-                    </li>
-                    <li>
                         <a href="" title="Messagerie">
                             <i class="las la-envelope"></i>
                             <span>Message</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" title="Favoris">
+                            <i class="las la-heart"></i>
+                            <span>Favoris</span>
                         </a>
                     </li>
                     <li>
