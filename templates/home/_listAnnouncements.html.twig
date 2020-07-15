@@ -138,15 +138,17 @@
             </div>
 
             <div class="buttonList">
-                <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
+                <button type="button" class="button darkGreyBackground" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
                 <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
                 <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
                 <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
 
                 {# Ce boutton ouvre une modal bootsrap #}
                 <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
+                
 
                 {{ include('home/_unlockAnnouncement.html.twig') }}
+                {{ include('home/_shareAnnouncement.html.twig') }}
 
             </div>
         </div>
