@@ -4,15 +4,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}  Yeah!{% endblock %}</title>
-        <!-- CSS only -->
+        {# CSS only #}
         <link rel="stylesheet" href="{{ asset('Css/normalize.css') }}">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap">
         <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin=""/>
         {# CDN noUiSlider #}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.css">
         {# CDN select2 #}
         <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+        {# Fichiers Markercluster #}
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.Default.css">
+
         <link rel="stylesheet" href="{{ asset('Css/styles.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
@@ -25,7 +32,7 @@
             <a href="{{ path('home_new') }}" type="button" class="btn pinkBackground">Créer une publication</a>
             <h1>Le réseau social des professionnels</h1>
             
-            <!--Menu Navigation-->
+            {# Menu Navigation #}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"><span><i class="las la-bars"></i></span></button>
 
             <nav class="collapse navbar-collapse" id="navbarHeader">
@@ -43,7 +50,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ path('search')}}" title="Recherche">
+                        <a href="" title="Recherche">
                             <i class="las la-search"></i>
                             <span>Recherche</span>
                         </a>
@@ -54,7 +61,7 @@
                             {% if app.user %}
                                 <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
                                     <i class="las la-user"></i>
-                                    <p>Bonjour {{ app.user.firstname }}</p>
+                                    <p class="firstname">Bonjour {{ app.user.firstname }}</p>
                                 </div> 
                                 <div class="dropdown-menu">
                                     {% if is_granted("ROLE_ADMIN") %}
@@ -80,7 +87,7 @@
                     </li>
                 </ul>
             </nav>
-            <!-- Fin Menu Navigation-->
+            {# Fin Menu Navigation #}
         </header>
         {# FIN HEADER #}
 
@@ -92,10 +99,13 @@
         </footer>
         {# FIN FOOTER #}
 
-        <!-- JS, Popper.js, and jQuery -->
+        {#  JS, Popper.js, and jQuery #}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
         {# CDN select2 #}
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         {# CDN noUiSlider #}
@@ -103,6 +113,10 @@
         {# js pour affichage des curseurs (gamme de budget) #}
         <script src="{{ asset('js/sliderBudget.js') }}"></script>
         <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
+        {# Fichier Markercluster #}
+        <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+        {# js pour affichage de la carte #}
+        <script src="{{ asset('js/map.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
