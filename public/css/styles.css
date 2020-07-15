@@ -493,7 +493,25 @@ main section p {
     .map {
         width: 40%;
     }
+  .label-file{
+    cursor: pointer;
+    
+    font-weight: bold;
+    width: 100px;
+    height: 100px;
+  }
   
+  .label-file:hover {
+    color: #25a5c4;
+}
+.img-file{
+    position: absolute;
+    margin-top: 3px;
+    margin-left: 3px;
+    height: 1px;
+    width: 1px;
+    z-index: -5;
+}
 
 
 }

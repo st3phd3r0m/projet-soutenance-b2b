@@ -4,13 +4,15 @@
 
 {% block body %}
 <main class="fond">
+<div class="container mx-auto">
 {{ form_start(form) }}
  <div class="row m-3 ">
     {# premiere partie #}
     <div class="col-2">
-        <div class="bg-dark">
-            {{ form_widget(form.imageFile) }}
-            {{ form_errors(form.imageFile)}}
+        <div class="bg-light labelI">
+            {{ form_row(form.imageFile) }}
+            
+           {# <i class="las la-plus"></i> #}
         </div>
     </div>
 
@@ -18,6 +20,7 @@
     <div class="col-5">
         <div class="d-flex"> 
             <div class="m-1">
+            
             {{ form_widget(form.category) }}
             {{ form_errors(form.category)}}
             </div>
@@ -82,5 +85,6 @@
  </div>
  
 {{ form_end(form) }}
+</div>
 </main>
 {% endblock %}
