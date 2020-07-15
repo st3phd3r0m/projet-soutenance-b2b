@@ -475,7 +475,7 @@ main section p {
         margin: 0;
     }
 
-    main:not(#layoutSidenav_content) {
+    main{
         display: flex;
         flex-direction: column;
         padding: 40px;
