@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Announcements;
+use App\Entity\Users;
 use App\Form\AnnouncementsType;
+use App\Form\UsersType;
 use App\Repository\AnnouncementsRepository;
+use App\Repository\UsersRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -19,9 +23,17 @@ class ProfileController extends AbstractController
 {
 
     /**
-     * @Route("/index", name="profile_index", methods={"GET"})
+     * @Route("/index", name="profile_index")
      */
-    public function index(AnnouncementsRepository $announcementsRepository, PaginatorInterface $paginator, Request $request)
+    public function index()
+    {
+        return $this->render('profile/index.html.twig');
+    }
+
+    /**
+     * @Route("/list", name="profile_list", methods={"GET"})
+     */
+    public function list(AnnouncementsRepository $announcementsRepository, PaginatorInterface $paginator, Request $request)
     {
 
         //Affichage, dans l'espace utilisateur, des annonces qu'il a publiées
@@ -33,7 +45,7 @@ class ProfileController extends AbstractController
             5
         );
 
-        return $this->render('profile/index.html.twig', [
+        return $this->render('profile/listAnnouncements.html.twig', [
             'announcements' => $announcements
         ]);
     }
@@ -87,7 +99,7 @@ class ProfileController extends AbstractController
             //Envoi d'un message de succès
             $this->addFlash('success', 'Votre annonce a bien été modifiée.');
 
-            return $this->redirectToRoute('profile_index');
+            return $this->redirectToRoute('profile_list');
         }
 
         return $this->render('profile/edit.html.twig', [
@@ -95,14 +107,49 @@ class ProfileController extends AbstractController
             'form' => $form->createView(),
         ]);
 
-
-        // return $this->render('profile/index.html.twig', [
-        //     'announcements' => $announcements
-        // ]);
     }
 
 
+    /**
+     * @Route("/account", name="profile", methods={"GET"})
+     */
+    public function account(UsersRepository $usersRepository, Request $request)
+    {
+
+        $user = $usersRepository->find($this->getUser());
+
+        return $this->render('profile/account.html.twig', [
+            'user' => $user
+        ]);
+    }
+
+    /**
+     * @Route("/details/change/{id}", name="profile_change_details", methods={"GET","POST"})
+     * @param Request $request
+     * @param Users $user
+     * @return Response
+     */
+    public function changeDetails(Request $request, Users $user): Response
+    {
+        $form = $this->createForm(UsersType::class, $user);
+        $form->remove('roles');
+        $form->remove('plainPassword');
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
  
+            return $this->redirectToRoute('customer_details');
+            
+        }
+
+        return $this->render('profile/changeDetails.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
 
 
 

@@ -104,7 +104,7 @@
                             {% if unlockedAnnouncement == true %}
                                 <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
                             {% else %}      
-                                disponible 
+                                *********** 
                             {% endif %}                     
                         </p>
 
@@ -115,7 +115,7 @@
                             {% if unlockedAnnouncement == true %}
                                 <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
                             {% else %}      
-                                disponible 
+                                *********** 
                             {% endif %}                      
                         </p>
                     </div>                
@@ -127,7 +127,7 @@
                         {% if unlockedAnnouncement %}
                             {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;
                         {% else %}
-                            disponible
+                            ***********
                         {% endif %}                 
                     </p>
 

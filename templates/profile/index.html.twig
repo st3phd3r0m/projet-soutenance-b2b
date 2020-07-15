@@ -6,15 +6,23 @@
 
     <main>
 
-        <!--Bloc Carte entreprise-->
-        {% for announcement in announcements %} 
-            {{ include('profile/_listAnnouncements.html.twig') }}
-        {% endfor %}
+        <ul>
+            <li>
+                <a class="dropdown-item" href="{{ path('profile_list') }}" title="Aller à la liste de vos annonces">Liste de vos annonces</a>
+            </li>
 
-        <div>
-            {{ knp_pagination_render(announcements) }}
-        </div>
-        <!--Fin Bloc Carte entreprise-->
+            <li>
+                <a class="dropdown-item" href="{{ path('profile') }}" title="Vos informations personnelles">Vos informations personnelles</a>
+            </li>
+
+            <li>
+                {# <a class="dropdown-item" href="{{ path('profile_credit') }}" title="Recharger votre compte en crédits">Gestion de vos crédits</a> #}
+            </li>
+            <li>
+            
+            </li>
+        
+        </ul>
 
     </main>
 
