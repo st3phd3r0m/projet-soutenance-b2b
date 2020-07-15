@@ -60,6 +60,11 @@
                                     {% if is_granted("ROLE_ADMIN") %}
                                         <a class="dropdown-item" href="{{ path('admin_dashboard') }}" title="Espace Administrateur">Espace Administrateur</a>
                                     {% endif %}
+
+                                    {% if is_granted("ROLE_USER") %}
+                                        <a class="dropdown-item" href="{{ path('profile_index') }}" title="Aller à votre espace personnel ">Espace personnel</a>
+                                    {% endif %}
+
                                         {# <a class="dropdown-item" href="{{ path('customer_details') }}" title="Espace Client">Espace Client</a> #}
                                         <a class="dropdown-item bouton" href="{{ path('app_logout') }}" title="Déconnexion">Déconnexion</a>                            
                                 </div>

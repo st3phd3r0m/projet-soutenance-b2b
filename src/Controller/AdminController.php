@@ -223,6 +223,26 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("/activity_sector/{id}/edit", name="admin_activity_sector_edit", methods={"GET","POST"})
+     */
+    public function editActivitySector(Request $request, ActivitySector $activitySector): Response
+    {
+        $form = $this->createForm(ActivitySectorType::class, $activitySector);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('admin_activity_sector_index');
+        }
+
+        return $this->render('admin/activity_sector/edit.html.twig', [
+            'activitySector' => $activitySector,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     // -------------------------------------------------------------------------------
     // ------------------  Administration des catégories d'annonces ------------------

@@ -40,14 +40,14 @@ class AnnouncementsType extends AbstractType
                 ],
                 'constraints' => [
                     new NotBlank([
-                        'message'=>'Veuillez saisir un titre de l\'annonce.',
-                        'groups'=> ['new', 'update']
+                        'message'=>'Veuillez saisir un titre d\'annonce.',
+                        
                     ]),
                     new Length([
                         'min' => 4,
                         'minMessage' => "Le titre doit comporter au minimum {{ limit }}
                         caractères.",
-                        'groups'=> ['new', 'update']
+                        
                     ])
                 ]
             ])
@@ -63,18 +63,18 @@ class AnnouncementsType extends AbstractType
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Veuillez saisir le contenu de votre annonce',
-                        'groups'=> ['new', 'update']
+                        
                     ]),
                     new Length([
                         'min' => 20,
                         'minMessage' => "Le texte doit comporter au minimum {{ limit }}
                         caractères.",
-                        'groups'=> ['new', 'update']
+                        
                     ])
                 ] 
             ])  
             ->add('notes', TextareaType::class, [
-                // 'required'=>true,
+                'required'=>false,
                 'label'=>'Ajouter accessoirement une note pour votre annonce',
                 'attr' => [
                     'class' => 'form-control form-control-lg form-control-a mb-3 '
@@ -84,28 +84,35 @@ class AnnouncementsType extends AbstractType
                 ],
             ]) 
             ->add('key_words', TextType::class,[
+                'required'=>false,
                 'label'=>'Ajouter des mots-clés, délimités par des points-virgules (";"), afin de référencer votre annonce : ',
+                'mapped' => false,
                 'attr' => [
                     'class' => 'form-control form-control-lg form-control-a mb-3 '
                 ],
                 'label_attr' => [
                     'class' => 'policeForm'
                 ],
-                'mapped' => false,
             ])
             ->add('price_min', MoneyType::class, [
+                'required'=>true,
                 'label'=>'entre : ',
                 'mapped' => false,
                 'attr'=>[
                     'value'=>'1000',
                     'class' => 'form-control form-control-lg form-control-a mb-3 ',
-
-                ]
+                ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un budget minimal',
+                        
+                    ])
+                ] 
             ])
             ->add('price_max', MoneyType::class, [
+                'required'=>true,
                 'label'=>'et : ',
                 'mapped' => false,
-                // 'attr'=>['value'=>'100000']
                 'attr' => [
                     'class' => 'form-control form-control-lg form-control-a mb-3 ',
                     'value'=>'100000'
@@ -113,6 +120,12 @@ class AnnouncementsType extends AbstractType
                 'label_attr' => [
                     'class' => 'policeForm'
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir un budget maximal',
+                        
+                    ])
+                ] 
             ])
             ->add('category', EntityType::class, [
                 'label'=>'Quel est le type de l\'annonce ?',
@@ -149,6 +162,13 @@ class AnnouncementsType extends AbstractType
                 'label_attr' => [
                     'class' => 'policeForm'
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir une ville',
+                        
+                    ])
+                ] 
+
             ])
             ->add('coordinates', HiddenType::class, [
                 'required' => true,
@@ -159,8 +179,16 @@ class AnnouncementsType extends AbstractType
                 'label_attr' => [
                     'class' => 'policeForm'
                 ],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Veuillez saisir des coordonnées',
+                        
+                    ])
+                ] 
+
             ])
             ->add('urgency', ChoiceType::class, [
+                'required' => false,
 				'label' => 'Urgence de l\'annonce',
 				'expanded' => true,
                 'multiple' => false,
@@ -177,6 +205,7 @@ class AnnouncementsType extends AbstractType
 				]
             ])
             ->add('imageFile', VichImageType::class,[
+                'required' => false,
                 'label'=>'Image d\'illustration de votre annonce',
                 'download_link'=>false,
                 'imagine_pattern'=>'miniatures',

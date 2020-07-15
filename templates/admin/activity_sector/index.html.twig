@@ -17,11 +17,7 @@
             <tr>
                 <td>{{ sector.name }}</td>
                 <td>
-                    <form method="post" action="{{ path('admin_activity_sector_delete', {'id': sector.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ sector.id) }}">
-                        <button class="btn btn-danger">Delete</button>
-                    </form>
+                    <a href="{{ path('admin_activity_sector_edit', {'id': sector.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}

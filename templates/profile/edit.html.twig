@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Yeah! - Espace personnel{% endblock %}
+
+{% block body %}
+
+   <div class="w-100 mx-auto fond">
+        <div class="w-50 mx-auto formulaire">
+            <h1 class="text-center titre mb-4 pt-4">Modifier votre annonce</h1>  
+
+                {{ form_start(form) }}
+
+                {{ form_row(form.title) }}
+                {{ form_row(form.description) }}
+
+                <div>
+                    <p class=" font-weight-bold form-control-lg form-control-a mb-3 ">Budget :</p>
+                    <div id="slider"></div>
+                    {{ form_row(form.price_min)}}
+                    {{ form_row(form.price_max)}}    
+                </div>
+
+                <div>
+                    {{ form_row(form.city)}}
+                    <datalist id="selectPannel" autocomplete="off">
+                    </datalist>
+                    {{ form_row(form.coordinates)}}
+                </div>
+                
+
+
+
+
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+
+{% endblock %}
