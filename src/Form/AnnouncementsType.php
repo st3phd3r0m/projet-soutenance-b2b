@@ -12,6 +12,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -142,7 +143,7 @@ class AnnouncementsType extends AbstractType
                 'class'=> Categories::class,
                 'choice_label'=> 'name',
                 'attr' => [
-                    'class' => 'btn pinkBackground',
+                    'class' => 'btn pinkBackground selector',
                     'placeholder'=> 'Choisir la categorie'
                 ],
                 // 'label_attr' => [
@@ -156,7 +157,7 @@ class AnnouncementsType extends AbstractType
                 // 'attr'=>['class'=>'actSect'] ICI A VOIR !!!
                 'attr' => [
                     // 'class' => ' actSelect'
-                    'class' => 'form-control-lg form-control-a mb-3 actSelect btn pinkBackground'
+                    'class' => 'form-control-lg form-control-a mb-3 actSelect btn pinkBackground selector'
                 ],
                 // 'label_attr' => [
                 //     'class' => 'policeForm'
@@ -244,25 +245,45 @@ class AnnouncementsType extends AbstractType
                     'Normal' => '1'
 				]
             ])
-            ->add('imageFile', VichImageType::class,[
+            // ->add('imageFile', VichImageType::class,[
+            //     'required' => false,
+            //     'label'=>'',
+            //     'download_link'=>false,
+            //     'imagine_pattern'=>'miniatures',
+            //     'attr' => [
+            //         'class' => 'img-file'
+            //     ],
+            //     'label_attr' => [
+            //         'class' => 'label-file '
+            //     ],
+            //     'constraints'=>[
+            //         new Image([
+            //             'maxSize'=>'2M',
+            //             'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
+            //             'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
+            //             'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
+            //         ])
+            //     ]
+            // ])
+            ->add('imageFile', FileType::class,[
                 'required' => false,
-                'label'=>'',
-                'download_link'=>false,
-                'imagine_pattern'=>'miniatures',
+                'label'=>'Upload image',
                 'attr' => [
-                    'class' => 'img-file'
+                    'class' => 'inputfile d-none'
                 ],
                 'label_attr' => [
-                    'class' => 'label-file '
+                    'class' => 'label-file'
                 ],
-                'constraints'=>[
-                    new Image([
-                        'maxSize'=>'2M',
-                        'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
-                        'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
-                        'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
-                    ])
-                ]
+                    'constraints'=>[
+                        new Image([
+                            'maxSize'=>'2M',
+                            'maxSizeMessage'=> 'Votre image dépasse les 2Mo',
+                            'mimeTypes'=>['image/png', 'image/gif', 'image/jpeg'],
+                            'mimeTypesMessage'=>'Votre image doit être de type PNG, GIF ou JPEG'
+                        ])
+                    ]
+               
+                
             ])
             ->add('Valider', SubmitType::class, [
                 'attr' => [
