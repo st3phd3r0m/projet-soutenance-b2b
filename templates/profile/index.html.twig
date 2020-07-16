@@ -4,30 +4,26 @@
 
 {% block body %}
 
-<main id="pt-85 layoutSidenav_content">
+<main id="layoutSidenav_content">
 
     <div class="container-fluid">
 
         <h2 class="m-5">Bienvenue dans votre espace personnel</h2>
 
-        <ul>
-            <li>
+        <ul class="list-group">
+            <li class="list-group-item">
                 <a class="dropdown-item" href="{{ path('profile_list') }}" title="Aller à la liste de vos annonces">Liste de vos annonces</a>
             </li>
-
-            <li>
+            <li class="list-group-item">
                 <a class="dropdown-item" href="{{ path('profile') }}" title="Vos informations personnelles">Vos informations personnelles</a>
             </li>
-
-            <li>
+            <li class="list-group-item">
                 <a class="dropdown-item" href="{{ path('profile_orders_record') }}" title="Historique de vos commandes">Historique de vos commandes</a>
             </li>
-            <li>
+            <li class="list-group-item">
             
             </li>
-        
         </ul>
-
     </div>    
 
 </main>

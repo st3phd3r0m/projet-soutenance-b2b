@@ -10,60 +10,57 @@
 
             <h2 class="m-5">Historique de vos commandes</h2>
 
-        {% if subscriptionPurchases is not empty %}
-            <div class="table-responsive">
+            {% if subscriptionPurchases is not empty %}
+                <div class="table-responsive">
 
-                {# Début tableau #}
-                <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
-                    {# DEBUT THEAD #}
-                    <thead>
-                        <tr>
-
-                            <th scope="col">#</th>     
-                            <th scope="col">Nom du produit</th>
-                            <th scope="col">Date de la commande</th>
-                            <th scope="col">Prix unitaire</th>
-                            <th scope="col">Quantité</th>
-                            <th scope="col">Montant</th>
-                            <th scope="col">Actions</th>
-                        </tr>
-                    </thead>
-                    {# FIN THEAD #}
-
-                    {# DEBUT TBODY #}
-                    <tbody>
-
-                        {% for subscriptionPurchase in subscriptionPurchases %}
+                    {# Début tableau #}
+                    <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
+                        {# DEBUT THEAD #}
+                        <thead>
                             <tr>
-                                <td>{{ subscriptionPurchase.id }}</td>  
-                                <td>{{ subscriptionPurchase.subscription.name }}</td>    
-                                <td>{{ subscriptionPurchase.orderedAt | date('d.m.Y')  }}</td>
-                                <td>{{ subscriptionPurchase.subscription.price }} &euro;</td>
-                                <td>{{ subscriptionPurchase.quantity }}</td>
-                                <td>{{ subscriptionPurchase.amount }} &euro;</td>
-                                <td>
-                                
-                                    <a class="button pinkBackground" type="button" title="Télécharger votre facture" href="{{ path('profile_bill', {'id': subscriptionPurchase.id }) }}">Télécharger votre facture</a>  
 
-                                </td>
+                                <th scope="col">#</th>     
+                                <th scope="col">Nom du produit</th>
+                                <th scope="col">Date de la commande</th>
+                                <th scope="col">Prix unitaire</th>
+                                <th scope="col">Quantité</th>
+                                <th scope="col">Montant</th>
+                                <th scope="col">Actions</th>
                             </tr>
+                        </thead>
+                        {# FIN THEAD #}
 
-                        {% endfor %}
+                        {# DEBUT TBODY #}
+                        <tbody>
 
-                    </tbody>
-                    {# FIN TBODY #}
-                </table>
+                            {% for subscriptionPurchase in subscriptionPurchases %}
+                                <tr>
+                                    <td>{{ subscriptionPurchase.id }}</td>  
+                                    <td>{{ subscriptionPurchase.subscription.name }}</td>    
+                                    <td>{{ subscriptionPurchase.orderedAt | date('d.m.Y')  }}</td>
+                                    <td>{{ subscriptionPurchase.subscription.price }} &euro;</td>
+                                    <td>{{ subscriptionPurchase.quantity }}</td>
+                                    <td>{{ subscriptionPurchase.amount }} &euro;</td>
+                                    <td>
+                                    
+                                        <a class="button pinkBackground" type="button" title="Télécharger votre facture" href="{{ path('profile_bill', {'id': subscriptionPurchase.id }) }}">Télécharger votre facture</a>  
+
+                                    </td>
+                                </tr>
+
+                            {% endfor %}
+
+                        </tbody>
+                        {# FIN TBODY #}
+                    </table>
 
 
 
 
-            </div>
-     
-        {% else %}
-
-            <p>Vous n'avez acheté aucun abonnement pour le moment.</p>
-
-        {% endif %}
+                </div>
+            {% else %}
+                <p>Vous n'avez acheté aucun pack crédits pour le moment.</p>
+            {% endif %}
 
             <!-- Button trigger modal -->
             <button type="button" class="button pinkBackground" data-toggle="modal" data-target="#reloadAccountModal">Ajouter des crédits à votre compte
@@ -81,11 +78,8 @@
                     </div>
                     <div class="modal-body">
                         {% for subscription in subscriptions %}
-
                         <a class="d-inline-block button pinkBackground w-25" href="{{ path('profile_confirm_subscription', {id: subscription.id }) }}" type="button">Ajouter {{ subscription.credit }} crédits avec le {{ subscription.name }} pour {{ subscription.price }} &euro;</a>
-
                         {% endfor %}
-
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>

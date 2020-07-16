@@ -5,7 +5,9 @@ use App\Entity\Announcements;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-
+/**
+ * @Route("/profile")
+ */
 class FavoriteController extends AbstractController
 {
     /**

@@ -52,7 +52,6 @@ class ProfileController extends AbstractController
      */
     public function list(AnnouncementsRepository $announcementsRepository, PaginatorInterface $paginator, Request $request)
     {
-
         //Affichage, dans l'espace utilisateur, des annonces qu'il a publiées
         $announcements = $paginator->paginate(
             $announcementsRepository->findBy(['user' => $this->getUser()], ['created_at' => 'DESC']),
@@ -61,7 +60,6 @@ class ProfileController extends AbstractController
             //Nombre d'élément par page
             5
         );
-
         return $this->render('profile/listAnnouncements.html.twig', [
             'announcements' => $announcements
         ]);
@@ -73,11 +71,8 @@ class ProfileController extends AbstractController
     public function ordersRecord(SubscriptionPurchasesRepository $subscriptionPurchasesRepository, SubscriptionRepository $subscriptionRepository)
     {
         $user = $this->getUser();
-
         $subscriptionPurchases = $subscriptionPurchasesRepository->findBy(['user' => $user], ['ordered_at' => 'DESC']);
-
         $subscriptions = $subscriptionRepository->findAll();
-
         return $this->render('profile/ordersRecord.html.twig', [
             'subscriptionPurchases' => $subscriptionPurchases,
             'subscriptions'=>$subscriptions
@@ -92,12 +87,10 @@ class ProfileController extends AbstractController
      */
     public function edit(Announcements $announcement, Request $request)
     {
-
+        //Création de formulaire
         $form = $this->createForm(AnnouncementsType::class, $announcement);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
             $location = json_decode($form->get("coordinates")->getData());
             $announcement->setCity($location->name);
@@ -109,46 +102,37 @@ class ProfileController extends AbstractController
                 'lat' => $location->lat
             ];
             $announcement->setGpsLocation($gps);
-
-
             //Récupération des mots-clés en tant que chaine de caractères et séparation en array avec un délimiteur ";"
             $key_words = $form->get("key_words")->getData();
             $key_words = explode(";", $key_words);
             $key_words = array_filter($key_words);
             $announcement->setKeyWords($key_words);
-
             //Récupération de la délimitation du budget
             $price_range[0] = $form->get("price_min")->getData();
             $price_range[1] = $form->get("price_max")->getData();
             $announcement->setPriceRange($price_range);
-
+            //Ré-initialisation du nombre de clics de déblocage de l'annonce
             $announcement->setUnlockCount(0);
-
+            //On fait persister les données en bdd
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($announcement);
             $entityManager->flush();
-
-
-
             //Envoi d'un message de succès
             $this->addFlash('success', 'Votre annonce a bien été modifiée.');
-
+            //Redirection
             return $this->redirectToRoute('profile_list');
         }
-
-        return $this->render('profile/edit.html.twig', [
+        return $this->render('home/new.html.twig', [
             'announcement' => $announcement,
             'form' => $form->createView(),
         ]);
     }
-
 
     /**
      * @Route("/account", name="profile", methods={"GET"})
      */
     public function account(UsersRepository $usersRepository, SubscriptionRepository $subscriptionRepository, Request $request)
     {
-
         $subscriptions = $subscriptionRepository->findAll();
         $user = $usersRepository->find($this->getUser());
 
@@ -175,8 +159,9 @@ class ProfileController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-
-            return $this->redirectToRoute('customer_details');
+            //Envoi d'un message de succès
+            $this->addFlash('success', 'Vos informations personnelles ont bien été modifiées.');
+            return $this->redirectToRoute('profile');
         }
 
         return $this->render('profile/changeDetails.html.twig', [

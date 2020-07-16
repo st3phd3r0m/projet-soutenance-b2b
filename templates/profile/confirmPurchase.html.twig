@@ -5,17 +5,11 @@
 {% block body %}
 
 <main id="layoutSidenav_content">
-
     <div class="container-fluid">
-    
         <h1 class="m-5">Achat d'un pack d'abonnement</h1>
-
         <p>Vous souhaitez acheter un {{ subscription.name }} pour {{ subscription.price }} &euro;</p>
         <p>Ce pack rechargera votre compte de {{ subscription.credit }} crédit{{ (subscription.credit > 1)?'s':'' }}.</p>
-
         <a href="{{ path('profile_subscription_payment', {id: subscription.id }) }}" class="button pinkBackground" type="button">Lancer l'achat</a>
-
-{# href="{{ path('profile_confirm_subscription', {id: subscription.id }) }}"  #}
     </div>
 </main>
 

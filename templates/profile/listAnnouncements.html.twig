@@ -4,15 +4,16 @@
 {% block title %} Yeah! - Liste de vos articles{% endblock %}
 
 {% block body %}
+   {# <main class="noPadding"> #}
+<main class="noPadding" id="pt-85 layoutSidenav_content"> 
 
-<main id="pt-85 layoutSidenav_content">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success noPadding" role="alert">{{ message }}</div>
+    {% endfor %}
 
     <div class="container-fluid">
-
         <h1 class="m-5">Liste de vos articles</h1>
-
         {% for announcement in announcements %} 
-
         <!--Bloc Carte entreprise-->
             <div class="card">
                 <div class="card_bloc_1">
