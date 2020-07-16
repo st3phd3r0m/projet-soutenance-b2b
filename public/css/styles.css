@@ -150,6 +150,7 @@ main section p {
 
 .search_bar .button {
     margin-top: 15px;
+    border: none;
 
 }
 
@@ -228,6 +229,7 @@ main section p {
 .buttonList .button {
     margin-bottom: 5px;
     padding: 5px 10px;
+    border: none;
     border-radius: 5px;
 }
 /*Fin Carte annonce*/
@@ -306,7 +308,7 @@ main section p {
   }
 
   .pt-85{
-      padding-top: 85px;
+      padding-top: 85px !important;
   }
 
   .fond {
@@ -333,6 +335,13 @@ main section p {
         text-align: center;
     }
 /*Fin Footer*/
+
+/* Page Admin */
+.pt-150{
+    padding-top: 150px !important;
+}
+
+/*Fin Page Admin*/
 
 /*Fin Vue mobile*/
 
@@ -549,6 +558,10 @@ main section p {
     height: 1px;
     width: 1px;
     z-index: -5;
+}
+.coeur{
+    font-size: 30px;
+    color: red;
 }
 
 

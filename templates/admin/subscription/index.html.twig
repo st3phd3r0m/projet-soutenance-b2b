@@ -3,7 +3,8 @@
 {% block title %}Liste des Packs{% endblock %}
 
 {% block body %}
-    <h1>Liste des Packs</h1>
+<main>
+    <h1 class="pt-150">Liste des Packs</h1>
 
     <table class="table">
         <thead>
@@ -38,4 +39,6 @@
     </table>
 
     <a href="{{ path('admin_subscription_new') }}">Nouveau</a>
+</main>
+    
 {% endblock %}

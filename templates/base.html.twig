@@ -37,6 +37,7 @@
 
             <nav class="collapse navbar-collapse" id="navbarHeader">
                 <ul class="menu">
+                    {% if app.user %}
                     {#<li>
                         <a href="" title="Messagerie">
                             <i class="las la-envelope"></i>
@@ -49,13 +50,14 @@
                             <span>Favoris</span>
                         </a>
                     </li>
+                    {% endif %}
                     <li>
                         <div class="d-block text-center mr-5">
                             <div class="dropdown show">
                             {% if app.user %}
                                 <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
                                     <i class="las la-user"></i>
-                                    <p class="firstname">Bonjour {{ app.user.firstname }}</p>
+                                    <span class="firstname">Bonjour {{ app.user.firstname }}</span>
                                 </div> 
                                 <div class="dropdown-menu">
                                     {% if is_granted("ROLE_ADMIN") %}
