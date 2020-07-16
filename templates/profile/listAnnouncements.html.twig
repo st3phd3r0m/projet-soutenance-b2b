@@ -121,8 +121,12 @@
                 </div>
             </div>
         <!--Fin Bloc Carte entreprise-->  
-
-    
+        {% else %}
+            {% if favoris is not defined %}
+                <p>Vous n'avez pas d'annonce en cours de publications.</p>
+            {% elseif favoris is defined and favoris == true %}    
+                <p>Vous n'avez pas d'article favori.</p>
+            {% endif %}
         {% endfor %}
 
         <div>

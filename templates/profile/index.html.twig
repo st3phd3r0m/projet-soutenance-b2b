@@ -15,13 +15,13 @@
                 <a class="dropdown-item" href="{{ path('profile_list') }}" title="Aller à la liste de vos annonces">Liste de vos annonces</a>
             </li>
             <li class="list-group-item">
+                <a class="dropdown-item" href="{{ path('myfavorite', {id: app.user.id }) }}" title="Vos articles favoris">Vos articles favoris</a>
+            </li>
+            <li class="list-group-item">
                 <a class="dropdown-item" href="{{ path('profile') }}" title="Vos informations personnelles">Vos informations personnelles</a>
             </li>
             <li class="list-group-item">
                 <a class="dropdown-item" href="{{ path('profile_orders_record') }}" title="Historique de vos commandes">Historique de vos commandes</a>
-            </li>
-            <li class="list-group-item">
-                <a class="dropdown-item" href="{{ path('myfavorite', {id: app.user.id }) }}" title="Vos articles favoris">Vos articles favoris</a>
             </li>
         </ul>
     </div>    
