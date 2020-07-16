@@ -94,12 +94,8 @@
             
             <div class="buttonList">
                 <button type="button" class="button darkGreyBackground" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
-                <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
-
-         
-
-                <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
-                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
+                {#<a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
+                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>#}
                 {# Ce boutton ouvre une modal bootsrap #}
                 <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
 
@@ -113,27 +109,26 @@
 
 {#<!--Bloc Carte entreprise-->
     <div class="card">
-        <div class="card_bloc_1">
+        <div class="card_bloc_1 m-0">
             <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
             {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> 
         </div>
 
-        <div class="card_bloc_2">
-            <div class="card_category pinkBackground">
-                <p>{{ announcement.category.name }}</p>
-            </div>
-            <p>{{ announcement.activitySector.name }}</p>
-            <div class="card_title">
+        <div class="card_bloc_2 m-0 p-0">
+            <p class="card_category pinkBackground m-0">
+                {{ announcement.category.name }}
+            </p>
+            <p class="m-0 p-0">{{ announcement.activitySector.name }}</p>
+            <div class="card_title m-0 p-0">
                 <h2>{{ announcement.title }}</h2>
             </div>
-            <div class="card_text">
-                <p>{{ announcement.description }}</p>
+            <div class="card_text m-0 p-0">
+                <p class="announcementContent">{{ announcement.description }}</p>
             </div>
-            <div class="card_announcement">
+            <div class="card_announcement m-0 p-0">
                 <p>Annonce. {{ announcement.ref }}</p>
             </div>
-            
-            <div class="keyWords"> Mots-clés :  
+            <div class="keyWords m-0 p-0"> Mots-clés :  
                 <p>
                     {% for keyWords in announcement.keyWords %} 
                         #{{ keyWords }}  
@@ -158,20 +153,20 @@
 
                 {% endif %}
 
-                <div class="card_alternative_text">
-                    <p><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</p>
+                <div class="card_alternative_text m-0 p-0">
+                    <p class="m-0 p-0"><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</p>
                 </div>
-                <div class="card_alternative_text">
-                    <p>
+                <div class="card_alternative_text m-0 p-0">
+                    <p class="m-0 p-0">
                         <i class="las la-clock"></i> 
                         <time datetime="{{ announcement.createdAt | date('d.m.Y') }}">
                             {{ announcement.createdAt | date('d.m.Y')}}
                         </time>
                     </p>
                 </div>
-                <address>
-                    <div class="card_alternative_text">
-                        <p>
+                <address class="m-0 p-0">
+                    <div class="card_alternative_text m-0 p-0">
+                        <p class="m-0 p-0">
                             <i class="las la-phone"></i> 
                             {% if unlockedAnnouncement == true %}
                                 <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
@@ -181,8 +176,8 @@
                         </p>
 
                     </div>
-                    <div class="card_alternative_text">
-                        <p>
+                    <div class="card_alternative_text m-0 p-0">
+                        <p class="m-0 p-0">
                             <i class="las la-envelope"></i>
                             {% if unlockedAnnouncement == true %}
                                 <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
@@ -192,8 +187,8 @@
                         </p>
                     </div>                
                 </address>
-                <div class="card_alternative_text">
-                    <p>
+                <div class="card_alternative_text m-0 p-0">
+                    <p class="m-0 p-0">
                         <i class="las la-euro-sign"></i> 
                         
                         {% if unlockedAnnouncement %}
@@ -202,23 +197,20 @@
                             ***********
                         {% endif %}                 
                     </p>
-
                 </div>
 
-                <p>Coordonnées débloquées {{ announcement.unlockCount }} fois.</p>
-
+                <p class="m-0 p-0">Coordonnées débloquées {{ announcement.unlockCount }} fois.</p>
             </div>
 
             <div class="buttonList">
-                <button type="button" class="button darkGreyBackground" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
-                <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
-                <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
-                <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
+                <button type="button" class="button darkGreyBackground m-1" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
+                <a href="#" type="button" class=" button darkGreyBackground m-1">Enregistrer</a>
+                <a href="#" type="button" class=" button darkGreyBackground m-1">Recommander</a>
+                <a href="#" type="button" class=" button lightGreyBackground m-1">Contrepartie</a>
 
                 {# Ce boutton ouvre une modal bootsrap 
                 <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
                 
-
                 {{ include('home/_unlockAnnouncement.html.twig') }}
                 {{ include('home/_shareAnnouncement.html.twig') }}
 

@@ -44,7 +44,7 @@
                         <div>
                             <select name="activitySectorFilter" id="activitySectorFilter">
                                 <option value="">Secteurs d'activité</option>     
-                                {% for activitySector in activitySectors %} 
+                                {% for activitySector in activitySectors|sort((a, b) => a.name <=> b.name) %} 
                                     <option value={{ activitySector.id }}>{{ activitySector.name }}</option>
                                 {% endfor %}                         
                             </select>
@@ -52,8 +52,12 @@
                         <div>
                             <select name="deptCode" id="locationFilter">
                                 <option value="">Où</option>
-                                {% for announcement in announcementsNoPag %} 
-                                    <option value={{ announcement.deptCode }}>{{ announcement. 	deptCode }} - {{ announcement.departememt }}</option>
+                                {% set newArray = [] %}
+                                {% for announcement in announcementsNoPag|sort((a, b) => a.deptCode <=> b.deptCode) %}  
+                                    {% if announcement.deptCode not in newArray %}
+                                        <option value={{ announcement.deptCode }}>{{ announcement.deptCode }} - {{ announcement.departememt }}</option>
+                                        {% set newArray = newArray|merge([announcement.deptCode]) %}
+                                    {% endif %}
                                 {% endfor %}     
                             </select>
                         </div>
@@ -70,18 +74,29 @@
                 </div>
             <!--Fin Barre de recherche-->
 
-                <!--<div class="sortByFilter">
-                    <button class="sortByButton">Trier par<i class="las la-sort-amount-down"></i></button>
-                </div>-->
+            <div class="dropdown">
+                <button class="btn dropdown-toggle sortByButton" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Trier par <i class="las la-sort-amount-down"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <ul class="m-0 py-0 rounded-lg">
+                        <li class="m-0 py-0 pr-2">{{ knp_pagination_sortable(announcements, 'Titres croissants', 'a.title', {}, {'direction': 'asc'}) }}</li>
+                        <li class="m-0 py-0 pr-2">{{ knp_pagination_sortable(announcements, 'Titres décroissants', 'a.title', {}, {'direction': 'desc'}) }}</li>
+                        <li class="m-0 py-0 pr-2">{{ knp_pagination_sortable(announcements, 'Références', 'a.ref') }}</li>
+                        <li class="m-0 py-0 pr-2">{{ knp_pagination_sortable(announcements, 'Du plus ancien au plus récent', 'a.created_at', {}, {'direction': 'asc'}) }}</li>
+                        <li class="m-0 py-0 pr-2">{{ knp_pagination_sortable(announcements, 'Du plus récent au plus ancien', 'a.created_at', {}, {'direction': 'desc'}) }}</li>                
+                    </ul>
+                </div>
+            </div>
+
 
             <!--Bloc Carte entreprise-->
-            
                 {% for announcement in announcements %} 
                     {{ include('home/_listAnnouncements.html.twig') }}
                 {% endfor %}
-
                 <div>
                 {{ knp_pagination_render(announcements) }}
+                
                 </div>
             <!--Fin Bloc Carte entreprise-->
             </section>

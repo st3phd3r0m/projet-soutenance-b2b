@@ -34,5 +34,15 @@ window.onload = () => {
         })
     }
 
+
+    // let announcementsContent=[];
+    let announcements = document.querySelectorAll('.announcementContent');
+
+    for (let compt = 0; compt < announcements.length; compt++) {
+
+        console.log(announcements[compt].textContent);
+        
+    }
+
 }
 
