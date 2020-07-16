@@ -203,21 +203,18 @@ class ProfileController extends AbstractController
      */
     public function cartPayment(Subscription $subscription)
     {
-
+        //Chargement id pach d'abonnement et quantité
         $this->session->set('cart', [
             'subscriptionId' => $subscription->getId(),
             'quantity' => 1
         ]);
-
         // Stripe - Create a PaymentIntent on the server
         Stripe::setApiKey('sk_test_51H02NpD7y6oTPe9NYnY22AFmxD034fdn0ndOVbOe63fGV5hQLUfHVhlIi59PGsFQWVvyfefK3c6MNKoBihYojpBT00Qo2t4tvx');
-
         // Prix en centimes !!!
         $intent = PaymentIntent::create([
             'amount' => $subscription->getPrice() * 100,
             'currency' => 'eur'
         ]);
-
         return $this->render('profile/cartPayment.html.twig', ['stripe' => $intent]);
     }
 

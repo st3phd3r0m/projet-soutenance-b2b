@@ -582,6 +582,10 @@ background-color: #FF6600
         align-self: start;
     }
 
+    .card_sector {
+        margin-top: 10px;
+    }
+
     .card_bloc_3 {
         border-left: 1px dotted #6f7176;
         padding-left: 15px;
