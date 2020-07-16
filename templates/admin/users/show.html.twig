@@ -4,53 +4,83 @@
 
 {% block body %}
    
-<main class="fond pt-150">
-    <a href="{{ path('admin_users_index') }}" class="btn pinkBackground ">Retour à la liste des utilisateurs</a>
-    <h1 class=" titre mb-4 pt-4 text-center">Utilisateur</h1>
-    <div class="col-sm col-lg-10 mr-4 mx-auto">
-        <table class="table ">
-            <tbody>
+<main class="fond">
+    <div class="col-sm-12 col-md-12 col-lg-12 mx-auto">
 
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ user.lastname }}</td>
-                </tr>
-                <tr>
-                    <th>Prénom</th>
-                    <td>{{ user.firstname }}</td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td>{{ user.email }}</td>
-                </tr>
-                <tr>
-                    <th>Numero de téléphone</th>
-                    <td>{{ user.phone }}</td>
-                </tr>
-                <tr>
-                    <th>Rôle</th>
-                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-                </tr>
-            
-            </tbody>
-        </table>
+        <a href="{{ path('admin_users_index') }}" class="btn pinkBackground selector">Retour à la liste des utilisateurs</a>
+        <h1 class=" titre mb-4 pt-4 text-center">Utilisateur</h1>
+        <div class="col-sm col-lg-10 mr-4 mx-auto">
+            <table class="table ">
+                <tbody>
 
-        {# faire différents onglets : Entreprise(s), Annonces postées, Hi4storique des Achats #}
+                    <tr>
+                        <th>Nom</th>
+                        <td>{{ user.lastname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Prénom</th>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                    <tr>
+                        <th>Email</th>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                    <tr>
+                        <th>Numero de téléphone</th>
+                        <td>{{ user.phone }}</td>
+                    </tr>
+                    <tr>
+                        <th>Rôle</th>
+                        <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    </tr>
+                
+                </tbody>
+            </table>
 
-        <!-- onglet "Entrepirses" -->
-        <h3 class="titre">Entreprises</h3>
+            {# faire différents onglets : Entreprise(s), Annonces postées, Hi4storique des Achats #}
+
+            <!-- onglet "Entrepirses" -->
+            <h3 class="titre">Entreprises</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>N° Siret</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for compagny in user.compagnies %}
+                    <tr>
+                        <td>{{ compagny.name }}</td>
+                        <td>{{ compagny.siret }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="8">Aucun ancien payement</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <!-- "Historique des Abonnements" -->
+        <h3 class="titre">Historique des Abonnements</h3>
+        
         <table class="table">
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>N° Siret</th>
+                    <th>Abonnement</th>
+                    <th>montant</th>
+                    <th>Date de paiement</th>
+                    <th>Entreprise</th>
                 </tr>
             </thead>
             <tbody>
-            {% for compagny in user.compagnies %}
+            {% for sub in user.subscriptionPurchases == user %}
                 <tr>
-                    <td>{{ compagny.name }}</td>
-                    <td>{{ compagny.siret }}</td>
+                    <td>{{ sub.subscription.name }}</td>
+                    <td>{{ sub.amount }}</td>
+                    <td>{{ sub.orderedAt }}</td>
+                    <td>{{ sub.compagny.name }}</td>
                 </tr>
             {% else %}
                 <tr>
@@ -59,47 +89,20 @@
             {% endfor %}
             </tbody>
         </table>
+        </div>
 
-        <!-- "Historique des Abonnements" -->
-    <h3 class="titre">Historique des Abonnements</h3>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Abonnement</th>
-                <th>montant</th>
-                <th>Date de paiement</th>
-                <th>Entreprise</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sub in user.subscriptionPurchases == user %}
-            <tr>
-                <td>{{ sub.subscription.name }}</td>
-                <td>{{ sub.amount }}</td>
-                <td>{{ sub.orderedAt }}</td>
-                <td>{{ sub.compagny.name }}</td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="8">Aucun ancien payement</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    </div>
+        
 
-    
+        <div class="col-sm col-lg-10 mr-4 mx-auto">
+            <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
+            <h3 class="titre">Annonces postées</h3>
 
-    <div class="col-sm col-lg-10 mr-4 mx-auto">
-        <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
-        <h3 class="titre">Annonces postées</h3>
-
-        {% for announcement in announcements %}
-            {{ include('admin/_listAnnouncements.html.twig') }}
-        {% else %}
-                <p>Cet utilisateur n'a pas encore posté d'annonce</p>
-        {% endfor %}
+            {% for announcement in announcements %}
+                {{ include('admin/_listAnnouncements.html.twig') }}
+            {% else %}
+                    <p>Cet utilisateur n'a pas encore posté d'annonce</p>
+            {% endfor %}
+        </div>
     </div>
 </main>
 {% endblock %}

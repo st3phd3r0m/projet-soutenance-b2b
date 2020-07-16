@@ -267,7 +267,7 @@ class AnnouncementsType extends AbstractType
             // ])
             ->add('imageFile', FileType::class,[
                 'required' => false,
-                'label'=>'Upload image',
+                'label'=>'Ajouter une image',
                 'attr' => [
                     'class' => 'inputfile d-none'
                 ],

@@ -461,10 +461,9 @@ background-color: #FF6600
 
 /* Page dépot d'annonce */
 .div-file{
-    /* background-color: white; */
-    /* border: 1px solid #fb3199; */
-    box-shadow:#fb3199 ;
-    background: linear-gradient(#ebf2e3,pink, #ebf2e3);
+   border: 1px solid black;
+   border-radius: 5px;
+   background-color: white;
 }
 .label-file{
     cursor: pointer;
@@ -739,11 +738,10 @@ background-color: #FF6600
 
 /* Depot d'annonce */
 .div-file{
-    /* background-color: white; */
-    /* border: 1px solid #fb3199; */
-    box-shadow:#fb3199 ;
-    
-    background: linear-gradient(#ebf2e3, #fb3199, #ebf2e3);
+ 
+    border: black solid 1px;
+    border-radius: 5px;
+    background-color: white;
 }
 .label-file{
     cursor: pointer;
