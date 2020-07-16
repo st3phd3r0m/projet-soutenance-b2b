@@ -13,14 +13,11 @@ class FavoriteController extends AbstractController
      */
     public function index()
     {
-       
-
         return $this->render('favorite/index.html.twig', [
-            'controller_name' => 'FavoriteController',
+            'favoris' => 'FavoriteController',
             
         ]);
     }
-
 
     /** 
      * @Route("/favorite/ajout/{id}", name="ajout_favoris")
@@ -33,9 +30,12 @@ class FavoriteController extends AbstractController
         $em->persist($announcement);
         $em->flush();
 
-        return $this->redirectToRoute('myfavorite');
+        // $this->addFlash(
+        // '	type',
+        // '	flashMessage'
+        // );
+        return $this->redirectToRoute('home');
     }
-
 
      /**
      * @Route("/favorite/retrait/{id}", name="retrait_favoris")
@@ -49,8 +49,6 @@ class FavoriteController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('home');
-
-
     }
 
 }

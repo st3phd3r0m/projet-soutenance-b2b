@@ -4,95 +4,90 @@
 
 {% block body %}
 <main class="fond pt-85">
-<div class="container mx-auto">
-{{ form_start(form) }}
- <div class="row m-3 ">
-    {# premiere partie #}
-    <div class="col-2">
-        <div class="bg-light labelI">
-            {{ form_row(form.imageFile) }}
-            
-           {# <i class="las la-plus"></i> #}
+    <div class="container mx-auto">
+    {{ form_start(form) }}
+    <div class="row m-3 ">
+        {# premiere partie #}
+        <div class="col-2">
+            <div class="bg-light labelI">
+                {{ form_row(form.imageFile) }}
+                {# <i class="las la-plus"></i> #}
+            </div>
         </div>
-    </div>
 
-    {# deuxieme partie #}
-    <div class="col-5">
+        {# deuxieme partie #}
+        <div class="col-5">
 
-            <div class="m-1">
-                <p class="font-weight-bold">Choisissez le secteur d'activité de votre annonce</p>
+                <div class="m-1">
+                    <p class="font-weight-bold">Choisissez le secteur d'activité de votre annonce</p>
+                    {{ form_widget(form.activity_sector) }}
+                    {{ form_errors(form.activity_sector)}}
+                </div>
+                <div class="m-1">
+                    <p class="font-weight-bold">Choisissez le type de votre annonce</p>
+                    {{ form_widget(form.category) }}
+                    {{ form_errors(form.category)}}
+                </div>
+
+            <div> 
+                {# <h2>Choisir un titre</h2> #}
+                {{ form_widget(form.title) }}
+                {{ form_errors(form.title)}}
+            </div>
+
+            <div>
+                {{ form_widget(form.description) }}
+                {{ form_errors(form.description)}}
+            </div>
+
+            <div>
+                {{ form_widget(form.notes) }}
+                {{ form_errors(form.notes)}}
+            </div>
+
+            <div class="keyWords"> Mots-clés :  
+                {{ form_row(form.key_words) }}
+            </div>
+        </div>
+        
+        {# troisieme partie #}
+        <div class="col-5 float-right">
+            <div>
                 {{ form_widget(form.activity_sector) }}
                 {{ form_errors(form.activity_sector)}}
             </div>
-            <div class="m-1">
-                <p class="font-weight-bold">Choisissez le type de votre annonce</p>
-                {{ form_widget(form.category) }}
-                {{ form_errors(form.category)}}
-            </div>
-
-        <div> 
-            {# <h2>Choisir un titre</h2> #}
-            {{ form_widget(form.title) }}
-            {{ form_errors(form.title)}}
-        </div>
-
-        <div>
-            {{ form_widget(form.description) }}
-            {{ form_errors(form.description)}}
-        </div>
-
-        <div>
-            {{ form_widget(form.notes) }}
-            {{ form_errors(form.notes)}}
-        </div>
-
-        <div class="keyWords"> Mots-clés :  
-            {{ form_row(form.key_words) }}
-        </div>
-    </div>
-       
-    
-
-    {# troisieme partie #}
-    <div class="col-5 float-right">
-        <div>
-            {{ form_widget(form.activity_sector) }}
-            {{ form_errors(form.activity_sector)}}
-        </div>
-        <div>
             <div>
-                <p class="font-weight-bold form-control-a">Budget :</p>
-                <div id="slider"></div>
-                {{ form_row(form.price_min) }}
-                {# {{ form_errors(form.price_min)}} #}
-                {{ form_row(form.price_max) }}
-                {# {{ form_errors(form.price_max)}} #}
-            </div>
-            <div> 
-                <p class="pinkBackground p-2 rounded-lg text-center">Urgence de votre annonce</p>
-                {{ form_widget(form.urgency) }}
-                {{ form_errors(form.urgency)}} 
-            </div>
-            <div class="mt-2">
-                {# {{ form_widget(form.city) }} #}
-                {{ form_row(form.city)}}
-                <datalist id="selectPannel" autocomplete="off"></datalist>
-                {{ form_row(form.coordinates) }}
+                <div>
+                    <p class="font-weight-bold form-control-a">Budget :</p>
+                    <div id="slider"></div>
+                    {{ form_row(form.price_min) }}
+                    {# {{ form_errors(form.price_min)}} #}
+                    {{ form_row(form.price_max) }}
+                    {# {{ form_errors(form.price_max)}} #}
+                </div>
+                <div> 
+                    <p class="pinkBackground p-2 rounded-lg text-center">Urgence de votre annonce</p>
+                    {{ form_widget(form.urgency) }}
+                    {{ form_errors(form.urgency)}} 
+                </div>
+                <div class="mt-2">
+                    {# {{ form_widget(form.city) }} #}
+                    {{ form_row(form.city)}}
+                    <datalist id="selectPannel" autocomplete="off"></datalist>
+                    {{ form_row(form.coordinates) }}
+                </div>
+                <div>
+                    {{ form_row(form.phone) }}
+                    {{ form_row(form.email) }}
+                </div>
+            
             </div>
             <div>
-                {{ form_row(form.phone) }}
-                {{ form_row(form.email) }}
+                {{ form_row(form.Valider) }}
             </div>
-           
-        </div>
-        <div>
-            {{ form_row(form.Valider) }}
         </div>
     </div>
-
- </div>
- 
-{{ form_end(form) }}
-</div>
+    {{ form_end(form) }}
+    </div>
 </main>
 {% endblock %}

@@ -550,6 +550,10 @@ main section p {
     width: 1px;
     z-index: -5;
 }
+.coeur{
+    font-size: 30px;
+    color: red;
+}
 
 
 

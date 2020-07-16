@@ -74,23 +74,24 @@
                 {% if app.user %}
                     {% for favoris in announcement.favoris %}
                         {% if favoris == app.user %}
-                         <a href="{{ path('retrait_favoris', {id: announcement.id}) }}"><i class="las la-heart"></i></a> 
+                         <a href="{{ path('retrait_favoris', {id: announcement.id}) }}" class="coeur"><i class="las la-heart "></i></a> 
                          {# <i  class="las la-heart"></i> #}
                          {% else %}
-                           <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                           <a href="{{ path('ajout_favoris', {id: announcement.id}) }}" class="coeur"><i class="lar la-heart "></i></a> 
                             {# <i  class="lar la-heart"></i> #}
                         {% endif %}
                     {% else %}
-                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}" class="coeur"><i class="lar la-heart"></i></a> 
                          {# <i  class="lar la-heart"></i> #}
                     {% endfor %}
 
                 {% else %}
-                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}" class="coeur"><i class="lar la-heart"></i></a> 
                      {# <i  class="lar la-heart"></i> #}
                 {% endif %}
                    
-                </div>
+            </div>
+            
             <div class="buttonList">
                 <button type="button" class="button darkGreyBackground" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
                 <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
