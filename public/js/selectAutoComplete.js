@@ -13,18 +13,19 @@ $(document).ready(function() {
 
 
 function getCityList() {
-
+    //Récupération valeur input
     let city = this.value;
-
+    //Instanciation objet requête xmlhttp
     let xmlhttp = new XMLHttpRequest();
+    //Ecouteur d'evenements sur la requete
     xmlhttp.onreadystatechange = () => {
-        // On attend la fin de la requete et la reception d'une reponse
+        // Attente requete et reception reponse
         if (xmlhttp.readyState == 4) {
-            //Ici la requete est terminée et on a une reponse
+            //requete terminée 
             if (xmlhttp.status == 200) {
-                //Ici on a une reponse
+                //reponse
                 let villes = JSON.parse(xmlhttp.responseText);
-
+                //Traitement données entrantes
                 cities=[];
                 let compt = 0;
                 for (let ville of villes) {
@@ -40,27 +41,23 @@ function getCityList() {
                         compt++;
                     }
                 }
-
+                //On vide le panneau de selection (<datalist>)
                 let selectPannel = document.querySelector("#selectPannel");
                 selectPannel.innerHTML="";
-                
+                //Ajout de balises <option> dans <datalist>
                 for (let ville of cities) {
                     let option = document.createElement("option"); 
                     option.dataset.ville = JSON.stringify(ville);
                     option.value = ville.name+"---"+ville.cp+"---"+ville.dept;
                     selectPannel.appendChild(option);
                 }
-
             }
         }
     }
-
-    //On ouvre la requête
-    //"https://geo.api.gouv.fr/communes?nom="+city+"&fields=code,nom,codeDepartement,departement,centre,codesPostaux&boost=population&limit="+numbOfSuggestion
+    //Ouverture requête
     xmlhttp.open("GET", "https://geo.api.gouv.fr/communes?nom="+city+"&fields=code,nom,departement,centre,codesPostaux,population&limit="+numbOfSuggestion);
-    //On envoie la requete
+    //Envoie de la requete
     xmlhttp.send();
-
 }
 
 function sendGPS(){
