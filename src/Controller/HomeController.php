@@ -70,35 +70,27 @@ class HomeController extends AbstractController
     /**
      * @Route("/unlock/{slug}", name="home_unlock", methods={"GET"})
      * @param string $slug
-     * @param Request $request
      * @return Response
      */
-    public function unlockAnnouncement(Announcements $announcement, UsersRepository $usersRepository,  UnlockedAnnouncementsRepository $unlockedAnnouncementsRepository, Request $request)
+    public function unlockAnnouncement(Announcements $announcement, UsersRepository $usersRepository,  UnlockedAnnouncementsRepository $unlockedAnnouncementsRepository)
     {
-
         //L'utilisateur doit être connecté pour débloquer les coordonnées d'un annonceur
         if ($this->getUser()) {
-
             //On interroge la table unlockedAnnouncements pour savoir si l'utilisateur a déjà débloqué l'annonce
             $didTheUserUnlockedIt = $unlockedAnnouncementsRepository->findOneBy([
                 'user'=> $this->getUser()->getId(),
                 'announcements'=> $announcement->getId()
                 ]);
-
             //Nbre de crédits sur le compte en bdd de l'utilisateur connecté
             $accountUser =  $usersRepository->find( $this->getUser() )->getAccount();
             //Nbre de crédits recquis pour débloquer l'annonce
             $requiredCredit = $announcement->getCategory()->getCreditsToUnlock();
 
             if($didTheUserUnlockedIt != null){
-
                 //Envoi d'un message de succès
                 $this->addFlash('success', 'Vous aviez déjà débloqué les coordonnéees de cet l\'annonceur.');
-
                 return $this->redirectToRoute('home');
-
             }elseif ($accountUser >= $requiredCredit) {
-
                 //Prélèvement de crédits sur le compte utilisateur
                 $accountUser -= $requiredCredit;
                 //Màj sur la variable session utilisateur
@@ -110,10 +102,8 @@ class HomeController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($user);
                 $entityManager->flush();
-
                 //Envoi d'un message de succès
                 $this->addFlash('success', 'Votre compte a été prélevé.');
-
                 //Instanciation de UnlockedAnnouncements pour stocker l'annonce débloquée par l'utilisateur
                 $unlockedAnnouncement = new UnlockedAnnouncements;
                 $unlockedAnnouncement->setUser($this->getUser());
@@ -122,7 +112,6 @@ class HomeController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($unlockedAnnouncement);
                 $entityManager->flush();
-
                 //Màj de compteur de déblocage de l'annonce dans l'entité Announcements
                 $unlock_count =  $announcement->getUnlockCount();
                 $unlock_count++;
@@ -131,24 +120,17 @@ class HomeController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($announcement);
                 $entityManager->flush();
-
-
                 //Envoi d'un message de succès
                 $this->addFlash('success', 'Les coordonnéees de l\'annonceur ont bien été débloquées.');
-
                 return $this->redirectToRoute('home');
             } else {
-
-                //Envoi d'un message de succès
+                //Envoi d'un message d'echec vers l'utilisateur
                 $this->addFlash('failUnlock', 'Le nombre de crédits sur votre compte est insuffisant pour débloquer les coordonnées de l\'annonceur.');
-
                 return $this->redirectToRoute('home');
             }
         } else {
-
             //Envoi d'un message de succès
             $this->addFlash('pleaseConnect', 'Veuillez vous connecter pour débloquer les coordonnées de l\'annonceur.');
-
             return $this->redirectToRoute('app_login');
         }
     }
@@ -156,10 +138,9 @@ class HomeController extends AbstractController
     /**
      * @Route("/show/{slug}", name="home_show")
      * @param string $slug
-     * @param Request $request
      * @return Response
      */
-    public function show(AnnouncementsRepository $announcementsRepository, Request $request, string $slug)
+    public function show(AnnouncementsRepository $announcementsRepository, string $slug)
     {
         $announcement = $announcementsRepository->findOneBy(['slug' => $slug]);
 
