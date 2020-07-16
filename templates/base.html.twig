@@ -37,22 +37,16 @@
 
             <nav class="collapse navbar-collapse" id="navbarHeader">
                 <ul class="menu">
-                    <li>
+                    {#<li>
                         <a href="" title="Messagerie">
                             <i class="las la-envelope"></i>
                             <span>Message</span>
                         </a>
-                    </li>
+                    </li>#}
                     <li>
                         <a href="" title="Favoris">
                             <i class="las la-heart"></i>
                             <span>Favoris</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="" title="Recherche">
-                            <i class="las la-search"></i>
-                            <span>Recherche</span>
                         </a>
                     </li>
                     <li>
@@ -117,6 +111,8 @@
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
         {# js pour affichage de la carte #}
         <script src="{{ asset('js/map.js') }}"></script>
+        {# js pour favoris #}
+        <script src="{{ asset('js/favoris.js') }}"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

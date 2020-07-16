@@ -3,11 +3,11 @@
 {% block title %}Users{% endblock %}
 
 {% block body %}
+   
+<main class="fond">
+    <a href="{{ path('admin_users_index') }}" class="btn pinkBackground ">Retour à la liste des utilisateurs</a>
     <h1 class=" titre mb-4 pt-4 text-center">Utilisateur</h1>
-
-    <a href="{{ path('admin_users_index') }}">Retour à la liste</a>
-
- <div class="col-sm col-lg-8 mr-4 mx-auto">
+    <div class="col-sm col-lg-10 mr-4 mx-auto">
         <table class="table ">
             <tbody>
 
@@ -38,7 +38,7 @@
         {# faire différents onglets : Entreprise(s), Annonces postées, Hi4storique des Achats #}
 
         <!-- onglet "Entrepirses" -->
-        <h3>Entreprises</h3>
+        <h3 class="titre">Entreprises</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -60,41 +60,43 @@
             </tbody>
         </table>
     </div>
+    <div class="col-sm col-lg-10 mr-4 mx-auto">
+        <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
+        <h3 class="titre">Annonces postées</h3>
 
-    <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
-    <h3>Annonces postées</h3>
-
-    {% for announcement in announcements %}
-        {{ include('admin/_listAnnouncements.html.twig') }}
-    {% else %}
-            <p>Cet utilisateur n'a pas encore posté d'annonce</p>
-    {% endfor %}
-
-    <!-- onglet "Historique des Abonnements" pour voir l'historique des abonnement -->
-    <h3>Historique des Abonnements</h3>
-    
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Abonnement</th>
-                <th>montant</th>
-                <th>Date de paiement</th>
-                <th>Entreprise</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for sub in user.subscriptionPurchases == user %}
-            <tr>
-                <td>{{ sub.subscription.name }}</td>
-                <td>{{ sub.amount }}</td>
-                <td>{{ sub.orderedAt }}</td>
-                <td>{{ sub.compagny.name }}</td>
-            </tr>
+        {% for announcement in announcements %}
+            {{ include('admin/_listAnnouncements.html.twig') }}
         {% else %}
-            <tr>
-                <td colspan="8">Aucun ancien payement</td>
-            </tr>
+                <p>Cet utilisateur n'a pas encore posté d'annonce</p>
         {% endfor %}
-        </tbody>
-    </table>
+
+        <!-- onglet "Historique des Abonnements" pour voir l'historique des abonnement -->
+        <h3 class="titre">Historique des Abonnements</h3>
+    
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Abonnement</th>
+                    <th>montant</th>
+                    <th>Date de paiement</th>
+                    <th>Entreprise</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for sub in user.subscriptionPurchases == user %}
+                <tr>
+                    <td>{{ sub.subscription.name }}</td>
+                    <td>{{ sub.amount }}</td>
+                    <td>{{ sub.orderedAt }}</td>
+                    <td>{{ sub.compagny.name }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8">Aucun ancien payement</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</main>
 {% endblock %}

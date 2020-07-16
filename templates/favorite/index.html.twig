@@ -1,0 +1,18 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Listes de mes annonces en favoris{% endblock %}
+
+{% block body %}
+    {% for favoris in announcement.favoris %}
+        {% if favoris == app.user %}
+            <a href="{{ path('retrait_favoris', {id: announcement.id}) }}"><i class="las la-heart"></i></a> 
+            
+            {% else %}
+            <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+            
+        {% endif %}
+            {% else %}
+            <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                    
+    {% endfor %}
+{% endblock %} #}

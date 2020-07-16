@@ -3,11 +3,16 @@
 {% block title %}Edition des rôles des utilisateurs{% endblock %}
 
 {% block body %}
-    <h1>Edition des rôles des utilisateurs</h1>
+<main class="fond"> 
+    
+    <div class="col-sm col-lg-10 mr-4 mx-auto">
+        <h1>Edition des rôles des utilisateurs</h1>
 
-    {{ include('admin/users/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
-
-    <a href="{{ path('admin_users_index') }}">Retour à la liste</a>
-
-    {{ include('admin/users/_delete_form.html.twig') }}
+        
+        {{ include('admin/users/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        {{ include('admin/users/_delete_form.html.twig') }}
+        <div> <a href="{{ path('admin_users_index') }}" class=" btn pinkBackground mt-3 w-25 ">Retour à la liste des utilisteurs</a></div>
+        
+    </div>
+</main>
 {% endblock %}

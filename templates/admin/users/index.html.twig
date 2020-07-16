@@ -5,29 +5,9 @@
 {% block body %}
 
     <h1 class=" titre mb-4 pt-4 text-center">Liste des utilisateurs</h1>
-{# <div class="container">
-  <div class="row">
-    <div class="col">
-      1 of 2
-    </div>
-    <div class="col">
-      2 of 2
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      1 of 3
-    </div>
-    <div class="col">
-      2 of 3
-    </div>
-    <div class="col">
-      3 of 3
-    </div>
-  </div>
-</div> #}
+
     <section class="fond">
-        <div class="container">
+        <div class="container ">
             <div class="col-10 mx-auto">
                 <table class="table">
                     <thead>
@@ -49,8 +29,8 @@
                             <td>{{ user.phone }}</td>
                             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
                             <td>
-                                <a href="{{ path('admin_users_show', {'slug': user.slug}) }}">Voir</a>
-                                <a class="btn" href="{{ path('admin_users_edit', {'slug': user.slug}) }}">Editer</a>
+                                <a href="{{ path('admin_users_show', {'slug': user.slug}) }}" class="btn pinkBackground w-100 mb-1">Voir</a>
+                                <a class="btn violetBackground w-100" href="{{ path('admin_users_edit', {'slug': user.slug}) }}">Editer</a>
                             </td>
                         </tr>
                     {% else %}
@@ -60,12 +40,6 @@
                     {% endfor %}
                     </tbody>
                 </table>
-
-                {# <div class="col text-center"> sauf caaaaaaaaaaaaaaaaaa
-                    <button class="btn bouton" type="submit">
-                        <a href="{{ path('admin_users_new') }}" class=" btn pinkBackground mb-4">Créer un nouvel utilisateur</a>
-                    </button>
-                </div> #}
             </div>
         </div>
     </section>
