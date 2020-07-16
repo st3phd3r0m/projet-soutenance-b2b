@@ -190,6 +190,10 @@ main section p {
     border-radius: 5px;
 }
 
+.card_sector {
+    margin-top: 10px;
+}
+
 .card_title {
     font-size: 16px;
     font-weight: 700;
@@ -398,10 +402,6 @@ main section p {
 
     .card_category{
         align-self: start;
-    }
-
-    .card_sector {
-        margin-top: 10px;
     }
 
     .card_bloc_3 {
