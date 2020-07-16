@@ -57,7 +57,7 @@
                             {% if app.user %}
                                 <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
                                     <i class="las la-user"></i>
-                                    <span class="firstname">Bonjour {{ app.user.firstname }}</span>
+                                    <p class="firstname">Bonjour {{ app.user.firstname }}</p>
                                 </div> 
                                 <div class="dropdown-menu">
                                     {% if is_granted("ROLE_ADMIN") %}
