@@ -146,29 +146,25 @@
                 {# Ce boutton ouvre une modal bootsrap #}
                 <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
                 
-                {# FAVORIS #}
-                {# {% if app.user %}
-                <div class="row justify-content-center">
-                <i id="{{ announcement.id }}" class="coeur las la-heart"></i>
-                </div>
-                {% endif %} #}
-
                 <div>
-                {% if is_granted("ROLE_USER") %}
+                {% if app.user %}
                     {% for favoris in announcement.favoris %}
-                        {% if favoris.id == app.user.id %}
-                         <i  class="lar la-heart"></i>
+                        {% if favoris == app.user %}
+                         <a href="{{ path('retrait_favoris', {id: announcement.id}) }}"><i class="las la-heart"></i></a> 
+                         {# <i  class="las la-heart"></i> #}
                          {% else %}
-                            <i  class="las la-heart"></i>
+                           <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                            {# <i  class="lar la-heart"></i> #}
                         {% endif %}
-                        {% else %}
-                         <i  class="las la-heart"></i>
+                    {% else %}
+                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                         {# <i  class="lar la-heart"></i> #}
                     {% endfor %}
 
                 {% else %}
-                     <i  class="las la-heart"></i>
+                    <a href="{{ path('ajout_favoris', {id: announcement.id}) }}"><i class="lar la-heart"></i></a> 
+                     {# <i  class="lar la-heart"></i> #}
                 {% endif %}
-                   
                    
                 </div>
 
