@@ -1,7 +1,6 @@
-let numbOfSuggestion = 5;
+let numbOfSuggestion = 7;
 
 $(document).ready(function() {
-
 
     //Elements de home/index.html.twig
     // $('#categoryFilter').select2();
