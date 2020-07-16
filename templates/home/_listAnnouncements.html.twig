@@ -1,13 +1,13 @@
 
 <!--Bloc Carte entreprise-->
-    {# <div class="card">
+    <div class="card">
         <div class="card_bloc_1">
             <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
         </div>
 
         <div class="card_bloc_2">
             <div class="card_category pinkBackground">{{ announcement.category.name }}</div>
-            <p>{{ announcement.activitySector.name }}</p>
+            <div>{{ announcement.activitySector.name }}</div>
             <div class="card_title">{{ announcement.title }}</div>
             <div class="card_text">{{ announcement.description }}</div>
             <div class="card_announcement">Annonce : {{ announcement.ref }}</div>
@@ -20,30 +20,104 @@
 
         <div class="card_bloc_3">
             <div class="informations">
-                <div class="card_alternative_text"><i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</div>
-                <div class="card_alternative_text"><i class="las la-clock"></i>Date de publication : {{ announcement.createdAt | date('d.m.Y')}}</div>
-                <div class="card_alternative_text"><i class="las la-phone"></i>Telephone : {{ announcement.user.phone }} </div>
-                <div class="card_alternative_text"><i class="las la-envelope"></i>Email : {{ announcement.user.email }}</div>
-                <div class="card_alternative_text"><i class="las la-euro-sign"></i>Tarif : {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;</div>
+
+                {% set unlockedAnnouncement = false %}
+
+                {% if app.user %}
+
+                    {% for array in app.user.unlockedAnnouncements %}
+                        {% if announcement.id == array.announcements.id %}
+                            {% set unlockedAnnouncement = true %}
+                        {% endif %}
+                    {% endfor %}
+
+                {% endif %}
+
+                <div class="card_alternative_text">
+                    <i class="las la-map-marker"></i>Localisation : {{ announcement.deptCode }}</div>
+                <div class="card_alternative_text">
+                    <i class="las la-clock"></i> 
+                    <time datetime="{{ announcement.createdAt | date('d.m.Y') }}">
+                    {{ announcement.createdAt | date('d.m.Y')}}
+                    </time>
+                </div>
+                <div class="card_alternative_text">
+                    <i class="las la-phone"></i>
+                    {% if unlockedAnnouncement == true %}
+                        <a href="tel:{{ announcement.user.phone }}">{{ announcement.user.phone }}</a>  
+                    {% else %}      
+                        *********** 
+                    {% endif %}
+                </div>
+                <div class="card_alternative_text">
+                    <i class="las la-envelope"></i>
+                    {% if unlockedAnnouncement == true %}
+                        <a href="mailto:{{ announcement.user.email }}">{{ announcement.user.email }}</a>  
+                    {% else %}      
+                        *********** 
+                    {% endif %}  
+                </div>
+                <div class="card_alternative_text">
+                    <i class="las la-euro-sign"></i>
+                    {% if unlockedAnnouncement %}
+                        {{ announcement.priceRange[0] }} - {{ announcement.priceRange[1] }} &euro;
+                    {% else %}
+                        ***********
+                    {% endif %}  
+                </div>
+                <div>
+                    Coordonnées débloquées {{ announcement.unlockCount }} fois.
+                </div>
             </div>
 
             <div class="buttonList">
-                <a href="#" type="button" class=" button darkGreyBackground">Partager</a>
+                <button type="button" class="button darkGreyBackground" data-toggle="modal" data-target="#shareAnnoncement{{ announcement.id }}Modal">Partager</button>
                 <a href="#" type="button" class=" button darkGreyBackground">Enregistrer</a>
+
+                {# FAVORIS #}
+                {# {% if app.user %}
+                <div class="row justify-content-center">
+                <i id="{{ announcement.id }}" class="coeur las la-heart"></i>
+                </div>
+                {% endif %} #}
+
+                {#<div>
+                {% if is_granted("ROLE_USER") %}
+                    {% for favoris in announcement.favoris %}
+                        {% if favoris.id == app.user.id %}
+                         <i  class="lar la-heart"></i>
+                         {% else %}
+                            <i  class="las la-heart"></i>
+                        {% endif %}
+                        {% else %}
+                         <i  class="las la-heart"></i>
+                    {% endfor %}
+
+                {% else %}
+                     <i  class="las la-heart"></i>
+                {% endif %}
+                   
+                   
+                </div>#}
+
                 <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
                 <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
-                <a href="#" type="button" class=" button violetBackground">Répondre</a>
+                {# Ce boutton ouvre une modal bootsrap #}
+                <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
+
+                 {{ include('home/_unlockAnnouncement.html.twig') }}
+                {{ include('home/_shareAnnouncement.html.twig') }}
             </div>
         </div>
-    </div> #}
+    </div>
 <!--Fin Bloc Carte entreprise-->  
 
 
-<!--Bloc Carte entreprise-->
+{#<!--Bloc Carte entreprise-->
     <div class="card">
         <div class="card_bloc_1">
             <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
-            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> 
         </div>
 
         <div class="card_bloc_2">
@@ -143,7 +217,7 @@
                 <a href="#" type="button" class=" button darkGreyBackground">Recommander</a>
                 <a href="#" type="button" class=" button lightGreyBackground">Contrepartie</a>
 
-                {# Ce boutton ouvre une modal bootsrap #}
+                {# Ce boutton ouvre une modal bootsrap 
                 <button type="button" class=" button violetBackground" data-toggle="modal" data-target="#unlockAnnoncement{{ announcement.id }}Modal">Débloquer</button>
                 
                 {# FAVORIS #}
@@ -153,7 +227,7 @@
                 </div>
                 {% endif %} #}
 
-                <div>
+                {#<div>
                 {% if is_granted("ROLE_USER") %}
                     {% for favoris in announcement.favoris %}
                         {% if favoris.id == app.user.id %}
@@ -177,6 +251,5 @@
 
             </div>
         </div>
-    </div>
-<!--Fin Bloc Carte entreprise-->  
-
+    </div>#}
+<!--Fin Bloc Carte entreprise-->
