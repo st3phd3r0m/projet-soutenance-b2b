@@ -4,7 +4,7 @@
 
 {% block body %}
    
-<main class="fond">
+<main class="fond pt-150">
     <a href="{{ path('admin_users_index') }}" class="btn pinkBackground ">Retour à la liste des utilisateurs</a>
     <h1 class=" titre mb-4 pt-4 text-center">Utilisateur</h1>
     <div class="col-sm col-lg-10 mr-4 mx-auto">
@@ -59,7 +59,38 @@
             {% endfor %}
             </tbody>
         </table>
+
+        <!-- "Historique des Abonnements" -->
+    <h3 class="titre">Historique des Abonnements</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Abonnement</th>
+                <th>montant</th>
+                <th>Date de paiement</th>
+                <th>Entreprise</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sub in user.subscriptionPurchases == user %}
+            <tr>
+                <td>{{ sub.subscription.name }}</td>
+                <td>{{ sub.amount }}</td>
+                <td>{{ sub.orderedAt }}</td>
+                <td>{{ sub.compagny.name }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">Aucun ancien payement</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
     </div>
+
+    
+
     <div class="col-sm col-lg-10 mr-4 mx-auto">
         <!-- onglet "Anonces postées" pour voir les annonces posté par l'utilisateur -->
         <h3 class="titre">Annonces postées</h3>
@@ -69,34 +100,6 @@
         {% else %}
                 <p>Cet utilisateur n'a pas encore posté d'annonce</p>
         {% endfor %}
-
-        <!-- onglet "Historique des Abonnements" pour voir l'historique des abonnement -->
-        <h3 class="titre">Historique des Abonnements</h3>
-    
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Abonnement</th>
-                    <th>montant</th>
-                    <th>Date de paiement</th>
-                    <th>Entreprise</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for sub in user.subscriptionPurchases == user %}
-                <tr>
-                    <td>{{ sub.subscription.name }}</td>
-                    <td>{{ sub.amount }}</td>
-                    <td>{{ sub.orderedAt }}</td>
-                    <td>{{ sub.compagny.name }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="8">Aucun ancien payement</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
     </div>
 </main>
 {% endblock %}

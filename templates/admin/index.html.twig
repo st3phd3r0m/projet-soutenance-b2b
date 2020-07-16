@@ -3,13 +3,18 @@
 {% block title %}Espace administration{% endblock %}
 
 {% block body %}
-
+<main>
     <div id="layoutSidenav_content">
         <div class="container-fluid text-center">
+            <h1 class="pt-150">Choisissez ce que vous voulez administrer</h1>
             <div class="d-block px-5">
-                <img class="logo" style="width: 800px;" src="{{ asset('images/logo_Yeah.png') }}">
+                <a class="dropdown-item" href="{{ path('admin_users_index') }}" title="Aller à l'index des utilisateurs">Aller à l'index des utilisateurs</a>
+                <a class="dropdown-item" href="{{ path('admin_subscription_index') }}" title="Aller à l'index des abonnements">Aller à l'index des abonnements</a>
+                <a class="dropdown-item" href="{{ path('admin_activity_sector_index') }}" title="Aller à l'index des secteurs d'activité">Aller à l'index des secteurs d'activité</a>
+                <a class="dropdown-item" href="{{ path('admin_categories_index') }}" title="Aller à l'index des types d'annonces">Aller à l'index des types d'annonces</a>
             </div>
         </div>
     </div>
+</main>
 
 {% endblock %}

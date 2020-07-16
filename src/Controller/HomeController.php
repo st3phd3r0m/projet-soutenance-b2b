@@ -93,7 +93,7 @@ class HomeController extends AbstractController
             if($didTheUserUnlockedIt != null){
 
                 //Envoi d'un message de succès
-                $this->addFlash('successUnlock', 'Vous aviez déjà débloqué les coordonnéees de cet l\'annonceur.');
+                $this->addFlash('success', 'Vous aviez déjà débloqué les coordonnéees de cet l\'annonceur.');
 
                 return $this->redirectToRoute('home');
 
@@ -112,7 +112,7 @@ class HomeController extends AbstractController
                 $entityManager->flush();
 
                 //Envoi d'un message de succès
-                $this->addFlash('successWithdraw', 'Votre compte a été prélevé.');
+                $this->addFlash('success', 'Votre compte a été prélevé.');
 
                 //Instanciation de UnlockedAnnouncements pour stocker l'annonce débloquée par l'utilisateur
                 $unlockedAnnouncement = new UnlockedAnnouncements;
@@ -134,7 +134,7 @@ class HomeController extends AbstractController
 
 
                 //Envoi d'un message de succès
-                $this->addFlash('successUnlock', 'Les coordonnéees de l\'annonceur ont bien été débloquées.');
+                $this->addFlash('success', 'Les coordonnéees de l\'annonceur ont bien été débloquées.');
 
                 return $this->redirectToRoute('home');
             } else {

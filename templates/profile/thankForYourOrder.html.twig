@@ -6,13 +6,9 @@
 {% block body %}
 
 <main id="layoutSidenav_content">
-
     <section class="w-50 mx-auto">
-
         <h1 class="mt-5 pt-5 font-weight-bold">Nous vous remercions pour votre commande ! Voici votre facture.</h1>
-
         <h2 class="my-5"> Votre commande du {{ subscriptionPurchase.orderedAt | date('d.m.Y') }}</h2>
-
         <h2>Informations client</h2>
         {# Début tableau #} 
         <table class="table table-bordered text-center" id="dataTable" cellspacing="0">
@@ -24,8 +20,6 @@
                 </tr>
             </thead>
             {# FIN THEAD #}
-
-
             {# DEBUT TBODY #}
             <tbody>
                 <tr>   
@@ -35,7 +29,7 @@
             </tbody>
             {# FIN TBODY #}
         </table>
-
+        {# Fin tableau #} 
         <h2>Articles commandés</h2>
         {# Début tableau #}
         <table class="table table-bordered text-center" id="dataTable" cellspacing="0">
@@ -49,7 +43,6 @@
                 </tr>
             </thead>
             {# FIN THEAD #}
-
             {# DEBUT TBODY #}
             <tbody>
 
@@ -70,13 +63,9 @@
             </tbody>
             {# FIN TBODY #}
         </table>        
-    
         <a class="button pinkBackground" type="button" title="Télécharger votre facture" href="{{ path('profile_bill', {'id': subscriptionPurchase.id }) }}">Télécharger votre facture</a>  
-    
     </section>
-
 </main>
-
 {% endblock %}
 
 

@@ -3,7 +3,8 @@
 {% block title %}Liste des Secteurs d'activités{% endblock %}
 
 {% block body %}
-    <h1>Liste des Secteurs d'activités</h1>
+<main>
+    <h1 class="pt-150">Liste des Secteurs d'activités</h1>
 
     <a href="{{ path('admin_activity_sector_new') }}">Nouveau</a>
 
@@ -29,5 +30,7 @@
         {% endfor %}
         </tbody>
     </table>
+</main>
+    
 
 {% endblock %}

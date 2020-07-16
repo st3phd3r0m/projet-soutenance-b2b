@@ -4,24 +4,18 @@
 
 {% block body %}
 
-
-    {% for message in app.flashes('success') %}
-    <div class="alert alert-success" role="alert">{{ message }}</div>
-    {% endfor %}
-
-    {% for message in app.flashes('successUnlock') %}
-    <div class="alert alert-success" role="alert">{{ message }}</div>
-    {% endfor %}
-
-    {% for message in app.flashes('failUnlock') %}
-    <div class="alert alert-warning" role="alert">{{ message }}</div>
-    {% endfor %}
-
-    {% for message in app.flashes('successWithdraw') %}
-    <div class="alert alert-success" role="alert">{{ message }}</div>
-    {% endfor %}
     
     <main class="noPadding">
+
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success" role="alert">{{ message }}</div>
+        {% endfor %}
+
+        {% for message in app.flashes('failUnlock') %}
+        <div class="alert alert-warning" role="alert">{{ message }}</div>
+        {% endfor %}
+
+
         <div class="left_bloc">
             <!--Présentation entreprise-->
             <section>
@@ -112,3 +106,8 @@
     </main>
 
 {% endblock %}
+{% block javascripts %}
+    {# js pour affichage de la carte #}
+    <script src="{{ asset('js/map.js') }}"></script>
+{% endblock %}
+

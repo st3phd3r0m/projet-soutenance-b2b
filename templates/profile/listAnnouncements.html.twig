@@ -1,18 +1,19 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %} Yeah! - Liste de vos articles{% endblock %}
+{% block title %} Yeah! - Liste de vos articles {{ (favoris is defined)?'favoris':'' }}{% endblock %}
 
 {% block body %}
+   {# <main class="noPadding"> #}
+<main class="noPadding" id="pt-85 layoutSidenav_content"> 
 
-<main id="pt-85 layoutSidenav_content">
+    {% for message in app.flashes('success') %}
+    <div class="alert alert-success noPadding" role="alert">{{ message }}</div>
+    {% endfor %}
 
     <div class="container-fluid">
-
-        <h1 class="m-5">Liste de vos articles</h1>
-
+        <h1 class="m-5">Liste de vos articles {{ (favoris is defined)?'favoris':'' }}</h1>
         {% for announcement in announcements %} 
-
         <!--Bloc Carte entreprise-->
             <div class="card">
                 <div class="card_bloc_1">
@@ -111,13 +112,21 @@
 
                     </div>
 
-                    <a href="{{ path('profile_edit', {slug : announcement.slug} ) }}" type="button" class="button violetBackground">Modifier l'annonce</a>
-                    
+                    {% if favoris is not defined %}
+                        <a href="{{ path('profile_edit', {slug : announcement.slug} ) }}" type="button" class="button violetBackground">Modifier l'annonce</a>
+                    {% elseif favoris is defined and favoris == true %}    
+                        <a href="{{ path('retrait_favoris', {id: announcement.id}) }}" class="coeur"><i class="las la-heart "></i></a> 
+                    {% endif %}
+
                 </div>
             </div>
         <!--Fin Bloc Carte entreprise-->  
-
-    
+        {% else %}
+            {% if favoris is not defined %}
+                <p>Vous n'avez pas d'annonce en cours de publications.</p>
+            {% elseif favoris is defined and favoris == true %}    
+                <p>Vous n'avez pas d'article favori.</p>
+            {% endif %}
         {% endfor %}
 
         <div>

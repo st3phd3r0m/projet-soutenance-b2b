@@ -45,7 +45,7 @@
                         </a>
                     </li>#}
                     <li>
-                        <a href="" title="Favoris">
+                        <a href="{{ path('myfavorite', {id: app.user.id }) }}" title="Favoris">
                             <i class="las la-heart"></i>
                             <span>Favoris</span>
                         </a>
@@ -57,7 +57,7 @@
                             {% if app.user %}
                                 <div data-toggle="dropdown" title="Votre espace client" id="divCustomerArea">
                                     <i class="las la-user"></i>
-                                    <span class="firstname">Bonjour {{ app.user.firstname }}</span>
+                                    <p class="firstname">Bonjour {{ app.user.firstname }}</p>
                                 </div> 
                                 <div class="dropdown-menu">
                                     {% if is_granted("ROLE_ADMIN") %}
@@ -106,13 +106,8 @@
         <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
         {# CDN noUiSlider #}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/14.6.0/nouislider.min.js"></script>
-        {# js pour affichage des curseurs (gamme de budget) #}
-        <script src="{{ asset('js/sliderBudget.js') }}"></script>
-        <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
         {# Fichier Markercluster #}
         <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
-        {# js pour affichage de la carte #}
-        <script src="{{ asset('js/map.js') }}"></script>
         {# js pour favoris #}
         <script src="{{ asset('js/inputfile.js') }}"></script>
         {% block javascripts %}{% endblock %}
