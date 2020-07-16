@@ -308,7 +308,7 @@ main section p {
   }
 
   .pt-85{
-      padding-top: 85px;
+      padding-top: 85px !important;
   }
 
   .fond {
@@ -335,6 +335,13 @@ main section p {
         text-align: center;
     }
 /*Fin Footer*/
+
+/* Page Admin */
+.pt-150{
+    padding-top: 150px !important;
+}
+
+/*Fin Page Admin*/
 
 /*Fin Vue mobile*/
 
