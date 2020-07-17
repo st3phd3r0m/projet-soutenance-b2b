@@ -3,6 +3,7 @@
 {% block title %}Message{% endblock %}
 
 {% block body %}
+<main class="pt-85">
    {% for message in app.flashes('message') %}
    <div class="alert alert-sucess" role="alert">
       {{ message }}
@@ -10,5 +11,5 @@
    {% endfor %}
    <h1>Message</h1> 
    {{ form(ContactForm) }}
-
+</main>
 {% endblock %}
