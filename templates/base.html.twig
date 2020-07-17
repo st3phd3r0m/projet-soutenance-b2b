@@ -38,12 +38,12 @@
             <nav class="collapse navbar-collapse" id="navbarHeader">
                 <ul class="menu">
                     {% if app.user %}
-                    {#<li>
-                        <a href="" title="Messagerie">
+                    <li>
+                        <a href="{{ path('contact') }}" title="Messagerie">
                             <i class="las la-envelope"></i>
                             <span>Message</span>
                         </a>
-                    </li>#}
+                    </li>
                     <li>
                         <a href="{{ path('myfavorite', {id: app.user.id }) }}" title="Favoris">
                             <i class="las la-heart"></i>
