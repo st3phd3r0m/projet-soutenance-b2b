@@ -13,4 +13,4 @@ liip_imagine:
         miniatures:
             quality: 70
             filters:
-                thumbnail: { size: [100, 100], position : center }
+                thumbnail: { size: [200, 200], position : center }

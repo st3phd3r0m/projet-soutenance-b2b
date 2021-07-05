@@ -1,8 +1,7 @@
 <!--Bloc Carte entreprise-->
     <div class="card enable-pointer-cursor">
         <div class="card_bloc_1">
-            <img src="{{ asset('images/announcements/'~ announcement.image )}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
-            {# <img src="{{ vich_uploader_asset(announcement, 'imageFile') | imagine_filter('miniatures') }}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'"> #}
+            <img src="{{ asset('images/announcements/'~ announcement.image ) | imagine_filter('miniatures')}}" alt="Image d'illustration de l'annonce : '{{ announcement.title }}'">
         </div>
 
         <div class="card_bloc_2">
