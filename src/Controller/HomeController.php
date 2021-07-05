@@ -54,7 +54,7 @@ class HomeController extends AbstractController
         $announcementsNoPag = $announcementsRepository->findAll();
         $categories = $categoriesRepository->findAll();
         $activitySectors = $activitySectorRepository->findAll();
-        $citiesCoord = $this->getCitiesCoordinatesFromAnnoucements($announcements);
+        $citiesCoord = $this->getCoordinatesFromAnnoucements($announcements);
 
         return $this->render('home/index.html.twig', [
             'announcements' => $announcements,
@@ -65,7 +65,7 @@ class HomeController extends AbstractController
         ]);
     }
 
-    
+
 
     /**
      * @Route("/unlock/{slug}", name="home_unlock", methods={"GET"})
@@ -78,19 +78,19 @@ class HomeController extends AbstractController
         if ($this->getUser()) {
             //On interroge la table unlockedAnnouncements pour savoir si l'utilisateur a déjà débloqué l'annonce
             $didTheUserUnlockedIt = $unlockedAnnouncementsRepository->findOneBy([
-                'user'=> $this->getUser()->getId(),
-                'announcements'=> $announcement->getId()
-                ]);
+                'user' => $this->getUser()->getId(),
+                'announcements' => $announcement->getId()
+            ]);
             //Nbre de crédits sur le compte en bdd de l'utilisateur connecté
-            $accountUser =  $usersRepository->find( $this->getUser() )->getAccount();
+            $accountUser =  $usersRepository->find($this->getUser())->getAccount();
             //Nbre de crédits recquis pour débloquer l'annonce
             $requiredCredit = $announcement->getCategory()->getCreditsToUnlock();
 
-            if($didTheUserUnlockedIt != null){
+            if ($didTheUserUnlockedIt != null) {
                 //Envoi d'un message de succès
                 $this->addFlash('success', 'Vous aviez déjà débloqué les coordonnéees de cet l\'annonceur.');
                 return $this->redirectToRoute('home');
-            }elseif ($accountUser >= $requiredCredit) {
+            } elseif ($accountUser >= $requiredCredit) {
                 //Prélèvement de crédits sur le compte utilisateur
                 $accountUser -= $requiredCredit;
                 //Màj sur la variable session utilisateur
@@ -242,22 +242,48 @@ class HomeController extends AbstractController
             'announcements' => $announcements
         ]);
     }
-    
+
+    // /**
+    //  * Retourne la liste des coordonnées des villes contenues dans un tableau d'objets [Annoucements]
+    //  *
+    //  * @param [array] $announcements
+    //  * @return string
+    //  */
+    // private function getCitiesCoordinatesFromAnnoucements($announcements)
+    // {
+    //     // dd($announcements);
+    //     // Construction de la chaine de caracteres JSON
+    //     $citiesCoord = '{';
+    //     foreach ($announcements as $announcement) {
+    //         dd($announcement);
+    //         // ex: "Paris" : {"lat": 1, "long": 1},
+    //         $citiesCoord = $citiesCoord . '"' . $announcement->getCity() . '":' . json_encode($announcement->getGpsLocation()) . ',';
+    //     }
+    //     $citiesCoord = $citiesCoord . '}';
+    //     // Suppression de la virgule de trop
+    //     return str_replace('},}', '}}', $citiesCoord);
+    // }
+
     /**
      * Retourne la liste des coordonnées des villes contenues dans un tableau d'objets [Annoucements]
      *
      * @param [array] $announcements
      * @return string
      */
-    private function getCitiesCoordinatesFromAnnoucements($announcements) {
+    private function getCoordinatesFromAnnoucements($announcements)
+    {
+        // dd($announcements);
         // Construction de la chaine de caracteres JSON
-        $citiesCoord = '{';
+        $coords = [];
         foreach ($announcements as $announcement) {
-            // ex: "Paris" : {"lat": 1, "long": 1},
-            $citiesCoord = $citiesCoord.'"'.$announcement->getCity().'":'.json_encode($announcement->getGpsLocation()).',';
+
+            $coords[] = [
+                'name' => $announcement->getCity(),
+                'coord' => $announcement->getGpsLocation()
+            ];
+
         }
-        $citiesCoord = $citiesCoord.'}';
-        // Suppression de la virgule de trop
-        return str_replace('},}', '}}', $citiesCoord);
+
+        return json_encode($coords);
     }
 }

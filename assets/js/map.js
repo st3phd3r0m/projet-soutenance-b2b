@@ -1,13 +1,13 @@
 // On initialise la latitude et la longitude de Paris (centre de la carte)
-var lat = 48.852969;
-var long = 2.349903;
-var myMap = null;
-var markerClusters; 
+let lat = 48.852969;
+let long = 2.349903;
+let myMap = null;
+let markerClusters; 
 
 // Fonction d'initialisation de la carte
 function initMap(cities) {
     // Initialisation de la liste des marqueurs
-    var markers = []; 
+    let markers = []; 
     // Créer l'objet "myMap" et l'insèrer dans l'élément HTML qui a l'ID "map"
     myMap = L.map('map').setView([lat, long], 10);
     // Nous initialisons les groupes de marqueurs
@@ -21,8 +21,10 @@ function initMap(cities) {
     }).addTo(myMap);
 
     // Nous parcourons la liste des villes
-	for (city in cities) {
-        var marker = L.marker([cities[city].lat, cities[city].long]);
+	for (let city of cities) {
+
+        console.log(city.name, city.coord.long, city.coord.lat);
+        let marker = L.marker([city.coord.lat, city.coord.long]);
         // Ajout du pop up de l'annonce
         marker.bindPopup(city);
         //l'affichage est géré par la bibliothèque des clusters / on ajoute le marqueur aux groupes
@@ -33,7 +35,7 @@ function initMap(cities) {
 
     if (markers.length > 0) {
         // Création du groupe des marqueurs pour adapter le zoom
-        var group = new L.featureGroup(markers); 
+        let group = new L.featureGroup(markers); 
         // Demande à ce que tous les marqueurs soient visibles, et ajout d'un padding (pad(0.5)) pour que les marqueurs ne soient pas coupés
         myMap.fitBounds(group.getBounds().pad(0.5)); 
     }
@@ -43,9 +45,10 @@ function initMap(cities) {
 
 window.onload = function(){
     // Nous initialisons une liste de coordonnées
-    var map = document.querySelector('#map');
-    var cities = JSON.parse(map.dataset.citiesCoord);
+    let map = document.querySelector('#map');
+    let cities = JSON.parse(map.dataset.citiesCoord);
 
+    console.log(cities);
     // Fonction d'initialisation qui s'exécute lorsque le DOM est chargé
     initMap(cities); 
 };
