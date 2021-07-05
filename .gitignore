@@ -1,5 +1,5 @@
-
 ###> symfony/framework-bundle ###
+/.env
 /.env.local
 /.env.local.php
 /.env.*.local
@@ -17,8 +17,14 @@
 # /.env
 /public/bundles/
 /public/media/
-/public/images/
 /migrations/
 ###> liip/imagine-bundle ###
 /public/media/cache/
 ###< liip/imagine-bundle ###
+
+/docker-compose.yml
+/DockerfilePHP-FPM
+/DockerfileNode
+/src/DataFixtures/
+/config/php.ini-development
+/config/php.ini-production
