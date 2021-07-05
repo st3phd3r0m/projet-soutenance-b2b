@@ -1,0 +1,42 @@
+{
+  "entrypoints": {
+    "map": {
+      "js": [
+        "/build/runtime.457970e9.js",
+        "/build/843.1252e90c.js",
+        "/build/map.abcb2b06.js"
+      ]
+    },
+    "new": {
+      "js": [
+        "/build/runtime.457970e9.js",
+        "/build/843.1252e90c.js",
+        "/build/new.fbfc8111.js"
+      ]
+    },
+    "norm": {
+      "js": [
+        "/build/runtime.457970e9.js",
+        "/build/norm.345523c3.js"
+      ],
+      "css": [
+        "/build/norm.c24ee721.css"
+      ]
+    },
+    "styles": {
+      "js": [
+        "/build/runtime.457970e9.js",
+        "/build/styles.de1ea7f4.js"
+      ],
+      "css": [
+        "/build/styles.12bb5eda.css"
+      ]
+    },
+    "cardPayment": {
+      "js": [
+        "/build/runtime.457970e9.js",
+        "/build/cardPayment.5f0a6f25.js"
+      ]
+    }
+  }
+}
