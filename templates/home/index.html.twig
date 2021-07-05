@@ -107,7 +107,6 @@
 
 {% endblock %}
 {% block javascripts %}
-    {# js pour affichage de la carte #}
-    <script src="{{ asset('js/map.js') }}"></script>
+    {{ encore_entry_script_tags('map') }}
 {% endblock %}
 

@@ -94,10 +94,7 @@
 </main>
 {% endblock %}
 {% block javascripts %}
-    {# js pour affichage des curseurs (gamme de budget) #}
-    <script src="{{ asset('js/sliderBudget.js') }}"></script>
-    {# js pour autocomplete, API gouv #}
-    <script src="{{ asset('js/selectAutoComplete.js') }}"></script>
+    {{ encore_entry_script_tags('new') }}
 {% endblock %}
 
 
