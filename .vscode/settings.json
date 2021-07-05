@@ -1,0 +1,6 @@
+{
+    "search.exclude": {
+        "../public/build": true
+    },
+    "search.useIgnoreFiles": false
+}
