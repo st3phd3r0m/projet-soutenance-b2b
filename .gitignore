@@ -28,3 +28,7 @@
 /src/DataFixtures/
 /config/php.ini-development
 /config/php.ini-production
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
