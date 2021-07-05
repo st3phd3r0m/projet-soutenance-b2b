@@ -182,7 +182,6 @@ class ProfileController extends AbstractController
         ]);
     }
 
-
     /**
      * @Route("/payment/{id}", name="profile_subscription_payment", methods={"GET"})
      */
@@ -255,16 +254,13 @@ class ProfileController extends AbstractController
      */
     public function billDownload(SubscriptionPurchases $subscriptionPurchase)
     {
-
-        //Conversion préalable en base64 (wtf?) du fichier logo.png pour inclure l'image
+        //Conversion préalable en base64 du fichier logo.png pour inclure l'image
         //dans la facture en pdf
-        $publicDirectory = $this->getParameter('kernel.project_dir') . '/public/';
 
         $path = 'images/logo_Yeah.png';
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data = file_get_contents($path);
         $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-
 
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
@@ -278,8 +274,8 @@ class ProfileController extends AbstractController
             'base64' => $base64
         ]);
         //Concatenation pour inclure les chemins des fichiers css
-        $html .= '<link rel="stylesheet" href="' . $publicDirectory . '/css/styles.css">';
-        $html .= '<link rel="stylesheet" href="' . $publicDirectory . '/css/stylesPDF.css">';
+        // $html .= '<link rel="stylesheet" href="' . $publicDirectory . '/css/styles.css">';
+        // $html .= '<link rel="stylesheet" href="' . $publicDirectory . '/css/stylesPDF.css">';
 
         // Load HTML to Dompdf
         $dompdf->loadHtml($html);
