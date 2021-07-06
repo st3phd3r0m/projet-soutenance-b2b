@@ -95,11 +95,11 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'options' => [
                     'attr' =>[
-                         'class' => 'form-control form-control-lg form-control-a mb-3'
+                        'class' => 'form-control form-control-lg form-control-a mb-3'
                     ],
                     'label_attr' => [
-                    'class' => 'policeForm'
-                ],
+                        'class' => 'policeForm'
+                    ],
                 ],
                 
                 'constraints' => [
@@ -107,7 +107,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Entrez votre mot de passe',
                     ]),
                     new Length([
-                        'min' => 10,
+                        'min' => 6,
                         'minMessage' => 'Votre mot de passe doit contenir minimum {{ limit }} caractères',
                         'max' => 4096,
                     ]),
@@ -122,7 +122,7 @@ class RegistrationFormType extends AbstractType
                 ],
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'Vous devez accepter les termes.',
+                        'message' => 'Vous devez accepter les conditions générales d\'utilisation.',
                     ]),
                 ],
             ])
